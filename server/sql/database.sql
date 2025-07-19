@@ -1,4 +1,5 @@
 DROP TABLE IF EXISTS project_b_users;
+DROP TABLE IF EXISTS _prisma_migrations;
 
 CREATE TABLE IF NOT EXISTS project_b_users
 (

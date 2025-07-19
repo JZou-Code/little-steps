@@ -20,6 +20,16 @@ app.use(session({
     }
 }));
 
+app.use((req, res, next) => {
+    const err = new Error('Not Found');
+    err.status = 404;
+    next(err);
+});
+
+app.use((err, req, res, next) => {
+    res.status(err.status || 500)
+        .json({ code: err.status || 500, message: err.message });
+});
 
 const PORT = process.env.PORT || 3000;
 
