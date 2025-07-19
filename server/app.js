@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const path = require('path')
 const session = require('express-session');
+const {createUser} = require('./src/modules/userDAO')
 
 const app = express();
 
@@ -20,6 +21,18 @@ app.use(session({
     }
 }));
 
+app.get('/addUser', async (req, res) => {
+    const result = await createUser({
+        username: 'hello',
+        password: '123456',
+        firstName: 'xixi',
+        lastName: 'haha'
+    })
+
+    console.log(result)
+    res.send('completed')
+})
+
 app.use((req, res, next) => {
     const err = new Error('Not Found');
     err.status = 404;
@@ -28,7 +41,7 @@ app.use((req, res, next) => {
 
 app.use((err, req, res, next) => {
     res.status(err.status || 500)
-        .json({ code: err.status || 500, message: err.message });
+        .json({code: err.status || 500, message: err.message});
 });
 
 const PORT = process.env.PORT || 3000;

@@ -13,18 +13,12 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model ProjectBUser {
-  id               Int      @id @default(autoincrement())
-  username         String   @unique @db.VarChar(32)
+model userTest {
+  id               String   @id @default(uuid())
+  username         String   @db.VarChar(32)
   password         String   @db.VarChar(128)
   firstName        String   @map("first_name")
   lastName         String   @map("last_name")
-  birth            DateTime @db.Date
-  description      String?  @db.Text
-  avatarPath       String   @map("avatar_path") @default("/images/avatars/avatar-default.jpg")
-  isDeleted        Boolean? @map("is_deleted")
-  defaultUsername  String   @map("default_username") @default("Anonymous User") @db.VarChar(32)
-  defaultAvatar    String   @map("default_avatar")   @default("/images/avatars/avatar-default.jpg")
 
-  @@map("project_b_users")
+  @@map("user_test")
 }
