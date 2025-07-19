@@ -1,1 +1,6 @@
 .idea
+little-steps.iml
+.vscode
+node_modules
+package-lock.json
+.env
