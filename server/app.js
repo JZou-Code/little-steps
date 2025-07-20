@@ -2,9 +2,11 @@ const express = require("express");
 const cors = require("cors");
 const path = require('path')
 const session = require('express-session');
-const {createUser} = require('./src/modules/userDAO')
+const {createUser} = require('./src/DAO/userDAO')
+const dotenv = require('dotenv');
 
 const app = express();
+dotenv.config();
 
 app.use(express.static(path.resolve(__dirname, './public')));
 app.use(cors());

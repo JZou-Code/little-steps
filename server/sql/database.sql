@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS project_b_users;
 DROP TABLE IF EXISTS _prisma_migrations;
 
-CREATE TABLE IF NOT EXISTS project_b_users
+CREATE TABLE IF NOT EXISTS user
 (
     id          INT AUTO_INCREMENT PRIMARY KEY,
     username    VARCHAR(32) UNIQUE NOT NULL,
