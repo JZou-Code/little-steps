@@ -1,7 +1,8 @@
 const prisma = require('../prisma/client');
 
 async function createChild(data) {
-    return prisma.child.create(data);
+    console.log(data)
+    return prisma.child.create({data});
 }
 
 async function updateChild(id, data) {
