@@ -2,7 +2,6 @@ const express = require("express");
 const cors = require("cors");
 const path = require('path')
 const session = require('express-session');
-const {createUser} = require('./src/DAO/userDAO')
 const dotenv = require('dotenv');
 
 const app = express();
@@ -23,17 +22,8 @@ app.use(session({
     }
 }));
 
-app.get('/addUser', async (req, res) => {
-    const result = await createUser({
-        username: 'hello',
-        password: '123456',
-        firstName: 'xixi',
-        lastName: 'haha'
-    })
-
-    console.log(result)
-    res.send('completed')
-})
+const test = require('./src/testAPI/testAPI');
+app.use('/test', test)
 
 app.use((req, res, next) => {
     const err = new Error('Not Found');
@@ -46,7 +36,7 @@ app.use((err, req, res, next) => {
         .json({code: err.status || 500, message: err.message});
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.EXPRESS_PORT || 3000;
 
 app.listen(PORT, () => {
     console.log(`CORS enabled Express web server is running on port ${PORT}.`);
