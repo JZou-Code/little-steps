@@ -17,6 +17,10 @@ async function findUser(id) {
     return prisma.user.findUnique({where: {id}});
 }
 
+async function findUserByEmail(email) {
+    return prisma.user.findUnique({where: {email}});
+}
+
 async function findManyUsers(data) {
     return prisma.user.findMany({where: data});
 }
@@ -30,5 +34,6 @@ module.exports = {
     updateUser,
     findUser,
     findManyUsers,
-    deleteUser
+    deleteUser,
+    findUserByEmail
 }
