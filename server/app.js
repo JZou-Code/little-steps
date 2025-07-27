@@ -22,6 +22,9 @@ app.use(session({
     }
 }));
 
+const userRouter = require('./src/routes/userRoutes');
+app.use('/user', userRouter);
+
 const test = require('./src/testAPI/testAPI');
 app.use('/test', test)
 
