@@ -1,0 +1,120 @@
+.FormContainer{
+    text-align: center;
+}
+
+.Title{
+    font-size: 2rem;
+}
+
+.InputContainer{
+    font-size: 1.2rem;
+}
+
+.Input{
+    border: 1px solid #FFA726;
+    border-radius: 0.5rem;
+    width: 16rem;
+    height: 2rem;
+    line-height: 2rem;
+    margin: 0.3rem;
+    padding-left: 0.3rem;
+}
+
+.Message{
+    margin-top: 0.2rem;
+    color: red;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    font-size: 0.8rem;
+}
+
+.CaptchaContainer{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    gap: 1rem;
+    margin: 0.3rem;
+}
+
+.CaptchaInput{
+    height: 2rem;
+    width: 10rem;
+    border: 1px solid #FFA726;
+    border-radius: 0.5rem;
+}
+
+.CaptchaImg{
+    width: 5rem;
+    height: 2rem;
+}
+
+.CaptchaImg img{
+    height: 2rem;
+    cursor: pointer;
+}
+
+.Button{
+    font-size: 1.2rem;
+    background-color: #FFA726;
+    padding: 0.3rem 1rem;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+}
+
+.Button:hover{
+    cursor: pointer;
+    color: white;
+    box-shadow: 0 0 2px 2px #FFCC80;
+}
+
+.Button:active{
+    box-shadow: none;
+}
+
+.Send{
+    border: 1px solid gray;
+    padding: 0.3rem 1rem;
+    border-radius: 0.5rem;
+    height: 2rem;
+    width: 5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    background-color: #FFA726;
+}
+
+.disabled{
+    background-color: lightgray;
+    color: white;
+}
+
+.Notification{
+    margin-top: 2rem;
+}
+
+.Notification_Login{
+    position: absolute;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+}
+
+.Forget{
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.LinkContainer{
+    display: flex;
+    justify-content: center;
+}
+
+.Link{
+    color: #FFA726;
+}
+
+.Link:hover{
+    color: orangered;
+    cursor: pointer;
+}

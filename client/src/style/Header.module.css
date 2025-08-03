@@ -1,6 +1,6 @@
 .Container {
     padding: 1rem 2rem;
-    border-bottom: 1px solid skyblue;
+    border-bottom: 1px solid #FFA726;
 }
 
 .TitleArea {
@@ -30,13 +30,12 @@
     font-weight: bold;
     padding: 0.5rem 1rem;
     border-radius: 1rem;
-    border: 1px solid black;
+    border: 1px solid #FFA726;
     margin: 0 1rem;
 }
 
 .Button:hover{
     cursor: pointer;
-    /*transform: scale(1.1);*/
     box-shadow: 0 0 2px 2px lightgray;
 }
 

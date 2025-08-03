@@ -18,9 +18,7 @@ const RoutesController = () => {
                     <Route path='/gallery' element={<Gallery/>}></Route>
                     <Route path='/contact' element={<Contact/>}></Route>
                     <Route path='/account' element={
-                        <PageStateProvider>
                             <Outlet/>
-                        </PageStateProvider>
                     }>
                         <Route path='login' element={<LoginPage/>}></Route>
                         <Route path='sign-up' element={<LoginPage/>}></Route>

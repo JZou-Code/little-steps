@@ -1,14 +1,19 @@
 import RoutesController from "./RoutesController.jsx";
 import classes from './style/App.module.css'
 import Header from "./components/Header.jsx";
+import PageStateProvider from "./context/PageStateProvider.jsx";
 
 function App() {
     return (
         <>
-            <Header/>
-            <div className={classes.Container}>
-                <RoutesController/>
-            </div>
+            <PageStateProvider>
+                <div className={classes.FontSet}>
+                    <Header/>
+                    <div className={classes.Container}>
+                        <RoutesController/>
+                    </div>
+                </div>
+            </PageStateProvider>
         </>
     )
 }
