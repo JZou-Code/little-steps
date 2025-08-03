@@ -12,8 +12,9 @@ import {useNavigate} from "react-router-dom";
 
 const SignUpForm = () => {
     // Input values, all string
-    const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
+    const [firstName,setFirstName] = useState('');
+    const [lastName,setLastName] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [captchaId, setCaptchaId] = useState('')
@@ -79,17 +80,6 @@ const SignUpForm = () => {
                 <div className={classes.InputContainer}>
                     <input
                         className={classes.Input}
-                        type="text"
-                        value={username}
-                        onChange={(e) => setUsername(e.target.value)}
-                        // onChange={onUsernameChange}
-                        required
-                        placeholder={'Username'}
-                    />
-                </div>
-                <div className={classes.InputContainer}>
-                    <input
-                        className={classes.Input}
                         type="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -116,6 +106,26 @@ const SignUpForm = () => {
                         onChange={(e) => setConfirmPassword(e.target.value)}
                         required
                         placeholder={'Confirm Password'}
+                    />
+                </div>
+                <div className={classes.InputContainer}>
+                    <input
+                        className={classes.Input}
+                        type="text"
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                        required
+                        placeholder={'First Name'}
+                    />
+                </div>
+                <div className={classes.InputContainer}>
+                    <input
+                        className={classes.Input}
+                        type="text"
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                        required
+                        placeholder={'Last Name'}
                     />
                 </div>
                 <div className={`${classes.InputContainer} ${classes.CaptchaContainer}`}>
@@ -154,7 +164,7 @@ const SignUpForm = () => {
                         ctx.dispatch({type: pageState.LOGIN})
                         navigate('/account/login')
                     }} className={classes.Link}>
-                        &nbsp;Login
+                    &nbsp;Login
                     </div>
                 </div>
             </div>

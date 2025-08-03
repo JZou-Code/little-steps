@@ -11,7 +11,7 @@ const ForgetPwdForm = () => {
     const ctx = useContext(PageStateContext);
 
     const handleSubmit = (e) => {
-
+        ctx.dispatch({type: pageState.CONFIRM})
     }
 
     return (

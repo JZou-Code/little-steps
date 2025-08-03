@@ -5,7 +5,7 @@ import PageStateContext from "../context/PageStateContext.jsx";
 import {useNavigate} from "react-router-dom";
 
 const LoginForm = () => {
-    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const ctx = useContext(PageStateContext);
@@ -23,10 +23,11 @@ const LoginForm = () => {
                 <div className={classes.InputContainer}>
                     <input
                         className={classes.Input}
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
+                        value={email}
+                        type="email"
+                        onChange={(e) => setEmail(e.target.value)}
                         required
-                        placeholder={'Username'}
+                        placeholder={'Email'}
                     />
                 </div>
                 <div className={classes.InputContainer}>
