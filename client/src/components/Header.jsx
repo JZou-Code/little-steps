@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {NavLink} from "react-router-dom";
 import classes from '../style/Header.module.css'
 import Backdrop from "../UI/Backdrop/Backdrop.jsx";
-import TopCorner from "./TopCorner.jsx";
+// import TopCorner from "./TopCorner.jsx";
 import HeaderContext from "../context/HeaderContext.jsx";
 import {pageState} from "../utils/pageState.js";
 
@@ -20,7 +20,7 @@ const Header = () => {
                 <div className={classes.TitleArea}>
 
                     <div>
-                        <div className={classes.Title}>Online Quiz</div>
+                        <div className={classes.Title}>Little Steps</div>
                     </div>
                     <div className={classes.LoginContainer}>
                         <div className={`${classes.Button} ${classes.Login}`}
@@ -46,20 +46,20 @@ const Header = () => {
                     <NavLink
                         className={({isActive}) => isActive ?
                             `${classes.Active} ${classes.Link}` : classes.Link}
-                        to='/Rank' end>
-                        Rank
+                        to='/about' end>
+                        About
                     </NavLink>
                     <NavLink
                         className={({isActive}) => isActive ?
                             `${classes.Active} ${classes.Link}` : classes.Link}
-                        to='/quiz/test' end>
-                        Quiz
+                        to='/gallery' end>
+                        Gallery
                     </NavLink>
                     <NavLink
                         className={({isActive}) => isActive ?
                             `${classes.Active} ${classes.Link}` : classes.Link}
-                        to='/account' end>
-                        Account
+                        to='/contact' end>
+                        Contact
                     </NavLink>
                 </div>
 

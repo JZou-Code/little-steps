@@ -36,16 +36,22 @@
 
 .Button:hover{
     cursor: pointer;
-    transform: scale(1.1);
+    /*transform: scale(1.1);*/
+    box-shadow: 0 0 2px 2px lightgray;
 }
 
 .SignUp{
-    background-color: rgba(19, 5, 143, 0.9);
+    background-color: #FFA726;
     color: white;
 }
 
 .SignUp:hover{
-    background-color: rgba(37, 20, 154, 0.8);
+    /*background-color:#FFCC80;*/
+}
+
+.SignUp:active{
+    background-color:#FFCC80;
+    transform: scale(1);
 }
 
 .Login{

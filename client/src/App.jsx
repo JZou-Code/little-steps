@@ -6,7 +6,7 @@ function App() {
     return (
         <>
             <Header/>
-            <div className={classes.container}>
+            <div className={classes.Container}>
                 <RoutesController/>
             </div>
         </>
