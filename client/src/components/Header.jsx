@@ -3,7 +3,7 @@ import {NavLink} from "react-router-dom";
 import classes from '../style/Header.module.css'
 import Backdrop from "../UI/Backdrop/Backdrop.jsx";
 // import TopCorner from "./TopCorner.jsx";
-import HeaderContext from "../context/HeaderContext.jsx";
+import HeaderContext from "../context/PageStateContext.jsx";
 import {pageState} from "../utils/pageState.js";
 
 

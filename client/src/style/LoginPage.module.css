@@ -1,0 +1,15 @@
+.Container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 10rem;
+}
+
+.AnimContainer{
+    width: 22.25rem;
+    height: 31.5rem;
+}
+
+.FormContainer{
+
+}

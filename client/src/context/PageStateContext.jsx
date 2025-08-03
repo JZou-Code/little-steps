@@ -1,9 +1,9 @@
 import React from "react";
 import {pageState} from "../utils/pageState.js";
 
-const HeaderContext = React.createContext({
+const PageStateContext = React.createContext({
     state:pageState.NONE,
     dispatch:()=>{}
 });
 
-export default HeaderContext;
+export default PageStateContext;

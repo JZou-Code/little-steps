@@ -1,8 +1,8 @@
 import React, {useReducer} from 'react';
-import HeaderContext from './HeaderContext';
 import {pageState} from "../utils/pageState.js";
+import PageStateContext from "./PageStateContext.jsx";
 
-export default function HeaderProvider({children}) {
+export default function PageStateProvider({children}) {
     const [popupStatus, dispatchPopupStatus] = useReducer(
         (prevState, action) => {
             switch (action.type){
@@ -28,13 +28,13 @@ export default function HeaderProvider({children}) {
         },
         pageState.NONE)
     return (
-        <HeaderContext.Provider
+        <PageStateContext.Provider
             value={{
                 state:popupStatus,
                 dispatch:dispatchPopupStatus
             }}
         >
             {children}
-        </HeaderContext.Provider>
+        </PageStateContext.Provider>
     );
 }

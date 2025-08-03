@@ -1,0 +1,47 @@
+.Container{
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.Slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    animation: fade 6s infinite;
+}
+
+.Slide1 {
+    animation-delay: 0s;
+}
+
+.Slide2 {
+    animation-delay: 2s;
+}
+
+.Slide3 {
+    animation-delay: 4s;
+}
+
+@keyframes fade {
+    0% {
+        opacity: 0;
+    }
+    10% {
+        opacity: 1;
+    }
+    30% {
+        opacity: 1;
+    }
+    40% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 0;
+    }
+}
