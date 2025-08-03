@@ -1,0 +1,79 @@
+.Container {
+    padding: 1rem 2rem;
+    border-bottom: 1px solid skyblue;
+}
+
+.TitleArea {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.Title {
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.Greeting{
+
+}
+
+.LoginContainer {
+    display: flex;
+    flex: 0 0 auto;
+    justify-content: space-around;
+}
+
+.Button{
+    font-size: 1.1rem;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    border: 1px solid black;
+    margin: 0 1rem;
+}
+
+.Button:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+.SignUp{
+    background-color: rgba(19, 5, 143, 0.9);
+    color: white;
+}
+
+.SignUp:hover{
+    background-color: rgba(37, 20, 154, 0.8);
+}
+
+.Login{
+
+}
+
+.LinkContainer {
+    font-size: 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+    padding: 0 2rem;
+}
+
+.Link {
+    transition: 0.1s;
+    margin: 0 1rem;
+}
+
+.Link:hover {
+    transform: scale(1.05);
+}
+
+.Link:active {
+    transform: scale(1);
+}
+
+.Active {
+    color: orangered;
+}
+

@@ -1,0 +1,78 @@
+/* 1. Global reset */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* 2. Root elements and font */
+html {
+    font-size: 100%;       /* Root size */
+}
+body {
+    min-height: 100vh;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* 3. List */
+ul,
+ol {
+    list-style: none;
+}
+
+/* 4. A tag */
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* 5. Image and Table */
+img,
+svg,
+canvas,
+video {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/* 6. Form elements */
+button,
+input,
+select,
+textarea {
+    background: none;
+    border: none;
+    font: inherit;
+    color: inherit;
+    outline: none;
+}
+
+/* 7. Heading and paragraph */
+h1, h2, h3, h4, h5, h6,
+p {
+    font-weight: normal;
+}
+
+/* 8. Others */
+blockquote,
+q {
+    quotes: none;
+}
+blockquote::before,
+blockquote::after,
+q::before,
+q::after {
+    content: '';
+}
+
+
+
