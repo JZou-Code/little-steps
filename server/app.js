@@ -1,4 +1,5 @@
 const express = require("express");
+const cookieParser = require('cookie-parser');
 const cors = require("cors");
 const path = require('path')
 const session = require('express-session');
@@ -7,6 +8,7 @@ const dotenv = require('dotenv');
 const app = express();
 dotenv.config();
 
+app.use(cookieParser());
 app.use(express.static(path.resolve(__dirname, './public')));
 app.use(cors());
 app.use(express.json());

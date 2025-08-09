@@ -13,7 +13,6 @@ const LoginForm = () => {
     const [errorMsg, setErrorMsg] = useState('')
 
     const pageCtx = useContext(PageStateContext);
-    const authCtx = useContext(authContext);
     const navigate = useNavigate();
 
     const location = useLocation();
@@ -23,7 +22,7 @@ const LoginForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const isOk = await login(email, password, setErrorMsg, authCtx, pageCtx)
+        const isOk = await login(email, password, setErrorMsg)
 
         console.log(isOk)
 
@@ -55,7 +54,7 @@ const LoginForm = () => {
                         placeholder={'Password'}
                     />
                 </div>
-                <button className={classes.Button} type='sumbit'>Login</button>
+                <button className={classes.Button} type='submit'>Login</button>
 
                 <div className={classes.Message}>
                     {errorMsg}

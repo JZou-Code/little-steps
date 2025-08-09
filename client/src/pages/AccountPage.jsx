@@ -1,7 +1,25 @@
-import React from 'react';
+import React, {useState} from 'react';
 import classes from '../style/AccountPage.module.css'
+import axios from "axios";
+import axiosApi from "../api/axiosApi.js";
 
 const AccountPage = () => {
+    const [msg, setMsg] = useState(null)
+
+    const test = async () => {
+        try {
+            const token = JSON.parse(localStorage.getItem('auth') || '{}')?.token || '';
+            const res = await axios.post('http://localhost:3000/user/profile',
+                {},
+                {
+                headers: token ? {Authorization: `Bearer ${token}`} : {}
+            });
+            setMsg(`OK ${res.status} — ${JSON.stringify(res.data)}`);
+        } catch (e) {
+            setMsg(`ERR ${e?.response?.status} — ${e?.response?.data?.message || e.message}`);
+        }
+    }
+
     return (
         <div className={classes.Container}>
             <section className={classes.Newsletter}>
@@ -36,8 +54,10 @@ const AccountPage = () => {
                         It’s the easiest way to share special moments and keep families in the loop.
                     </div>
                     <div className={classes.ButtonContainer}>
-                        <button className={classes.Button}>
-                            Contact
+                        <button
+                            onClick={test}
+                            className={classes.Button}>
+                            hello - {msg}
                         </button>
                     </div>
                 </div>

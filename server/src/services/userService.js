@@ -43,6 +43,20 @@ const login = async (email, password) => {
     }
 }
 
+const refresh = (refreshToken) => {
+    try {
+        const decoded = jwt.verify(refreshToken, JWT_REFRESH_SECRET);
+        const newAccessToken = jwt.sign(
+            { sub: decoded.sub, role: decoded.role },
+            JWT_ACCESS_SECRET,
+            { expiresIn: ACCESS_EXPIRES_IN }
+        );
+        return { code: 200, message: 'ok', data: { accessToken: newAccessToken } };
+    } catch (e) {
+        return { code: 403, message: 'Invalid refresh token', data: {} };
+    }
+}
+
 const updateUser = async (id, data) => {
     return userDao.updateUser(id, data);
 }
@@ -86,6 +100,7 @@ const changePassword = async (id, newPwd) => {
 module.exports = {
     createUser,
     login,
+    refresh,
     updateUser,
     findUser,
     findManyUsers,

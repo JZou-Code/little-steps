@@ -1,4 +1,6 @@
 const userService = require('../services/userService');
+const {JWT_ACCESS_SECRET, ACCESS_EXPIRES_IN, JWT_REFRESH_SECRET} = require("../auth/config");
+const jwt = require("jsonwebtoken");
 
 const createUser = async (req, res) => {
     const data = req.body;
@@ -48,6 +50,22 @@ const logout = async (req, res) => {
     });
 
     // res.status(200).json({ message: 'Logged out successfully' });
+}
+
+const refresh = (req, res) => {
+    try {
+        const rt = req.cookies.refreshToken;
+        if (!rt) return res.status(401).json({ message: 'No refresh token' });
+
+        const result = userService.refresh(rt);
+        if (result.code === 200) {
+            return res.status(200).json(result);
+        }
+        return res.status(403).json(result);
+    } catch (e) {
+        console.log(e)
+        return res.status(500).json({ message: 'Server error' });
+    }
 }
 
 const updateUser = async (req, res) => {
@@ -100,6 +118,7 @@ module.exports = {
     createUser,
     login,
     logout,
+    refresh,
     updateUser,
     findUser,
     findManyUsers,
