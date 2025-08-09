@@ -1,10 +1,14 @@
-import React from 'react';
-import classes from '../style/LoginPage.module.css'
-import LoginAnim from "../components/LoginAnim.jsx";
-import FormContainer from "../components/FormContainer.jsx";
+import React, {useContext, useEffect} from 'react';
 import SetupAccount from "../components/SetupAccount.jsx";
+import PageStateContext from "../context/PageStateContext.jsx";
+import {pageState} from "../utils/pageState.js";
 
 const LoginPage = () => {
+    const ctx = useContext(PageStateContext);
+    useEffect(() => {
+        ctx.dispatch({type:pageState.LOGIN})
+    }, []);
+
     return (
         <div>
             <SetupAccount/>

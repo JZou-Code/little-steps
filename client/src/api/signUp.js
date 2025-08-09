@@ -16,8 +16,10 @@ export const requestValidationCode = (email)=>{
 }
 
 export const requestSignUp = (data)=>{
+    const newData = {...data, role:'PARENT'}
+
     return axios.post(
-        'api/user/register',
-        data
+        'http://localhost:3000/user/create-user',
+        newData
     )
 }

@@ -9,6 +9,7 @@ import PageStateContext from "../context/PageStateContext.jsx";
 import ValidationCode from "./ValidationCode.jsx";
 import Captcha from "./Captcha.jsx";
 import {useNavigate} from "react-router-dom";
+import {requestSignUp} from "../api/signUp.js";
 
 const SignUpForm = () => {
     // Input values, all string
@@ -29,8 +30,8 @@ const SignUpForm = () => {
 
     const validationRules = [
         {
-            check: () => isValidUsername(username),
-            message: "Username must be 6–12 characters long and include uppercase letters, lowercase letters, and numbers.",
+            check: () => isValidEmail(email),
+            message: "Email must be in a valid format (e.g. username@domain.com).",
         },
         {
             check: () => isValidPassword(password),
@@ -39,10 +40,6 @@ const SignUpForm = () => {
         {
             check: () => password === confirmPassword,
             message: "Passwords do not match.",
-        },
-        {
-            check: () => isValidEmail(email),
-            message: "Email must be in a valid format (e.g. username@domain.com).",
         },
     ];
 
@@ -55,19 +52,22 @@ const SignUpForm = () => {
             return;
         }
 
-        // requestSignUp({
-        //     username,
-        //     email,
-        //     password,
-        //     captchaId,
-        //     validationCode,
-        //     captcha
-        // }).then(result => {
-        //     console.log(result)
-        //     ctx.dispatch(pageState.LOGIN)
-        // }).catch(e => {
-        //     setErrorMsg(e.message)
-        // })
+        requestSignUp({
+            email,
+            password,
+            firstName,
+            lastName
+        }).then(result => {
+            if(result.data.code.startsWith('2')){
+                ctx.dispatch(pageState.LOGIN)
+                navigate('/account/login')
+            }else {
+                setErrorMsg(result.data.message)
+            }
+        }).catch(e => {
+            console.log(e)
+            setErrorMsg(e.message)
+        })
     }
 
     return (

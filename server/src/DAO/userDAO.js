@@ -1,7 +1,23 @@
 const prisma = require('../prisma/client');
 
 async function createUser(data) {
-    return prisma.user.create({data});
+    try {
+        return await prisma.user.create({data});
+    } catch (e) {
+        if (e.code === 'P2002') {
+            return {
+                code: '409',
+                message: 'Email already exists',
+                data: {}
+            }
+        } else {
+            return {
+                code: '500',
+                message: 'Internal server error',
+                data: {}
+            }
+        }
+    }
 }
 
 async function updateUser(id, data) {

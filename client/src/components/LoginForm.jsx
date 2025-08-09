@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import classes from "../style/Forms.module.css";
 import {pageState} from "../utils/pageState.js";
 import PageStateContext from "../context/PageStateContext.jsx";
@@ -9,13 +9,11 @@ const LoginForm = () => {
     const [password, setPassword] = useState('');
 
     const ctx = useContext(PageStateContext);
-
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
 
     }
-
     return (
         <>
             <form className={classes.FormContainer} onSubmit={handleSubmit} style={{marginTop: '1.5rem'}}>
