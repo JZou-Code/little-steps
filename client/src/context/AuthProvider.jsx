@@ -1,45 +1,61 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import AuthContext from "./AuthContext.jsx";
 import {roles} from "../utils/roles.js";
 
-export default function AuthProvider({children}) {
-    const [isLogin, setIsLogin] = useState(false);
-    const [id, setId] = useState('');
-    const [email, setEmail] = useState('');
-    const [role, setRole] = useState(roles.PARENT);
-    const [token, setToken] = useState('')
+const defaultAuth = {
+    isLogin: false,
+    user: {
+        id: '',
+        email: '',
+        role: roles.PARENT,
+    },
+    token: ''
+};
 
-    useEffect(() => {
-        const raw = localStorage.getItem('auth');
-        if (!raw) return;
-        try {
-            const { token: tk, id: uid, email: em, role: r } = JSON.parse(raw) || {};
-            if (tk && uid && em) {
-                setToken(tk);
-                setId(uid);
-                setEmail(em);
-                setRole(r ?? roles.PARENT);
-                setIsLogin(true);
-            }
-        } catch (e) {
-            console.error('parse auth failed', e);
+const init = () => {
+    try {
+        const stored = localStorage.getItem('auth');
+        if (!stored) {
+            return {
+                isLogin: false,
+                user: {
+                    id: '',
+                    email: '',
+                    role: roles.PARENT
+                },
+                token: ''
+            };
         }
-    }, []);
-
-    return (
-        <AuthContext.Provider
-            value={{
-                isLogin,
+        const {token, id, email, role} = JSON.parse(stored) || {};
+        if (token && id && email) {
+            return {
+                isLogin: true,
                 user: {
                     id,
                     email,
-                    role
+                    role: role ?? roles.PARENT
                 },
-                setIsLogin,
-                setId,
-                setEmail,
-                setRole
-            }}
+                token
+            };
+        }
+    } catch {
+        return defaultAuth;
+    }
+};
+
+export default function AuthProvider({children}) {
+    const [auth, setAuth] = useState(init);
+    const value = useMemo(() => {
+        return {
+            isLogin: auth.isLogin,
+            user: auth.user,
+            setAuth
+        }
+    }, [auth]);
+
+    return (
+        <AuthContext.Provider
+            value={value}
         >
             {children}
         </AuthContext.Provider>

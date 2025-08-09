@@ -26,23 +26,25 @@ const useAuth = () => {
                 email,
                 role
             }))
-            authCtx.setIsLogin(true);
-            authCtx.setId(id);
-            authCtx.setEmail(email);
-            authCtx.setRole(role);
+            authCtx.setAuth({
+                isLogin: true,
+                user: {
+                    id,
+                    email,
+                    role
+                },
+                token: res.data.data.accessToken
+            })
             pageCtx.dispatch({type: pageState.NONE});
             return true;
         } catch (e) {
-            console.log(e)
-            console.log(e.response)
-            console.log(e.response.data)
-
             setErrorMsg(e.response.data.message);
             return false
         }
     }
 
-    const logout = async () => {}
+    const logout = async () => {
+    }
 
     return {
         login,

@@ -32,12 +32,6 @@ const Header = () => {
                     <NavLink
                         className={({isActive}) => isActive ?
                             `${classes.Active} ${classes.Link}` : classes.Link}
-                        to='/about' end>
-                        About
-                    </NavLink>
-                    <NavLink
-                        className={({isActive}) => isActive ?
-                            `${classes.Active} ${classes.Link}` : classes.Link}
                         to='/gallery' end>
                         Gallery
                     </NavLink>
@@ -46,6 +40,12 @@ const Header = () => {
                             `${classes.Active} ${classes.Link}` : classes.Link}
                         to='/contact' end>
                         Contact
+                    </NavLink>
+                    <NavLink
+                        className={({isActive}) => isActive ?
+                            `${classes.Active} ${classes.Link}` : classes.Link}
+                        to='/newsletter' end>
+                        Newsletter
                     </NavLink>
                     <NavLink
                         className={({isActive}) => isActive ?

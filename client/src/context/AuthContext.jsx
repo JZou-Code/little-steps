@@ -8,14 +8,16 @@ const AuthContext = React.createContext({
         email: '',
         role: roles.PARENT
     },
-    setIsLogin: () => {
-    },
-    setId: () => {
-    },
-    setEmail: () => {
-    },
-    setRole: () => {
+    setAuth: () => {
     }
+    // setIsLogin: () => {
+    // },
+    // setId: () => {
+    // },
+    // setEmail: () => {
+    // },
+    // setRole: () => {
+    // }
 });
 
 export default AuthContext;

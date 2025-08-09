@@ -1,0 +1,57 @@
+.Container {
+    padding: 0 5rem;
+    background-color: rgba(255, 210, 128, 0.5);
+}
+
+
+.Newsletter {
+    padding: 3rem 0;
+    display: flex;
+    justify-content: center;
+}
+
+.ImageContainer {
+    width: 50%
+}
+
+.Content {
+    width: 50%;
+}
+
+.Title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2.5rem;
+}
+
+.Image {
+    border-radius: 3rem;
+}
+
+.Text {
+    padding: 0 3rem;
+    font-size: 1.5rem;
+    line-height: 2rem;
+}
+
+.ButtonContainer{
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.Button {
+    font-size: 1.5rem;
+    background-color: #FFA726;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.Button:hover {
+    box-shadow: 0 0 2px 2px #FFCC80;
+}
+
+.Button:active {
+    box-shadow: none;
+}
