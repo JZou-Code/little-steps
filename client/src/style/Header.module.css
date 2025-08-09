@@ -27,7 +27,6 @@
 
 .Button{
     font-size: 1.1rem;
-    font-weight: bold;
     padding: 0.5rem 1rem;
     border-radius: 1rem;
     border: 1px solid #FFA726;
@@ -36,7 +35,16 @@
 
 .Button:hover{
     cursor: pointer;
-    box-shadow: 0 0 2px 2px lightgray;
+    box-shadow: 0 0 2px 2px #FFCC80;
+}
+
+.AccountContainer{
+
+}
+
+.AccountContainer .Button{
+    background-color: #FFA726;
+    color: white;
 }
 
 .SignUp{

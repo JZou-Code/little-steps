@@ -3,16 +3,32 @@ import classes from "../style/Forms.module.css";
 import {pageState} from "../utils/pageState.js";
 import PageStateContext from "../context/PageStateContext.jsx";
 import {useNavigate} from "react-router-dom";
+import {login} from "../api/login.js";
+import authContext from "../context/AuthContext.jsx";
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [errorMsg, setErrorMsg] = useState('')
 
-    const ctx = useContext(PageStateContext);
+    const pageCtx = useContext(PageStateContext);
+    const authCtx = useContext(authContext);
     const navigate = useNavigate();
 
     const handleSubmit = (e) => {
-
+        e.preventDefault();
+        login(email, password)
+            .then(res => {
+                console.log(res.data)
+                authCtx.setIsLogin(true);
+                authCtx.setEmail(res.data.email);
+                pageCtx.dispatch({type:pageState.NONE});
+                navigate('/');
+            })
+            .catch(e => {
+                console.log(e.response)
+                setErrorMsg(e.response.data.message);
+            })
     }
     return (
         <>
@@ -39,9 +55,14 @@ const LoginForm = () => {
                     />
                 </div>
                 <button className={classes.Button} type='sumbit'>Login</button>
+
+                <div className={classes.Message}>
+                    {errorMsg}
+                </div>
             </form>
+
             <div className={classes.Notification}>
-                <div className={classes.Forget} onClick={() => ctx.dispatch({type: pageState.FORGET})}>
+            <div className={classes.Forget} onClick={() => pageCtx.dispatch({type: pageState.FORGET})}>
                 <span className={classes.Link}>
                     Forgot password?
                 </span>
@@ -51,7 +72,7 @@ const LoginForm = () => {
                         Not registered yet?
                     </div>
                     <div onClick={() => {
-                        ctx.dispatch({type: pageState.SIGNUP})
+                        pageCtx.dispatch({type: pageState.SIGNUP})
                         navigate('/account/sign-up')
                     }} className={classes.Link}>
                         &nbsp;Signup for an account

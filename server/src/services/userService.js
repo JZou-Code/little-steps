@@ -1,9 +1,46 @@
 const userDao = require('../DAO/userDAO');
 const saltTool = require('../utils/SaltTool');
+const jwt = require('jsonwebtoken');
+const {JWT_ACCESS_SECRET, JWT_REFRESH_SECRET, ACCESS_EXPIRES_IN, REFRESH_EXPIRES_IN} = require('../auth/config');
 
 const createUser = async (data) => {
     data.password = await saltTool.hash(data.password);
     return userDao.createUser(data)
+}
+
+const login = async (email, password) => {
+    const storedData = await userDao.findUserByEmail(email);
+    if (!storedData) {
+        const err = new Error('Invalid credentials.');
+        err.status = 401;
+        throw err;
+    }
+
+    const hashedPwd = storedData.password;
+    const result = await saltTool.verify(hashedPwd, password)
+    if (!result) {
+        const err = new Error('Invalid credentials');
+        err.status = 401;
+        throw err;
+    }
+
+    const accessToken = jwt.sign(
+        {sub: storedData.id, role: storedData.role, email: storedData.email},
+        JWT_ACCESS_SECRET,
+        {expiresIn: ACCESS_EXPIRES_IN}
+    );
+
+    const refreshToken = jwt.sign(
+        {sub: storedData.id},
+        JWT_REFRESH_SECRET,
+        {expiresIn: REFRESH_EXPIRES_IN}
+    );
+
+    return {
+        accessToken,
+        refreshToken,
+        user: {id: storedData.id, email: storedData.email, role: storedData.role}
+    }
 }
 
 const updateUser = async (id, data) => {
@@ -32,14 +69,15 @@ const changePassword = async (id, newPwd) => {
     const result = await saltTool.verify(hashedPwd, newPwd)
     if (result) {
         return {
-            flag: false,
+            code: '409',
+            data: null,
             message: 'Password cannot be the same as the current one.'
         }
     }
     const newHashedPwd = await saltTool.hash(newPwd);
     const newData = await userDao.updateUser(id, {password: newHashedPwd})
     return {
-        flag: true,
+        code: '200',
         data: newData,
         message: 'Password changed successfully.'
     }
@@ -47,6 +85,7 @@ const changePassword = async (id, newPwd) => {
 
 module.exports = {
     createUser,
+    login,
     updateUser,
     findUser,
     findManyUsers,

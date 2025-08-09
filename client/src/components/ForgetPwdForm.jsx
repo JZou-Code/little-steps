@@ -52,7 +52,7 @@ const ForgetPwdForm = () => {
                         placeholder={'Confirm Password'}
                     />
                 </div>
-                <button className={classes.Button} type='sumbit'>Next</button>
+                <button className={classes.Button} type='sumbit'>Submit</button>
             </form>
             <div className={classes.Notification}>
                 <div className={classes.LinkContainer}>

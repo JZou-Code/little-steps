@@ -7,6 +7,31 @@ const createUser = async (req, res) => {
     res.send(result)
 }
 
+const login = async (req, res, next) => {
+    try {
+        const {email, password} = req.body;
+        const result = await userService.login(email, password);
+
+        res.cookie('refreshToken', result.refreshToken, {
+            httpOnly: true,
+            secure: true,
+            sameSite: 'strict',
+            maxAge: 7 * 24 * 3600 * 1000
+        });
+
+        return res.status(200).json({
+            code: 200,
+            message: 'ok',
+            data: {
+                accessToken: result.accessToken,
+                user: result.user,
+            },
+        });
+    }catch (e){
+        return next(e)
+    }
+}
+
 const updateUser = async (req, res) => {
     const {id, ...data} = req.body;
     const result = await userService.updateUser(id, data)
@@ -55,6 +80,7 @@ const changePassword = async (req, res) => {
 
 module.exports = {
     createUser,
+    login,
     updateUser,
     findUser,
     findManyUsers,

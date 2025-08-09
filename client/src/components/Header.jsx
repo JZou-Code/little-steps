@@ -1,20 +1,13 @@
 import React, {useContext} from 'react';
 import {NavLink, useNavigate} from "react-router-dom";
 import classes from '../style/Header.module.css'
-import Backdrop from "../UI/Backdrop/Backdrop.jsx";
-// import TopCorner from "./TopCorner.jsx";
-import HeaderContext from "../context/PageStateContext.jsx";
-import {pageState} from "../utils/pageState.js";
-import PageStateContext from "../context/PageStateContext.jsx";
+import AuthContext from "../context/AuthContext.jsx";
+import HeaderAccount from "./HeaderAccount.jsx";
+import HeaderLogin from "./HeaderLogin.jsx";
 
 
 const Header = () => {
-    const onClose = () => {
-        ctx.dispatch({type: pageState.NONE})
-    }
-
-    const ctx = useContext(PageStateContext);
-    const navigate = useNavigate();
+    const ctx = useContext(AuthContext);
 
     return (
         <>
@@ -24,20 +17,9 @@ const Header = () => {
                     <div>
                         <div className={classes.Title}>Little Steps</div>
                     </div>
-                    <div className={classes.LoginContainer}>
-                        <div className={`${classes.Button} ${classes.Login}`}
-                             onClick={() => {
-                                 ctx.dispatch({type: pageState.LOGIN})
-                                 navigate('/account/login')
-                             }}>Log In
-                        </div>
-                        <div className={`${classes.Button} ${classes.SignUp}`}
-                             onClick={() => {
-                                 ctx.dispatch({type: pageState.SIGNUP})
-                                 navigate('/account/sign-up')
-                             }}>Sign Up
-                        </div>
-                    </div>
+
+                    {ctx.isLogin ? <HeaderAccount/> : <HeaderLogin/>}
+
                 </div>
 
                 <div className={classes.LinkContainer}>
