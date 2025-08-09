@@ -32,6 +32,24 @@ const login = async (req, res, next) => {
     }
 }
 
+const logout = async (req, res) => {
+    res.clearCookie('refreshToken', {
+        httpOnly: true,
+        secure: true,
+        sameSite: 'strict'
+    });
+
+    req.session.destroy(err => {
+        if (err) {
+            console.error('Session destroy error:', err);
+            return res.status(500).json({ message: 'Logout failed' });
+        }
+        res.status(200).json({ message: 'Logged out successfully' });
+    });
+
+    // res.status(200).json({ message: 'Logged out successfully' });
+}
+
 const updateUser = async (req, res) => {
     const {id, ...data} = req.body;
     const result = await userService.updateUser(id, data)
@@ -81,6 +99,7 @@ const changePassword = async (req, res) => {
 module.exports = {
     createUser,
     login,
+    logout,
     updateUser,
     findUser,
     findManyUsers,

@@ -3,6 +3,7 @@ import axios from "axios";
 import {pageState} from "../utils/pageState.js";
 import PageStateContext from "../context/PageStateContext.jsx";
 import AuthContext from "../context/AuthContext.jsx";
+import {roles} from "../utils/roles.js";
 
 const useAuth = () => {
     const authCtx = useContext(AuthContext);
@@ -43,7 +44,40 @@ const useAuth = () => {
         }
     }
 
-    const logout = async () => {
+    const logout = async (id) => {
+        try {
+            const res = await axios.post(
+                'http://localhost:3000/user/logout',
+                {
+                    id
+                }
+            )
+
+            localStorage.removeItem('auth');
+
+            authCtx.setAuth({
+                isLogin: false,
+                user: {
+                    id: '',
+                    email: '',
+                    role: roles.PARENT
+                },
+                token: ''
+            })
+
+            pageCtx.dispatch({type: pageState.NONE});
+            return true;
+        } catch (e) {
+            alert(e.response.data.message);
+            return false
+        }finally {
+            authCtx.setAuth(prev=>{
+                return {
+                    ...prev,
+                    isLogin: false
+                }
+            })
+        }
     }
 
     return {

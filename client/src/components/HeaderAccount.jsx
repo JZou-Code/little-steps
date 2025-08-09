@@ -1,17 +1,17 @@
 import React, {useContext} from 'react';
 import classes from "../style/Header.module.css";
 import AuthContext from "../context/AuthContext.jsx";
+import useAuth from "../hook/useAuth.jsx";
 
 const HeaderAccount = () => {
     const ctx = useContext(AuthContext);
+    const {logout} = useAuth();
 
     const onLogOut = () => {
         try {
-
+            logout(ctx.user.id);
         } catch (e) {
 
-        } finally {
-            ctx.setIsLogin(false);
         }
     }
     return (
