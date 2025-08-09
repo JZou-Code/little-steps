@@ -7,7 +7,7 @@ function App() {
     return (
         <>
             <PageStateProvider>
-                <div className={classes.FontSet}>
+                <div className={classes.All}>
                     <Header/>
                     <div className={classes.Container}>
                         <RoutesController/>

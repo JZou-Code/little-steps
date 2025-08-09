@@ -1,7 +1,7 @@
 import React from 'react';
 import ErrorBoundary from "./utils/ErrorBoundary.jsx";
 import {Outlet, Route, Routes} from "react-router-dom";
-import Home from "./pages/Home.jsx";
+import HomePage from "./pages/HomePage.jsx";
 import About from "./pages/About.jsx";
 import Gallery from "./pages/Gallery.jsx";
 import Contact from "./pages/Contact.jsx";
@@ -13,7 +13,7 @@ const RoutesController = () => {
         <div>
             <ErrorBoundary>
                 <Routes>
-                    <Route path='/' element={<Home/>}></Route>
+                    <Route path='/' element={<HomePage/>}></Route>
                     <Route path='/about' element={<About/>}></Route>
                     <Route path='/gallery' element={<Gallery/>}></Route>
                     <Route path='/contact' element={<Contact/>}></Route>

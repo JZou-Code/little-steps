@@ -1,7 +1,10 @@
 .Container{
-    /*background-color: #FFD280;*/
+    background-color: rgba(255, 210, 128, 0.5);
 }
 
-.FontSet{
+.All{
     color: #4E342E;;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 2rem;
 }

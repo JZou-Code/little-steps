@@ -68,17 +68,16 @@
 .Link {
     transition: 0.1s;
     margin: 0 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    transition: 0.2s;
 }
 
 .Link:hover {
-    transform: scale(1.05);
-}
-
-.Link:active {
-    transform: scale(1);
+    box-shadow: 0 0 2px 2px #FFCC80;
 }
 
 .Active {
-    color: orangered;
+    background-color: #FFA726;
 }
 

@@ -17,9 +17,9 @@ const SignUpForm = () => {
     const [lastName,setLastName] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [captchaId, setCaptchaId] = useState('')
-    const [validationCode, setValidationCode] = useState('')
-    const [captcha, setCaptcha] = useState('');
+    // const [captchaId, setCaptchaId] = useState('')
+    // const [validationCode, setValidationCode] = useState('')
+    // const [captcha, setCaptcha] = useState('');
 
     const [errorMsg, setErrorMsg] = useState('')
 
@@ -87,7 +87,7 @@ const SignUpForm = () => {
                         placeholder={'Email'}
                     />
                 </div>
-                <ValidationCode code={validationCode} setCode={setValidationCode} email={email}></ValidationCode>
+                {/*<ValidationCode code={validationCode} setCode={setValidationCode} email={email}></ValidationCode>*/}
                 <div className={classes.InputContainer}>
                     <input
                         className={classes.Input}
@@ -128,21 +128,21 @@ const SignUpForm = () => {
                         placeholder={'Last Name'}
                     />
                 </div>
-                <div className={`${classes.InputContainer} ${classes.CaptchaContainer}`}>
-                    <input
-                        className={classes.CaptchaInput}
-                        type="text"
-                        value={captcha}
-                        onChange={(e) => setCaptcha(e.target.value)}
-                        required
-                        placeholder={'Captcha'}
-                    />
-                    <div
-                        className={classes.CaptchaImg}
-                    >
-                        <Captcha setCaptchaId={setCaptchaId}/>
-                    </div>
-                </div>
+                {/*<div className={`${classes.InputContainer} ${classes.CaptchaContainer}`}>*/}
+                {/*    <input*/}
+                {/*        className={classes.CaptchaInput}*/}
+                {/*        type="text"*/}
+                {/*        value={captcha}*/}
+                {/*        onChange={(e) => setCaptcha(e.target.value)}*/}
+                {/*        required*/}
+                {/*        placeholder={'Captcha'}*/}
+                {/*    />*/}
+                {/*    <div*/}
+                {/*        className={classes.CaptchaImg}*/}
+                {/*    >*/}
+                {/*        <Captcha setCaptchaId={setCaptchaId}/>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
                 <button
                     onClick={onSignUp}
                     className={classes.Button}

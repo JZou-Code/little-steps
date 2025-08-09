@@ -1,7 +1,7 @@
 import React from 'react';
 import classes from '../style/LoginPage.module.css'
-import LoginAnim from "../components/LoginAnim.jsx";
-import FormContainer from "../components/FormContainer.jsx";
+import LoginAnim from "./LoginAnim.jsx";
+import FormContainer from "./FormContainer.jsx";
 
 
 const SetupAccount = () => {

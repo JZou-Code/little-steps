@@ -3,11 +3,12 @@
 }
 
 .Title{
-    font-size: 2rem;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
 }
 
 .InputContainer{
-    font-size: 1.2rem;
+
 }
 
 .Input{
