@@ -10,7 +10,11 @@ const AuthContext = React.createContext({
     },
     setIsLogin: () => {
     },
+    setId: () => {
+    },
     setEmail: () => {
+    },
+    setRole: () => {
     }
 });
 

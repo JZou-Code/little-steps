@@ -2,9 +2,10 @@ import React, {useContext, useEffect, useState} from 'react';
 import classes from "../style/Forms.module.css";
 import {pageState} from "../utils/pageState.js";
 import PageStateContext from "../context/PageStateContext.jsx";
-import {useNavigate} from "react-router-dom";
-import {login} from "../api/login.js";
+import {useLocation, useNavigate} from "react-router-dom";
+// import {login} from "../api/login.js";
 import authContext from "../context/AuthContext.jsx";
+import useAuth from "../hook/useAuth.jsx";
 
 const LoginForm = () => {
     const [email, setEmail] = useState('');
@@ -15,20 +16,20 @@ const LoginForm = () => {
     const authCtx = useContext(authContext);
     const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
+
+    const {login} = useAuth();
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        login(email, password)
-            .then(res => {
-                console.log(res.data)
-                authCtx.setIsLogin(true);
-                authCtx.setEmail(res.data.email);
-                pageCtx.dispatch({type:pageState.NONE});
-                navigate('/');
-            })
-            .catch(e => {
-                console.log(e.response)
-                setErrorMsg(e.response.data.message);
-            })
+        const isOk = await login(email, password, setErrorMsg, authCtx, pageCtx)
+
+        console.log(isOk)
+
+        if (isOk) {
+            navigate(from, {replace: true})
+        }
     }
     return (
         <>
@@ -62,7 +63,7 @@ const LoginForm = () => {
             </form>
 
             <div className={classes.Notification}>
-            <div className={classes.Forget} onClick={() => pageCtx.dispatch({type: pageState.FORGET})}>
+                <div className={classes.Forget} onClick={() => pageCtx.dispatch({type: pageState.FORGET})}>
                 <span className={classes.Link}>
                     Forgot password?
                 </span>

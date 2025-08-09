@@ -47,6 +47,12 @@ const Header = () => {
                         to='/contact' end>
                         Contact
                     </NavLink>
+                    <NavLink
+                        className={({isActive}) => isActive ?
+                            `${classes.Active} ${classes.Link}` : classes.Link}
+                        to='/account' end>
+                        Account
+                    </NavLink>
                 </div>
 
             </div>

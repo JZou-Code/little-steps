@@ -6,7 +6,13 @@ const HeaderAccount = () => {
     const ctx = useContext(AuthContext);
 
     const onLogOut = () => {
-        ctx.setIsLogin(false)
+        try {
+
+        } catch (e) {
+
+        } finally {
+            ctx.setIsLogin(false);
+        }
     }
     return (
         <div>
