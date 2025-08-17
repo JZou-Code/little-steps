@@ -1,20 +1,55 @@
 .Container {
     width: 100%;
-    padding: 0 2rem;
+    padding: 2rem;
     background-color: rgba(255, 210, 128, 0.5);
 }
 
 .ListContainer {
-
+    border: 1px solid #FFA726;
+    padding: 1rem;
 }
 
 .ListContainer table {
     width: 100%;
     margin: 0 auto;
-    border-collapse: separate;
+    border-collapse: collapse;
+}
+
+.First {
+    border-bottom: 1px solid #FFA726;
 }
 
 .ListContainer td,
 .ListContainer th {
+    font-size: 1rem;
     padding: 0.8rem;
+    text-align: center;
+}
+
+.ListFunction {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5rem;
+}
+
+.Button {
+    background-color: #FFA726;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.Button:hover {
+    box-shadow: 0 0 2px 2px #FFCC80;
+}
+
+.Button:active {
+    box-shadow: none;
+}
+
+.Disabled {
+    pointer-events: none;
+    background-color: lightgray;
+    color: white;
 }

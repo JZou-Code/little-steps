@@ -48,14 +48,25 @@ async function findManyUsers(data) {
 
 async function findManyUsersByOffset(data) {
     try {
-        const res = await prisma.user.findMany(data);
+        const res = await prisma.user.findMany({
+            ...data,
+            take: data.take + 1
+        });
 
-        console.log(res)
+        const newData = res.map(item => {
+            return {
+                email: item.email,
+                firstName: item.firstName,
+                lastName: item.lastName,
+                role: item.role
+            }
+        })
 
         return {
             code: '200',
+            hasNext: newData.length === data.take + 1,
             message: 'ok',
-            data: res
+            data: newData
         }
     } catch (e) {
         return {

@@ -13,7 +13,7 @@ export default function useRefreshScheduler(accessToken, refresh) {
             const expiresAt = getJwtExpMs(accessToken);
             const now = Date.now();
 
-            const refreshAt = expiresAt - now - 2 * 1000;
+            const refreshAt = expiresAt - now - 60 * 1000;
 
             if (refreshAt > 0) {
                 timerRef.current = setTimeout(() => {
