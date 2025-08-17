@@ -4,9 +4,9 @@ async function createUser(data) {
     try {
         const resData = await prisma.user.create({data});
         return {
-            code:'200',
-            message:'ok',
-            data:resData
+            code: '200',
+            message: 'ok',
+            data: resData
         }
     } catch (e) {
         if (e.code === 'P2002') {
@@ -46,6 +46,26 @@ async function findManyUsers(data) {
     return prisma.user.findMany({where: data});
 }
 
+async function findManyUsersByOffset(data) {
+    try {
+        const res = await prisma.user.findMany(data);
+
+        console.log(res)
+
+        return {
+            code: '200',
+            message: 'ok',
+            data: res
+        }
+    } catch (e) {
+        return {
+            code: '500',
+            message: 'Internal server error',
+            data: {}
+        }
+    }
+}
+
 async function deleteUser(id) {
     return prisma.user.delete({where: {id}});
 }
@@ -55,6 +75,7 @@ module.exports = {
     updateUser,
     findUser,
     findManyUsers,
+    findManyUsersByOffset,
     deleteUser,
     findUserByEmail
 }

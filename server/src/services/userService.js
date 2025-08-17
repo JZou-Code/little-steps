@@ -73,6 +73,10 @@ const findManyUsers = (filterObj) => {
     return userDao.findManyUsers(filterObj);
 }
 
+const findManyUsersByOffset = (filterObj) => {
+    return userDao.findManyUsersByOffset(filterObj);
+}
+
 const deleteUser = (id) => {
     return userDao.deleteUser(id);
 }
@@ -104,6 +108,7 @@ module.exports = {
     updateUser,
     findUser,
     findManyUsers,
+    findManyUsersByOffset,
     deleteUser,
     changePassword,
     findUserByEmail

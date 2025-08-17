@@ -15,7 +15,8 @@ router.post('/profile', authenticate, (req, res) => {
 router.put('/update-user', userController.updateUser)
 router.get('/find-user', userController.findUser)
 router.get('/find-user-by-email', userController.findUserByEmail)
-router.get('/find-many-user', userController.findManyUsers)
+router.get('/find-many-users', userController.findManyUsers)
+router.post('/find-many-users-by-offset', userController.findManyUsersByOffset)
 router.delete('/delete-user', userController.deleteUser)
 router.put('/change-password', userController.login)
 

@@ -1,7 +1,7 @@
 import React, {useContext, useState} from 'react';
 import classes from '../style/AccountPage.module.css'
 import axios from "axios";
-import axiosApi from "../api/axiosApi.js";
+// import axiosApi from "../api/axiosApi.js";
 import {useNavigate} from "react-router-dom";
 import AuthContext from "../context/AuthContext.jsx";
 import {roles} from "../utils/roles.js";

@@ -6,7 +6,7 @@ import {pageState} from "./pageState.js";
 import {roles} from "./roles.js";
 
 export default function AdminRoute() {
-    const {isLogin, role} = useContext(AuthContext);
+    const {isLogin, user:{role}} = useContext(AuthContext);
     const {dispatch} = useContext(PageStateContext)
     const location = useLocation();
 
@@ -20,9 +20,9 @@ export default function AdminRoute() {
         return <Navigate to="/account/login" state={{from: location}} replace/>;
     }
 
-    if (role !== roles.ADMIN){
+    if (role !== roles.ADMIN) {
         return <Navigate to="/account" state={{from: location}} replace/>;
     }
 
-        return <Outlet/>;
+    return <Outlet/>;
 }

@@ -101,6 +101,12 @@ const findManyUsers = async (req, res) => {
     res.send(result)
 }
 
+const findManyUsersByOffset = async (req, res) => {
+    const filter = req.body;
+    const result = await userService.findManyUsersByOffset(filter)
+    res.send(result)
+}
+
 const deleteUser = async (req, res) => {
     const {id} = req.query;
     const result = await userService.deleteUser(id)
@@ -121,6 +127,7 @@ module.exports = {
     updateUser,
     findUser,
     findManyUsers,
+    findManyUsersByOffset,
     deleteUser,
     changePassword,
     findUserByEmail
