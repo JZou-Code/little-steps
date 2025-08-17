@@ -9,6 +9,8 @@ import SignUpPage from "./pages/SignUpPage.jsx";
 import AccountPage from "./pages/AccountPage.jsx";
 import PrivateRoute from "./utils/PrivateRoute.jsx";
 import NewsletterPage from "./pages/NewsletterPage.jsx";
+import AdminDashboardPage from "./pages/AdminDashboardPage.jsx";
+import AdminRoute from "./utils/AdminRoute.jsx";
 
 const RoutesController = () => {
     return (
@@ -28,7 +30,9 @@ const RoutesController = () => {
                         <Route path='login' element={<LoginPage/>}></Route>
                         <Route path='sign-up' element={<SignUpPage/>}></Route>
                     </Route>
-
+                    <Route element={<AdminRoute/>}>
+                        <Route path='/admin-dashboard' element={<AdminDashboardPage/>}></Route>
+                    </Route>
                 </Routes>
             </ErrorBoundary>
         </div>

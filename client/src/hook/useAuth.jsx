@@ -37,7 +37,6 @@ const useAuth = () => {
             pageCtx.dispatch({type: pageState.NONE});
             return true;
         } catch (e) {
-            console.log(e)
             setErrorMsg(e.response.data.message);
             return false
         }

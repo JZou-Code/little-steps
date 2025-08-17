@@ -58,7 +58,7 @@ const SignUpForm = () => {
             firstName,
             lastName
         }).then(result => {
-            if(result.data.code.startsWith('2')){
+            if(result.data.code === '200'){
                 ctx.dispatch(pageState.LOGIN)
                 navigate('/account/login')
             }else {

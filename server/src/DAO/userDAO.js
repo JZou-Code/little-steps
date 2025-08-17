@@ -2,7 +2,12 @@ const prisma = require('../prisma/client');
 
 async function createUser(data) {
     try {
-        return await prisma.user.create({data});
+        const resData = await prisma.user.create({data});
+        return {
+            code:'200',
+            message:'ok',
+            data:resData
+        }
     } catch (e) {
         if (e.code === 'P2002') {
             return {

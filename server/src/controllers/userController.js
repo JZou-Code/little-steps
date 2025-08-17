@@ -13,7 +13,6 @@ const login = async (req, res, next) => {
     try {
         const {email, password} = req.body;
         const result = await userService.login(email, password);
-
         res.cookie('refreshToken', result.refreshToken, {
             httpOnly: true,
             secure: true,
