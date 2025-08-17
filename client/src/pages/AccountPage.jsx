@@ -2,9 +2,11 @@ import React, {useState} from 'react';
 import classes from '../style/AccountPage.module.css'
 import axios from "axios";
 import axiosApi from "../api/axiosApi.js";
+import {useNavigate} from "react-router-dom";
 
 const AccountPage = () => {
     const [msg, setMsg] = useState(null)
+    const navigate = useNavigate();
 
     const test = async () => {
         try {
@@ -18,6 +20,10 @@ const AccountPage = () => {
         } catch (e) {
             setMsg(`ERR ${e?.response?.status} — ${e?.response?.data?.message || e.message}`);
         }
+    }
+
+    const newsletterHandler = ()=>{
+        navigate('/newsletter')
     }
 
     return (
@@ -37,7 +43,7 @@ const AccountPage = () => {
                         It’s the easiest way to share special moments and keep families in the loop.
                     </div>
                     <div className={classes.ButtonContainer}>
-                        <button className={classes.Button}>
+                        <button onClick={newsletterHandler} className={classes.Button}>
                             More
                         </button>
                     </div>

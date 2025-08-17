@@ -1,4 +1,85 @@
 .Container {
-    padding-top: 5rem;
+    padding: 1rem 15%;
     background-color: rgba(255, 210, 128, 0.5);
+}
+
+.ItemContainer {
+    width: 80%;
+    margin: 1rem auto;
+    padding: 1rem 2rem;
+    border: 1px solid #FFA726;
+    border-radius: 0.5rem;
+}
+
+.ArticleContainer {
+    text-align: center;
+}
+
+.Top {
+
+}
+
+.Title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.TopInfo {
+    margin-top: 1rem;
+    color: gray;
+    font-size: 0.8rem;
+    text-align: right;
+}
+
+.ImagesContainer{
+    display: grid;
+    align-items: center;
+    margin: 1rem auto;
+}
+
+/* 1 image */
+.Images_1Image {
+    width: 60%;
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+}
+
+/* 2 or 4 images */
+.Images_2or4Images {
+    width: 80%;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.4rem;
+}
+
+/* 3 or 5 or more images layout */
+.Images_3or5orMore {
+    width: 100%;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0.4rem;
+}
+
+.ImageWrapper{
+    width: 100%;
+    height: 4rem;
+    padding-top: 100%;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #FFA726;
+}
+
+.Image{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.Article{
+    text-align: justify;
+}
+
+.CommentContainer {
+
 }
