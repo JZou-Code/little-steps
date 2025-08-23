@@ -1,0 +1,48 @@
+.Container {
+    padding: 2rem 5rem;
+    background-color: rgba(255, 210, 128, 0.5);
+    font-size: 1.2rem;
+}
+
+.HeaderContainer {
+    margin-bottom: 2rem;
+}
+
+.Header {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.Description {
+    margin: 1rem auto;
+    padding: 0 5rem;
+    font-size: 1.5rem;
+}
+
+.ContentBlock {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+}
+
+.ImageContainer {
+    width: 50%;
+    border-radius: 1rem;
+    overflow: hidden;
+}
+
+.Content {
+    width: 45%;
+}
+
+.Title{
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.Text{
+
+}
