@@ -5,7 +5,7 @@
 }
 
 .ListContainer {
-    border: 1px solid #FFA726;
+    /*border: 1px solid #FFA726;*/
     padding: 1rem;
 }
 
@@ -15,15 +15,15 @@
     border-collapse: collapse;
 }
 
-.First {
-    border-bottom: 1px solid #FFA726;
-}
-
 .ListContainer td,
 .ListContainer th {
     font-size: 1rem;
     padding: 0.8rem;
     text-align: center;
+}
+
+.ListContainer th{
+    border-bottom: 2px solid #FFA726;
 }
 
 .ListFunction {
@@ -52,4 +52,11 @@
     pointer-events: none;
     background-color: lightgray;
     color: white;
+}
+
+.CellButtonContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem
 }

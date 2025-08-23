@@ -1,0 +1,83 @@
+.Container{
+    margin: 10rem auto 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.AnimContainer{
+    width: 22.25rem;
+    height: 31.5rem;
+}
+
+.FormContainer{
+    width: 20rem;
+    height: 31.5rem;
+    padding: 3rem 2rem;
+    border: 1px solid #FFA726;
+    border-radius: 0.5rem;
+    box-shadow: 3px 3px 5px 2px #FFCC80;
+}
+
+.Title{
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.InputContainer{
+    border: 1px solid #FFA726;
+    border-radius: 0.3rem;
+    margin: 1rem auto;
+    padding: 0.5rem;
+}
+
+.Input{
+    width: 100%;
+    font-size: 1.2rem;
+    text-align: center;
+}
+
+.RadioContainer{
+    display: flex;
+    gap: 5%;
+    justify-content: center;
+    align-items: center;
+}
+
+.RadioWrapper{
+}
+
+.RadioContainer label,
+.RadioContainer input{
+    cursor: pointer;
+}
+
+.Radio{
+    font-size: 1.2rem;
+}
+
+.ButtonGroup{
+    display: flex;
+    gap:5%;
+    justify-content: center;
+    align-items: center;
+}
+
+.Button{
+    font-size: 1.2rem;
+    background-color: #FFA726;
+    padding: 0.3rem 1rem;
+    border-radius: 0.5rem;
+    margin-top: 1rem;
+}
+
+.Button:hover{
+    cursor: pointer;
+    color: white;
+    box-shadow: 0 0 2px 2px #FFCC80;
+}
+
+.Button:active{
+    box-shadow: none;
+}

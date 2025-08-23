@@ -25,7 +25,7 @@ const AccountPage = () => {
         }
     }
 
-    const newsletterHandler = () => {
+    const navigateToNewsletter = () => {
         navigate('/newsletter')
     }
 
@@ -33,9 +33,13 @@ const AccountPage = () => {
         navigate('/admin-dashboard')
     }
 
+    const navigateToBind = () => {
+        navigate('/account/bind-child')
+    }
+
     return (
         <div className={classes.Container}>
-            <section className={classes.Newsletter}>
+            <section className={classes.ContentBlock}>
                 <div className={classes.ImageContainer}>
                     <img className={classes.Image} alt='Newsletter'
                          src='../public/images/account-page/newsletter.jpg'/>
@@ -50,13 +54,13 @@ const AccountPage = () => {
                         It’s the easiest way to share special moments and keep families in the loop.
                     </div>
                     <div className={classes.ButtonContainer}>
-                        <button onClick={newsletterHandler} className={classes.Button}>
+                        <button onClick={navigateToNewsletter} className={classes.Button}>
                             More
                         </button>
                     </div>
                 </div>
             </section>
-            <section className={classes.Newsletter}>
+            <section className={classes.ContentBlock}>
                 <div className={classes.Content}>
                     <div className={classes.Title}>
                         Āku Tamariki
@@ -79,7 +83,7 @@ const AccountPage = () => {
                          src='../public/images/account-page/newsletter.jpg'/>
                 </div>
             </section>
-            <section className={classes.Newsletter}>
+            <section className={classes.ContentBlock}>
                 <div className={classes.ImageContainer}>
                     <img className={classes.Image} alt='Newsletter'
                          src='../public/images/account-page/newsletter.jpg'/>
@@ -92,7 +96,7 @@ const AccountPage = () => {
                         Easily change your password here to keep your account secure and prevent unauthorized access.
                     </div>
                     <div className={classes.ButtonContainer}>
-                        <button onClick={newsletterHandler} className={classes.Button}>
+                        <button onClick={navigateToNewsletter} className={classes.Button}>
                             Go
                         </button>
                     </div>
@@ -100,7 +104,7 @@ const AccountPage = () => {
             </section>
             {
                 authCtx.user.role === roles.ADMIN &&
-                <section className={classes.Newsletter}>
+                <section className={classes.ContentBlock}>
                     <div className={classes.Content}>
                         <div className={classes.Title}>
                             Admin Dashboard
@@ -114,6 +118,31 @@ const AccountPage = () => {
                                 onClick={navigateToAdmin}
                                 className={classes.Button}>
                                 Manage
+                            </button>
+                        </div>
+                    </div>
+                    <div className={classes.ImageContainer}>
+                        <img className={classes.Image} alt='Newsletter'
+                             src='../public/images/account-page/newsletter.jpg'/>
+                    </div>
+                </section>
+            }
+            {
+                authCtx.user.role === roles.PARENT &&
+                <section className={classes.ContentBlock}>
+                    <div className={classes.Content}>
+                        <div className={classes.Title}>
+                            Admin Dashboard
+                        </div>
+                        <div className={classes.Text}>
+                            This section is restricted to staff only. Here, administrators can monitor system activity,
+                            manage accounts, and update important kindergarten information."
+                        </div>
+                        <div className={classes.ButtonContainer}>
+                            <button
+                                onClick={navigateToBind}
+                                className={classes.Button}>
+                                Bind Child
                             </button>
                         </div>
                     </div>

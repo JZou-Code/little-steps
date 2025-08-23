@@ -51,6 +51,14 @@ const AdminDashboardPage = () => {
         setPageIndex(pageIndex + itemNum)
     }
 
+    const modifyHandler = () => {
+
+    }
+
+    const deleteHandler = () => {
+
+    }
+
     return (
         <div className={classes.Container}>
             <div className={classes.ListContainer}>
@@ -76,7 +84,10 @@ const AdminDashboardPage = () => {
                                         <td>{item.firstName}</td>
                                         <td>{item.lastName}</td>
                                         <td>{item.role}</td>
-                                        <td></td>
+                                        <td className={`${classes.CellButtonContainer}`}>
+                                            <button onClick={modifyHandler} className={classes.Button}>Modify</button>
+                                            <button onClick={deleteHandler} className={classes.Button}>Delete</button>
+                                        </td>
                                     </tr>
                                 )
                             }
