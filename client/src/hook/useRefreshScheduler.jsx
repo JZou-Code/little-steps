@@ -19,6 +19,8 @@ export default function useRefreshScheduler(accessToken, refresh) {
                 timerRef.current = setTimeout(() => {
                     refresh();
                 }, refreshAt);
+            }else {
+                refresh();
             }
         } catch (err) {
             console.error('Failed to schedule token refresh', err);

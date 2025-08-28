@@ -55,6 +55,7 @@ async function findManyUsersByOffset(data) {
 
         const newData = res.map(item => {
             return {
+                id:item.id,
                 email: item.email,
                 firstName: item.firstName,
                 lastName: item.lastName,

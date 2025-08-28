@@ -5,23 +5,34 @@ import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import AuthContext from "../context/AuthContext.jsx";
 import {roles} from "../utils/roles.js";
+import useAuth from "../hook/useAuth.jsx";
 
 const AccountPage = () => {
     const [msg, setMsg] = useState(null)
     const navigate = useNavigate();
     const authCtx = useContext(AuthContext);
 
+    const {refreshToken} = useAuth();
+
     const test = async () => {
         try {
             const token = JSON.parse(localStorage.getItem('auth') || '{}')?.token || '';
+
+            console.log(token)
+
             const res = await axios.post('http://localhost:3000/user/profile',
                 {},
                 {
                     headers: token ? {Authorization: `Bearer ${token}`} : {}
                 });
+            console.log(res)
             setMsg(`OK ${res.status} — ${JSON.stringify(res.data)}`);
         } catch (e) {
-            setMsg(`ERR ${e?.response?.status} — ${e?.response?.data?.message || e.message}`);
+            console.log(e)
+            if (e.status === 401){
+                refresh()
+            }
+            // setMsg(`ERR ${e?.response?.status} — ${e?.response?.data?.message || e.message}`);
         }
     }
 
@@ -35,6 +46,10 @@ const AccountPage = () => {
 
     const navigateToBind = () => {
         navigate('/account/bind-child')
+    }
+
+    const refresh = async ()=>{
+        await refreshToken();
     }
 
     return (

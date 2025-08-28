@@ -1,8 +1,20 @@
 const prisma = require('../prisma/client');
 
 async function createChild(data) {
-    console.log(data)
-    return prisma.child.create({data});
+    try {
+        const resData = await prisma.user.create({data});
+        return {
+            code: '200',
+            message: 'ok',
+            data: resData
+        }
+    } catch (e) {
+        return {
+            code: '500',
+            message: 'Internal server error',
+            data: {}
+        }
+    }
 }
 
 async function updateChild(id, data) {

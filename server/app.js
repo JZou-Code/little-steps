@@ -25,7 +25,10 @@ app.use(session({
 }));
 
 const userRouter = require('./src/routes/userRoutes');
+const childRouter = require('./src/routes/childRoutes');
+
 app.use('/user', userRouter);
+app.use('/child', childRouter);
 
 const test = require('./src/testAPI/testAPI');
 app.use('/test', test)

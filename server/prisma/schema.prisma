@@ -19,12 +19,6 @@ enum Role {
   PARENT
 }
 
-enum BindStatus {
-  PENDING
-  APPROVED
-  REJECTED
-}
-
 model User {
   id         String   @id @default(uuid())
   email      String   @unique
@@ -32,14 +26,11 @@ model User {
   firstName  String
   lastName   String
   role       Role
-  phone      String?
   department String?
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
   children   Child[]
 
-  bindRequests    BindRequest[]  @relation("ParentBind")
-  actedBind       BindRequest[]  @relation("BindActedBy")
   newsletters     Newsletter[]   @relation("Author")
   comments        Comment[]      @relation("CommentAuthor")
   parentMessages  ChildMessage[] @relation("ParentMessages")
@@ -57,22 +48,7 @@ model Child {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  bindRequests BindRequest[]
   messages     ChildMessage[] @relation("AboutChild")
-}
-
-model BindRequest {
-  id          String     @id @default(uuid())
-  parent      User       @relation("ParentBind", fields: [parentId], references: [id])
-  parentId    String
-  child       Child      @relation(fields: [childId], references: [id])
-  childId     String
-  status      BindStatus @default(PENDING)
-  requestedAt DateTime   @default(now())
-  actedBy     User?      @relation("BindActedBy", fields: [actedById], references: [id])
-  actedById   String?
-  actedAt     DateTime?
-  note        String?
 }
 
 model ChildMessage {

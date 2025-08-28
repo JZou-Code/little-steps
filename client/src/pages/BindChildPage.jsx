@@ -14,6 +14,8 @@ const BindChildPage = () => {
     const submitHandler = (e) => {
         e.preventDefault();
         console.log(firstName,lastName,dob,gender);
+
+
     }
 
     const cancelHandler = (e) => {

@@ -63,9 +63,9 @@ const LoginForm = () => {
 
             <div className={classes.Notification}>
                 <div className={classes.Forget} onClick={() => pageCtx.dispatch({type: pageState.FORGET})}>
-                <span className={classes.Link}>
-                    Forgot password?
-                </span>
+                    <span className={classes.Link}>
+                        Forgot password?
+                    </span>
                 </div>
                 <div className={classes.LinkContainer}>
                     <div>

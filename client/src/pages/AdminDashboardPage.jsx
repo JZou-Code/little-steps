@@ -2,6 +2,9 @@ import React, {useEffect, useState} from 'react';
 import classes from '../style/AdminDashboardPage.module.css'
 import {fetchUsers} from "../api/adminOperation.js";
 import LoginForm from "../components/LoginForm.jsx";
+import Backdrop from "../UI/Backdrop/Backdrop.jsx";
+import ModifyUsers from "../components/ModifyUsers.jsx";
+import {roles} from "../utils/roles.js";
 
 const AdminDashboardPage = () => {
     const [pageIndex, setPageIndex] = useState(0);
@@ -9,6 +12,9 @@ const AdminDashboardPage = () => {
     const [orderBy, setOrderBy] = useState({createdAt: 'desc'});
     const [isLoading, setIsLoading] = useState(false);
     const [users, setUsers] = useState([]);
+
+    const [data, setData] = useState(null);
+    const [isEditing, setIsEditing] = useState(false);
 
     const [disablePrev, setDisablePrev] = useState(true);
     const [disableNext, setDisableNext] = useState(false);
@@ -51,12 +57,16 @@ const AdminDashboardPage = () => {
         setPageIndex(pageIndex + itemNum)
     }
 
-    const modifyHandler = () => {
-
+    const modifyHandler = (item) => {
+        setData(item);
+        setIsEditing(true);
     }
 
     const deleteHandler = () => {
+    }
 
+    const cancelHandler = ()=>{
+        setIsEditing(false);
     }
 
     return (
@@ -85,7 +95,13 @@ const AdminDashboardPage = () => {
                                         <td>{item.lastName}</td>
                                         <td>{item.role}</td>
                                         <td className={`${classes.CellButtonContainer}`}>
-                                            <button onClick={modifyHandler} className={classes.Button}>Modify</button>
+                                            <button datasrc={index}
+                                                    onClick={() => {
+                                                        modifyHandler(item)
+                                                    }}
+                                                    className={classes.Button}>
+                                                Modify
+                                            </button>
                                             <button onClick={deleteHandler} className={classes.Button}>Delete</button>
                                         </td>
                                     </tr>
@@ -107,6 +123,13 @@ const AdminDashboardPage = () => {
                     </button>
                 </div>
             </div>
+            {
+                isEditing &&
+                <Backdrop>
+                    <ModifyUsers onCancel={cancelHandler} data={data}/>
+                </Backdrop>
+            }
+
         </div>
     );
 };
