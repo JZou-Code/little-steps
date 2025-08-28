@@ -3,14 +3,24 @@ import classes from '../style/ModifyUsers.module.css'
 import {roles} from "../utils/roles.js";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faXmark} from "@fortawesome/free-solid-svg-icons";
+import {updateUserById} from "../api/manageUsers.js";
 
-const ModifyUsers = ({data, onCancel}) => {
-    const [firstName, setFirstName] = useState(data.firstName || '');
-    const [lastName, setLastName] = useState(data.lastName || '');
-    const [role, setRole] = useState(data.role || roles.PARENT);
+const ModifyUsers = ({data, onCancel, setupMsg, loadUsers}) => {
+    const [firstName, setFirstName] = useState(data?.firstName || '');
+    const [lastName, setLastName] = useState(data?.lastName || '');
+    const [role, setRole] = useState(data?.role || roles.PARENT);
 
-    const submitHandler = (e)=>{
+    const submitHandler = async (e) => {
         e.preventDefault();
+        try {
+            await updateUserById(data.id, {firstName, lastName, role});
+            setupMsg('Edit Successfully', true);
+        } catch (e) {
+            setupMsg('Edit Failed', false);
+        }finally {
+            onCancel();
+            loadUsers();
+        }
     }
 
     return (
@@ -22,19 +32,27 @@ const ModifyUsers = ({data, onCancel}) => {
                 </div>
                 <div className={classes.InputContainer}>
                     <label className={classes.Subtitle} htmlFor={'modifyFirst'}>First Name:</label>
-                    <input onChange={e=>{setFirstName(e.target.value)}} id={'modifyFirst'} value={firstName}/>
+                    <input onChange={e => {
+                        setFirstName(e.target.value)
+                    }} id={'modifyFirst'} value={firstName}/>
                 </div>
                 <div className={classes.InputContainer}>
                     <label className={classes.Subtitle} htmlFor={'modifyLast'}>Last Name:</label>
-                    <input onChange={e=>{setLastName(e.target.value)}} id={'modifyLast'} value={lastName}/>
+                    <input onChange={e => {
+                        setLastName(e.target.value)
+                    }} id={'modifyLast'} value={lastName}/>
                 </div>
                 <div className={classes.InputContainer}>
                     <label className={classes.Subtitle} htmlFor={'modifyRole'}>Last Name:</label>
-                    <select onChange={e=>{setRole(e.target.value)}} id={'modifyRole'}>
-                        <option value={roles.PARENT} selected={role === roles.PARENT}>
+                    <select
+                        value={role}
+                        onChange={e => {
+                            setRole(e.target.value)
+                        }} id={'modifyRole'}>
+                        <option value={roles.PARENT}>
                             {roles.PARENT}
                         </option>
-                        <option value={roles.TEACHER} selected={role === roles.TEACHER}>
+                        <option value={roles.TEACHER}>
                             {roles.TEACHER}
                         </option>
                     </select>
@@ -45,7 +63,6 @@ const ModifyUsers = ({data, onCancel}) => {
                 </div>
             </form>
         </div>
-
     );
 };
 

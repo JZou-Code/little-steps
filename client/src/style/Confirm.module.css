@@ -1,0 +1,62 @@
+.Container{
+    position: absolute;
+    width: 25rem;
+    height: 12rem;
+    background-color: #fafafa;
+    inset: 0;
+    margin: auto;
+    border-radius: 1rem;
+    font-size: 1.2rem;
+    color: #4E342E;
+    padding-top: 2rem;
+}
+
+.CancelIcon{
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.CancelIcon:hover{
+    transform: rotate(90deg);
+    color: orangered;
+}
+
+.Title{
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.Text{
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.ButtonContainer{
+    margin-top: 2rem;
+    display: flex;
+    gap: 4rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.Button{
+    background-color: #FFA726;
+    width: 6rem;
+    height: 2rem;
+    font-size: 1.2rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    color: #fafafa;
+}
+
+.Button:hover{
+    box-shadow: 0 0 2px 2px #FFA726;
+}
+
+.Button:active{
+    box-shadow: none;
+}

@@ -69,6 +69,7 @@ const refresh = (req, res) => {
 
 const updateUser = async (req, res) => {
     const {id, ...data} = req.body;
+    console.log(data)
     const result = await userService.updateUser(id, data)
     res.send(result)
 }
@@ -108,7 +109,7 @@ const findManyUsersByOffset = async (req, res) => {
 }
 
 const deleteUser = async (req, res) => {
-    const {id} = req.query;
+    const {id} = req.params;
     const result = await userService.deleteUser(id)
     res.send(result)
 }
