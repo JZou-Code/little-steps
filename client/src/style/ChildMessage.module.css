@@ -1,3 +1,94 @@
 .Container {
     width: 100%;
+    padding: 1rem 2rem;
+}
+
+
+.TopBar button{
+    width: 8rem;
+}
+
+.ListContainer {
+    padding: 1rem;
+    border: 2px solid #FFA726;
+    border-radius: 1rem;
+    position: relative;
+    margin-top: 2rem;
+}
+
+.ListContainer table {
+    width: 100%;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+
+.ListContainer td,
+.ListContainer th {
+    font-size: 1rem;
+    padding: 0.8rem;
+    text-align: center;
+}
+
+.ListContainer th{
+    border-bottom: 2px solid #FFA726;
+}
+
+.ListFunction {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5rem;
+    margin-top: 1rem;
+}
+
+.Button {
+    background-color: #FFA726;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.Button:hover {
+    box-shadow: 0 0 2px 2px #FFCC80;
+}
+
+.Button:active {
+    box-shadow: none;
+}
+
+.Disabled {
+    pointer-events: none;
+    background-color: lightgray;
+    color: white;
+}
+
+.CellButtonContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem
+}
+
+.Title{
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 1rem 0;
+}
+
+.SearchBarContainer{
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    gap: 1rem;
+    margin: 0 auto;
+}
+
+.SearchBar{
+    border: 1px solid #FFA726;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border-radius: 0.3rem;
 }
