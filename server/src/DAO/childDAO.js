@@ -1,6 +1,8 @@
 const prisma = require('../prisma/client');
 
 async function createChild(data) {
+
+    console.log(data)
     try {
         const resData = await prisma.child.create({data});
         return {

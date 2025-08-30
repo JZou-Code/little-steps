@@ -81,3 +81,9 @@
 .Button:active{
     box-shadow: none;
 }
+
+.Message{
+    color: red;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}

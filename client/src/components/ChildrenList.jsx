@@ -34,7 +34,6 @@ const AdminDashboardPage = (props) => {
             const res = await fetchChildren(pageIndex, itemNum, orderBy);
             const arr = res.data?.data ?? [];
             if (arr) {
-                console.log(arr)
                 arr.map(item => {
                     item.dob = item.dob.split('T')[0];
                 })

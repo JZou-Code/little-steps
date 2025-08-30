@@ -12,3 +12,10 @@ export const updateChildById = (id, data) => {
         {id, ...data}
     )
 }
+
+export const addNewChild = (data) => {
+    return axios.post(
+        'http://localhost:3000/child/create-child',
+        data
+    )
+}

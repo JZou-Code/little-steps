@@ -1,25 +1,35 @@
 import React, {useState} from 'react';
-import classes from '../style/BindChildPage.module.css'
-import {useNavigate} from "react-router-dom";
+import classes from '../style/AddChildPage.module.css'
+import {useLocation, useNavigate} from "react-router-dom";
 import LoginAnim from "../components/LoginAnim.jsx";
+import {addNewChild} from "../api/manageChildren.js";
 
-const BindChildPage = () => {
+const AddChildPage = () => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [dob, setDob] = useState('');
     const [gender, setGender] = useState('male');
 
+    const [message, setMessage] = useState('')
+
+    const location = useLocation();
+    const from = location.state?.from?.pathname || '/';
+
     const navigate = useNavigate();
 
-    const submitHandler = (e) => {
+    const submitHandler = async (e) => {
         e.preventDefault();
-        console.log(firstName,lastName,dob,gender);
-
-
+        try {
+            const newDob = dob+'T00:00:00.000Z'
+            const res = await addNewChild({firstName, lastName, dob: newDob, gender});
+        } catch (e) {
+            setMessage(e.data)
+        }
+        navigate('/admin-dashboard')
     }
 
     const cancelHandler = (e) => {
-        navigate('/account')
+        navigate('/admin-dashboard')
     }
 
     return (
@@ -33,6 +43,7 @@ const BindChildPage = () => {
                 </div>
                 <div className={classes.InputContainer}>
                     <input
+                        required={true}
                         value={firstName}
                         className={classes.Input}
                         placeholder='First Name'
@@ -41,24 +52,27 @@ const BindChildPage = () => {
                 </div>
                 <div className={classes.InputContainer}>
                     <input
+                        required={true}
                         value={lastName}
                         className={classes.Input}
-                        placeholder='First Name'
+                        placeholder='Last Name'
                         onChange={e => setLastName(e.target.value)}
                     />
                 </div>
                 <div className={classes.InputContainer}>
                     <input
                         type='date'
+                        required={true}
                         value={dob}
                         className={classes.Input}
-                        placeholder='First Name'
+                        placeholder='Date of Birth'
                         onChange={e => setDob(e.target.value)}
                     />
                 </div>
                 <div className={`${classes.InputContainer} ${classes.RadioContainer}`}>
                     <div className={classes.RadioWrapper}>
                         <input
+                            checked={gender === 'male'}
                             id='gender-male'
                             type='radio'
                             name='gender'
@@ -71,6 +85,7 @@ const BindChildPage = () => {
 
                     <div className={classes.RadioWrapper}>
                         <input
+                            checked={gender === 'female'}
                             id='gender-female'
                             type='radio'
                             name='gender'
@@ -82,6 +97,7 @@ const BindChildPage = () => {
                     </div>
                     <div className={classes.RadioWrapper}>
                         <input
+                            checked={gender === 'other'}
                             id='gender-other'
                             type='radio'
                             name='gender'
@@ -100,9 +116,13 @@ const BindChildPage = () => {
                         Cancel
                     </button>
                 </div>
+                <div className={classes.Message}>
+                    {message}
+                </div>
             </form>
         </div>
-    );
+    )
+        ;
 };
 
-export default BindChildPage;
+export default AddChildPage;

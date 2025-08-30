@@ -3,7 +3,6 @@ const childService = require('../services/childService');
 const createChild = async (req, res) => {
     const data = req.body;
     const result = await childService.createChild(data)
-    console.log(result)
     res.send(result)
 }
 

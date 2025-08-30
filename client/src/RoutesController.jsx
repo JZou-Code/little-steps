@@ -11,7 +11,7 @@ import PrivateRoute from "./utils/PrivateRoute.jsx";
 import NewsletterPage from "./pages/NewsletterPage.jsx";
 import AdminDashboardPage from "./pages/AdminDashboardPage.jsx";
 import AdminRoute from "./utils/AdminRoute.jsx";
-import BindChildPage from "./pages/BindChildPage.jsx";
+import AddChildPage from "./pages/AddChildPage.jsx";
 
 const RoutesController = () => {
     return (
@@ -27,7 +27,7 @@ const RoutesController = () => {
                     <Route path='/account' element={<Outlet/>}>
                         <Route element={<PrivateRoute/>}>
                             <Route path='' element={<AccountPage/>}></Route>
-                            <Route path='bind-child' element={<BindChildPage/>}></Route>
+                            <Route path='add-child' element={<AddChildPage/>}></Route>
                         </Route>
                         <Route path='login' element={<LoginPage/>}></Route>
                         <Route path='sign-up' element={<SignUpPage/>}></Route>
