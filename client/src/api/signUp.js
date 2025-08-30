@@ -1,4 +1,5 @@
 import axios from "axios";
+import {roles} from "../utils/roles.js";
 
 export const requestCaptcha = () => {
     return axios.get(
@@ -6,7 +7,7 @@ export const requestCaptcha = () => {
     )
 }
 
-export const requestValidationCode = (email)=>{
+export const requestValidationCode = (email) => {
     return axios.post(
         'api/send-validation-code',
         {
@@ -15,8 +16,8 @@ export const requestValidationCode = (email)=>{
     )
 }
 
-export const requestSignUp = (data)=>{
-    const newData = {...data, role:'PARENT'}
+export const requestSignUp = (data) => {
+    const newData = {...data, role: roles.OTHER}
 
     return axios.post(
         'http://localhost:3000/user/create-user',

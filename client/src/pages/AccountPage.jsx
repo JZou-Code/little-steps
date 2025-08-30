@@ -40,6 +40,10 @@ const AccountPage = () => {
         navigate('/newsletter')
     }
 
+    const navigateToChildMessage = () => {
+        navigate('/child-message')
+    }
+
     const navigateToAdmin = () => {
         navigate('/admin-dashboard')
     }
@@ -87,7 +91,7 @@ const AccountPage = () => {
                     </div>
                     <div className={classes.ButtonContainer}>
                         <button
-                            onClick={test}
+                            onClick={navigateToChildMessage}
                             className={classes.Button}>
                             hello - {msg}
                         </button>
