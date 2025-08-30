@@ -16,6 +16,10 @@ const findManyChildren = (filterObj) => {
     return childDao.findManyChildren(filterObj);
 }
 
+const findManyChildrenByOffset = (filterObj) => {
+    return childDao.findManyChildrenByOffset(filterObj);
+}
+
 const deleteChild = (id) => {
     return childDao.deleteChild(id);
 }
@@ -25,5 +29,6 @@ module.exports = {
     updateChild,
     findChild,
     findManyChildren,
+    findManyChildrenByOffset,
     deleteChild
 }

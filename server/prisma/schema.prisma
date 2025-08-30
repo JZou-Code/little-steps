@@ -41,10 +41,10 @@ model Child {
   id        String   @id @default(uuid())
   firstName String
   lastName  String
-  dob       DateTime
+  dob       DateTime @db.Date
   gender    String
-  parentId  String
-  parent    User     @relation(fields: [parentId], references: [id])
+  parentId  String?
+  parent    User?     @relation(fields: [parentId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 

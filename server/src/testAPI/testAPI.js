@@ -62,5 +62,11 @@ router.delete('/deleteChild', async (req, res) => {
     res.send(result)
 })
 
+router.get('/findParent/:id', async (req, res) => {
+    const {id} = req.params;
+    const result = await childDao.findParent(id)
+    res.send(result)
+})
+
 module.exports = router;
 

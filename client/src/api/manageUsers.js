@@ -12,3 +12,4 @@ export const updateUserById = (id, data) => {
         {id, ...data}
     )
 }
+

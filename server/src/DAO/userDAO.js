@@ -47,6 +47,8 @@ async function findManyUsers(data) {
 }
 
 async function findManyUsersByOffset(data) {
+    console.log(data)
+
     try {
         const res = await prisma.user.findMany({
             ...data,

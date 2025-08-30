@@ -25,6 +25,12 @@ const findManyChildren = async (req, res) => {
     res.send(result)
 }
 
+const findManyChildrenByOffset = async (req, res) => {
+    const filter = req.body;
+    const result = await childService.findManyChildrenByOffset(filter)
+    res.send(result)
+}
+
 const deleteChild = async (req, res) => {
     const {id} = req.query;
     const result = await childService.deleteChild(id)
@@ -36,5 +42,6 @@ module.exports = {
     updateChild,
     findChild,
     findManyChildren,
+    findManyChildrenByOffset,
     deleteChild
 }

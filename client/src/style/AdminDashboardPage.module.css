@@ -1,12 +1,27 @@
 .Container {
     width: 100%;
-    padding: 2rem;
-    background-color: rgba(255, 210, 128, 0.5);
+    padding: 1rem 2rem;
+    /*background-color: rgba(255, 210, 128, 0.5);*/
+}
+
+.TopBar{
+    display: flex;
+    gap: 8rem;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.TopBar button{
+    width: 8rem;
 }
 
 .ListContainer {
-    /*border: 1px solid #FFA726;*/
     padding: 1rem;
+    border: 2px solid #FFA726;
+    border-radius: 1rem;
+    position: relative;
+    margin-top: 2rem;
 }
 
 .ListContainer table {
@@ -31,6 +46,7 @@
     justify-content: center;
     align-items: center;
     gap: 5rem;
+    margin-top: 1rem;
 }
 
 .Button {
@@ -59,4 +75,28 @@
     justify-content: center;
     align-items: center;
     gap: 1rem
+}
+
+.Title{
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 1rem 0;
+}
+
+.SearchBarContainer{
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.2rem;
+    gap: 1rem;
+    margin: 0 auto;
+}
+
+.SearchBar{
+    border: 1px solid #FFA726;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border-radius: 0.3rem;
 }
