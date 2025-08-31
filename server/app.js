@@ -26,9 +26,11 @@ app.use(session({
 
 const userRouter = require('./src/routes/userRoutes');
 const childRouter = require('./src/routes/childRoutes');
+const messageRouter = require('./src/routes/messageRoutes');
 
 app.use('/user', userRouter);
 app.use('/child', childRouter);
+app.use('/message', messageRouter);
 
 const test = require('./src/testAPI/testAPI');
 app.use('/test', test)

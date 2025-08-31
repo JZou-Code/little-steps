@@ -1,7 +1,6 @@
-import React, {use, useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import classes from '../style/AdminDashboardPage.module.css'
 import {searchUsers} from "../api/adminOperation.js";
-import {deleteUserById} from "../api/manageUsers.js";
 import {updateChildById} from "../api/manageChildren.js";
 
 const BindChildToParent = ({child, reset}) => {
@@ -10,17 +9,6 @@ const BindChildToParent = ({child, reset}) => {
     const [orderBy, setOrderBy] = useState({createdAt: 'desc'});
     const [isLoading, setIsLoading] = useState(false);
     const [users, setUsers] = useState([]);
-
-    const [data, setData] = useState(null);
-    const [isEditing, setIsEditing] = useState(false);
-
-    const [id, setId] = useState(null);
-    const [isDeleting, setIsDeleting] = useState(false);
-
-    const [successfulMsg, setSuccessfulMsg] = useState('');
-    const [isSuccessful, setIsSuccessful] = useState(false);
-    const [failedMsg, setFailedMsg] = useState('');
-    const [isFailed, setIsFailed] = useState(false);
 
     const [disablePrev, setDisablePrev] = useState(true);
     const [disableNext, setDisableNext] = useState(false);
@@ -69,59 +57,6 @@ const BindChildToParent = ({child, reset}) => {
         setPageIndex(pageIndex + itemNum)
     }
 
-    const modifyHandler = (item) => {
-        setData(item);
-        setIsEditing(true);
-    }
-
-    const deleteHandler = (id) => {
-        setId(id);
-        setIsDeleting(true);
-    }
-
-    const cancelEditHandler = () => {
-        setIsEditing(false);
-        setData(null);
-    }
-
-    const cancelDeleteHandler = () => {
-        setIsDeleting(false);
-        setId(null);
-    }
-
-    const confirmDeleteHandler = async () => {
-        try {
-            const res = await deleteUserById(id);
-            setupMsg('Delete Successfully', true);
-            console.log(res)
-            if (users.length === 1 && pageIndex > 0) {
-                setPageIndex(pageIndex - itemNum);
-            } else {
-                await loadUsers();
-            }
-        } catch (e) {
-            setupMsg('Delete Failed', false)
-            console.log(e)
-        } finally {
-            setIsDeleting(false);
-        }
-    }
-
-    const cancelMessage = () => {
-        setIsFailed(false);
-        setIsSuccessful(false);
-    }
-
-    const setupMsg = (msg, flag) => {
-        if (flag) {
-            setSuccessfulMsg(msg);
-            setIsSuccessful(true);
-        } else {
-            setFailedMsg(msg);
-            setIsFailed(true);
-        }
-    }
-
     const handleSearch = async () => {
         setPageIndex(0);
         setQuery(keyword.trim());
@@ -144,7 +79,7 @@ const BindChildToParent = ({child, reset}) => {
                     onChange={(e) => {
                         setKeyword(e.target.value)
                     }}
-                    placeholder={'Parent Name'}
+                    placeholder={'Parent First Name'}
                     className={classes.SearchBar}/>
                 <button onClick={handleSearch} className={classes.Button}>
                     Search

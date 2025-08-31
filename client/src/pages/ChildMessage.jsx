@@ -1,12 +1,8 @@
-import React, {useCallback, useEffect, useState} from 'react';
+import React, {useCallback, useContext, useEffect, useState} from 'react';
 import classes from '../style/ChildMessage.module.css'
-import ChildrenList from "../components/ChildrenList.jsx";
-import {forms} from "../utils/forms.js";
-import UsersList from "../components/UsersList.jsx";
-import BindChildToParent from "../components/BindChildToParent.jsx";
-import {fetchChildren, fetchUsers} from "../api/adminOperation.js";
-import {deleteUserById} from "../api/manageUsers.js";
-import {deleteChildById} from "../api/manageChildren.js";
+import {searchChildren} from "../api/adminOperation.js";
+import AuthContext from "../context/AuthContext.jsx";
+import {useNavigate} from "react-router-dom";
 
 const ChildMessage = () => {
     const [pageIndex, setPageIndex] = useState(0);
@@ -18,30 +14,40 @@ const ChildMessage = () => {
     const [disablePrev, setDisablePrev] = useState(true);
     const [disableNext, setDisableNext] = useState(false);
 
-    const loadChildren = useCallback(async () => {
+    const [keyword, setKeyword] = useState('');
+    const [query, setQuery] = useState('');
+
+    const authCtx = useContext(AuthContext);
+    const navigate = useNavigate();
+
+    const searchResults = useCallback(async () => {
         try {
             setIsLoading(true);
-            const res = await fetchChildren(pageIndex, itemNum, orderBy);
-            const arr = res.data?.data ?? [];
-            if (arr) {
-                arr.map(item => {
-                    item.dob = item.dob.split('T')[0];
-                })
-            }
-            setChildren(arr.slice(0, itemNum));
+            const res = await searchChildren(pageIndex, itemNum, orderBy, query, authCtx.user);
+
+
+            const childrenArr = res.data?.data ?? [];
+            const newChildrenArr = childrenArr.map(item => {
+                return {
+                    ...item,
+                    dob: item.dob.split('T')[0]
+                }
+            })
+
+            setChildren(newChildrenArr.slice(0, itemNum));
 
             setDisablePrev(pageIndex === 0);
-            setDisableNext(arr.length <= itemNum);
+            setDisableNext(childrenArr.length <= itemNum);
         } catch (e) {
             console.log(e);
         } finally {
             setIsLoading(false);
         }
-    }, [pageIndex, itemNum, orderBy]);
+    }, [pageIndex, itemNum, orderBy, query]);
 
     useEffect(() => {
-        loadChildren();
-    }, [loadChildren]);
+        searchResults();
+    }, [searchResults]);
 
     const handlePrev = () => {
         setDisableNext(false);
@@ -60,9 +66,27 @@ const ChildMessage = () => {
         setPageIndex(pageIndex + itemNum)
     }
 
+    const handleSearch = async () => {
+        setPageIndex(0);
+        setQuery(keyword.trim());
+        await searchResults();
+    }
+
     return (
         <div className={classes.Container}>
             <div className={classes.ListContainer}>
+                <div className={classes.SearchBarContainer}>
+                    <input
+                        value={keyword}
+                        onChange={(e) => {
+                            setKeyword(e.target.value)
+                        }}
+                        placeholder={'Child First Name'}
+                        className={classes.SearchBar}/>
+                    <button onClick={handleSearch} className={classes.Button}>
+                        Search
+                    </button>
+                </div>
                 {
                     isLoading ?
                         <div>Loading...</div>
@@ -90,7 +114,7 @@ const ChildMessage = () => {
                                         <td className={`${classes.CellButtonContainer}`}>
                                             <button datasrc={index}
                                                     onClick={() => {
-                                                        props.setChild(item)
+                                                        navigate('/child-message/message', {state: {id: item.id, name: item.lastName}})
                                                     }}
                                                     className={classes.Button}>
                                                 Message

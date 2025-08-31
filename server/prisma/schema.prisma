@@ -34,8 +34,7 @@ model User {
 
   newsletters     Newsletter[]   @relation("Author")
   comments        Comment[]      @relation("CommentAuthor")
-  parentMessages  ChildMessage[] @relation("ParentMessages")
-  teacherMessages ChildMessage[] @relation("TeacherMessages")
+  MessageSender  ChildMessage[] @relation("MessageSender")
 }
 
 model Child {
@@ -54,16 +53,13 @@ model Child {
 
 model ChildMessage {
   id        String @id @default(uuid())
+  content   String
+  createdAt DateTime @default(now())
+
   childId   String
   child     Child  @relation("AboutChild", fields: [childId], references: [id])
-  parentId  String
-  parent    User   @relation("ParentMessages", fields: [parentId], references: [id])
-  teacherId String
-  teacher   User   @relation("TeacherMessages", fields: [teacherId], references: [id])
-
-  content   String
-  role      Role
-  createdAt DateTime @default(now())
+  senderId  String
+  sender    User   @relation("MessageSender", fields: [senderId], references: [id])
 }
 
 model Newsletter {

@@ -29,3 +29,21 @@ export const searchUsers = (skip, take, orderBy = {}, keyword) => {
         }
     )
 }
+
+export const searchChildren = (skip, take, orderBy = {}, keyword, user) => {
+    const queryObj = {
+        firstName: keyword ? {contains: keyword} : undefined
+    }
+
+    if(user.role === roles.PARENT){
+        queryObj.parentId = user.id
+    }
+
+    return axios.post(
+        'http://localhost:3000/child/find-many-children-by-offset',
+        {
+            skip, take, orderBy,
+            where: queryObj
+        }
+    )
+}
