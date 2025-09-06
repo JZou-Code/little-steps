@@ -3,6 +3,23 @@
     background-color: rgba(255, 210, 128, 0.5);
 }
 
+.TopSection{
+    height: 4rem;
+    width: 80%;
+    margin: 1rem auto;
+}
+
+.TopTitle{
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+}
+
+.Create{
+    display: flex;
+    justify-content: flex-end;
+}
+
 .ItemContainer {
     width: 80%;
     margin: 1rem auto;

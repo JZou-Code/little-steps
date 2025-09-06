@@ -14,6 +14,7 @@ import AdminRoute from "./utils/AdminRoute.jsx";
 import AddChildPage from "./pages/AddChildPage.jsx";
 import ChildMessage from "./pages/ChildMessage.jsx";
 import MessagePage from "./pages/MessagePage.jsx";
+import CreateNewsletterPage from "./pages/CreateNewsletterPage.jsx";
 
 const RoutesController = () => {
     return (
@@ -23,7 +24,10 @@ const RoutesController = () => {
                     <Route path='/' element={<HomePage/>}></Route>
                     <Route path='/gallery' element={<Gallery/>}></Route>
                     <Route element={<PrivateRoute/>}>
-                        <Route path='/newsletter' element={<NewsletterPage/>}></Route>
+                        <Route path='/newsletter' element={<Outlet/>}>
+                            <Route path='' element={<NewsletterPage/>}></Route>
+                            <Route path='create-new' element={<CreateNewsletterPage/>}></Route>
+                        </Route>
                         <Route path='/child-message' element={<Outlet/>}>
                             <Route path='' element={<ChildMessage/>}></Route>
                             <Route path='message' element={<MessagePage/>}></Route>
