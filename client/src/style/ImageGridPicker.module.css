@@ -1,0 +1,14 @@
+
+.ImagesContainer{
+    width: 60%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.8rem;
+}
+
+.ButtonContainer{
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+}

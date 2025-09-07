@@ -17,16 +17,17 @@ export default function TinyMCE({content, onChange}) {
             onEditorChange={onChange}
             init={{
                 skin: 'oxide-dark',
+                content_style: 'body { font-size: 1.2rem; line-height: 0.5; }',
                 license_key: 'gpl',
                 height: '100%',
                 width: '100%',
-                resize:false,
+                resize: false,
                 menubar: false,
                 xss_sanitization: true,
                 allow_script_urls: false,
                 sandbox_iframes: true,
                 convert_unsafe_embeds: true,
-                plugins: 'code link lists image table preview',
+                plugins: 'code link lists image preview',
                 toolbar:
                     [
                         'undo redo | bold italic underline | forecolor',
@@ -36,15 +37,36 @@ export default function TinyMCE({content, onChange}) {
                 branding: false,
                 link_default_target: '_blank',
                 rel_list: [{title: 'No Referrer', value: 'noreferrer'}, {title: 'No Opener', value: 'noopener'}],
-                images_upload_handler: async (blobInfo) => {
-                    const form = new FormData();
-                    form.append('file', blobInfo.blob(), blobInfo.filename());
-                    const res = await fetch('/api/upload', {method: 'POST', body: form});
-                    if (!res.ok) throw new Error('Upload failed');
-                    const {url} = await res.json();
-                    return url;
-                },
-                setup: (editor)=> {
+                // automatic_uploads: false,
+                // images_upload_handler: async (blobInfo) => {
+                //     const form = new FormData();
+                //     form.append('file', blobInfo.blob(), blobInfo.filename());
+                //     const res = await fetch('/api/upload', {method: 'POST', body: form});
+                //     if (!res.ok) throw new Error('Upload failed');
+                //     const {url} = await res.json();
+                //     return url;
+                // },
+                // file_picker_types: 'image',
+                // file_picker_callback: (cb) => {
+                //     const input = document.createElement('input');
+                //     input.type = 'file';
+                //     input.accept = 'image/*';
+                //     input.onchange = () => {
+                //         const file = input.files[0];
+                //         const reader = new FileReader();
+                //         reader.onload = () => {
+                //             const id = 'blobid' + Date.now();
+                //             const base64 = reader.result.split(',')[1];
+                //             const blobCache = tinymce.activeEditor.editorUpload.blobCache;
+                //             const blobInfo = blobCache.create(id, file, base64);
+                //             blobCache.add(blobInfo);
+                //             cb(blobInfo.blobUri(), { title: file.name });
+                //         };
+                //         reader.readAsDataURL(file);
+                //     };
+                //     input.click();
+                // },
+                setup: (editor) => {
                     function pointInRects(x, y, rects) {
                         for (const r of rects) {
                             if (x >= r.left && x <= r.right && y >= r.top && y <= r.bottom) return true;
