@@ -40,7 +40,7 @@ export default function ImageGridPicker({
 
             if (file.size > maxMB * 1024 * 1024) {
                 setNotify(true);
-                setNotifyMessage(`Image "${f.name}" has been ignored, because the size exceed ${maxMB}MB.`);
+                setNotifyMessage(`Image "${file.name}" has been ignored, because the size exceed ${maxMB}MB.`);
                 continue;
             }
 
