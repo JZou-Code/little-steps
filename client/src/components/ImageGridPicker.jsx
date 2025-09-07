@@ -100,53 +100,37 @@ export default function ImageGridPicker({
     }
 
     return (
-        <div style={{display: 'grid', gap: 12}}>
-            <div style={{display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 8}}>
-                <label
-                    style={{
-                        padding: '6px 12px',
-                        border: '1px solid #ddd',
-                        borderRadius: 8,
-                        cursor: images.length >= maxCount ? 'not-allowed' : 'pointer',
-                        opacity: images.length >= maxCount ? 0.6 : 1,
-                    }}
-                >
+        <div className={classes.Container}>
+            <div className={classes.Select}>
+                <label className={images.length >= maxCount ? `${classes.Label} ${classes.SelectDisabled}` : classes.Label}>
                     Select Images
                     <input
                         type="file"
+                        className={classes.SelectInput}
                         accept="image/*"
                         multiple
                         onChange={onPick}
-                        style={{display: 'none'}}
                         disabled={images.length >= maxCount}
                     />
                 </label>
-                <div style={{color: '#666'}}>{images.length} / {maxCount}</div>
+                <div className={classes.Count}>{images.length} / {maxCount}</div>
             </div>
 
             <div className={classes.ImagesContainer}>
                 {images.map((img, i) => (
                     <figure
                         key={img.id}
+                        className={classes.Figure}
                         draggable
                         onDragStart={() => onDragStart(i)}
                         onDragOver={onDragOver}
                         onDrop={() => onDrop(i)}
-                        style={{
-                            position: 'relative',
-                            margin: 0,
-                            aspectRatio: '1 / 1',
-                            border: '1px solid #eee',
-                            borderRadius: 12,
-                            overflow: 'hidden',
-                            background: '#fafafa',
-                        }}
                         title="Drag to change order"
                     >
                         <img
+                            className={classes.SingleImage}
                             src={img.dataUrl}
                             alt=""
-                            style={{width: '100%', height: '100%', objectFit: 'cover'}}
                         />
                         <div className={classes.ButtonContainer}>
                             <Button handleClick={() => removeAt(i)} name={'Delete'}/>
@@ -156,15 +140,7 @@ export default function ImageGridPicker({
 
                 {/* empty slots */}
                 {Array.from({length: Math.max(0, maxCount - images.length)}).map((_, idx) => (
-                    <div
-                        key={`placeholder-${idx}`}
-                        style={{
-                            aspectRatio: '1 / 1',
-                            border: '1px dashed #ddd',
-                            borderRadius: 12,
-                            background: '#fff',
-                        }}
-                    />
+                    <div className={classes.EmptySlot} key={`placeholder-${idx}`}></div>
                 ))}
             </div>
             {

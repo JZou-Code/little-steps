@@ -1,5 +1,49 @@
+.Container {
+    display: grid;
+    gap: 0.8rem;
+}
 
-.ImagesContainer{
+.Select {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.Label {
+    padding: 0.4rem 0.8rem;
+    border: 1px solid #ddd;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.Label:hover{
+    box-shadow: 0 0 2px 2px #dddddd;
+}
+
+.Label:active{
+    box-shadow: none;
+}
+
+.SelectDisabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+    box-shadow: none;
+}
+
+.SelectDisabled:hover{
+    box-shadow: none;
+}
+
+.SelectInput{
+    display: none;
+}
+
+.Count{
+    color: #666;
+}
+
+.ImagesContainer {
     width: 60%;
     margin: 0 auto;
     display: grid;
@@ -7,7 +51,30 @@
     gap: 0.8rem;
 }
 
-.ButtonContainer{
+.Figure{
+    position: relative;
+    margin: 0;
+    aspect-ratio: 1/1;
+    border: 1px solid #eee;
+    border-radius: 0.8rem;
+    overflow: hidden;
+    background: #fafafa;
+}
+
+.SingleImage{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.EmptySlot{
+    aspect-ratio: 1/1;
+    border: 1px dashed #FFA726;
+    border-radius: 0.8rem;
+    background: #fff;
+}
+
+.ButtonContainer {
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
