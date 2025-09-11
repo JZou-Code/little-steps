@@ -17,7 +17,7 @@ const NewsletterPage = () => {
                     Newsletter
                 </div>
                 <div className={classes.Create}>
-                    <Button handleClick={handleClick} name={'New'} style={{translate: '-20%'}}/>
+                    <Button handleClick={handleClick} name={'New Post'}/>
                 </div>
             </div>
             <NewsletterBlock/>

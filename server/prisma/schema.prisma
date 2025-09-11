@@ -32,9 +32,9 @@ model User {
   updatedAt  DateTime @updatedAt
   children   Child[]
 
-  newsletters     Newsletter[]   @relation("Author")
-  comments        Comment[]      @relation("CommentAuthor")
-  MessageSender  ChildMessage[] @relation("MessageSender")
+  newsletters   Newsletter[]   @relation("Author")
+  comments      Comment[]      @relation("CommentAuthor")
+  MessageSender ChildMessage[] @relation("MessageSender")
 }
 
 model Child {
@@ -44,22 +44,22 @@ model Child {
   dob       DateTime @db.Date
   gender    String
   parentId  String?
-  parent    User?     @relation(fields: [parentId], references: [id])
+  parent    User?    @relation(fields: [parentId], references: [id])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  messages     ChildMessage[] @relation("AboutChild")
+  messages ChildMessage[] @relation("AboutChild")
 }
 
 model ChildMessage {
-  id        String @id @default(uuid())
+  id        String   @id @default(uuid())
   content   String
   createdAt DateTime @default(now())
 
-  childId   String
-  child     Child  @relation("AboutChild", fields: [childId], references: [id])
-  senderId  String
-  sender    User   @relation("MessageSender", fields: [senderId], references: [id])
+  childId  String
+  child    Child  @relation("AboutChild", fields: [childId], references: [id])
+  senderId String
+  sender   User   @relation("MessageSender", fields: [senderId], references: [id])
 }
 
 model Newsletter {
@@ -71,6 +71,8 @@ model Newsletter {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   comments  Comment[] @relation("OnNewsletter")
+
+  ArticleImage ArticleImage[]
 }
 
 model Comment {
@@ -81,4 +83,17 @@ model Comment {
   newsletter   Newsletter? @relation("OnNewsletter", fields: [newsletterId], references: [id])
   content      String
   createdAt    DateTime    @default(now())
+}
+
+model ArticleImage {
+  id           Int        @id @default(autoincrement())
+  newsletter   Newsletter @relation(fields: [newsletterId], references: [id], onDelete: Cascade)
+  newsletterId String
+
+  storageKey String // 例如: "articles/123/xxx.jpg"
+  position Int
+
+  createdAt DateTime @default(now())
+
+  @@unique([newsletterId, position])
 }

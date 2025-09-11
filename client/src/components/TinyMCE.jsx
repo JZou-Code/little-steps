@@ -17,7 +17,7 @@ export default function TinyMCE({content, onChange}) {
             onEditorChange={onChange}
             init={{
                 skin: 'oxide-dark',
-                content_style: 'body { font-size: 1.2rem; line-height: 0.5; }',
+                content_style: 'body { font-size: 1.2rem; line-height: 0.9; }',
                 license_key: 'gpl',
                 height: '100%',
                 width: '100%',

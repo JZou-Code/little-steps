@@ -16,6 +16,7 @@ export default function ImageGridPicker({
     const dragIndexRef = useRef(null);
 
     const emit = (arr) => {
+        console.log(arr)
         setImages(arr);
         onChange?.(arr);
     };

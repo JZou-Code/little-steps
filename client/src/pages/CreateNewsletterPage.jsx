@@ -18,7 +18,7 @@ const CreateNewsletterPage = () => {
 
     const handleSubmit = () => {
         console.log(images)
-        console.log('handle submit')
+        console.log(content)
     }
 
     const handleCancel = () => {
