@@ -16,13 +16,13 @@ export default function ImageGridPicker({
     const dragIndexRef = useRef(null);
 
     const emit = (arr) => {
-        console.log(arr)
         setImages(arr);
         onChange?.(arr);
     };
 
     const onPick = async (e) => {
         const files = Array.from(e.target.files || []);
+
         e.target.value = '';
         if (!files.length) {
             return
@@ -46,16 +46,11 @@ export default function ImageGridPicker({
             }
 
             try {
-                const blob = await makeThumbnail(file, maxW, maxH, 'image/webp', 0.85);
-                const dataUrl = await blobToDataURL(blob);
-                const img = await loadImage(dataUrl);
+                const imageUrl = await readAsDataURL(file);
                 added.push({
                     id: `${Date.now()}-${Math.random().toString(36).slice(2)}`,
-                    dataUrl,
-                    blob,
-                    fileName: file.name,
-                    width: img.width,
-                    height: img.height,
+                    imageUrl,
+                    file,
                 });
             } catch (err) {
                 console.log(`Handle ${file.name} failed：${err?.message || err}`);
@@ -79,7 +74,6 @@ export default function ImageGridPicker({
         dragIndexRef.current = i
     };
     const onDragOver = (e) => {
-        // console.log(e)
         e.preventDefault()
     };
     const onDrop = (i) => {
@@ -95,7 +89,7 @@ export default function ImageGridPicker({
         emit(arr);
     };
 
-    const handleCancel = ()=>{
+    const handleCancel = () => {
         setNotify(false);
         setNotifyMessage('');
     }
@@ -103,7 +97,8 @@ export default function ImageGridPicker({
     return (
         <div className={classes.Container}>
             <div className={classes.Select}>
-                <label className={images.length >= maxCount ? `${classes.Label} ${classes.SelectDisabled}` : classes.Label}>
+                <label
+                    className={images.length >= maxCount ? `${classes.Label} ${classes.SelectDisabled}` : classes.Label}>
                     Select Images
                     <input
                         type="file"
@@ -130,7 +125,7 @@ export default function ImageGridPicker({
                     >
                         <img
                             className={classes.SingleImage}
-                            src={img.dataUrl}
+                            src={img.imageUrl}
                             alt=""
                         />
                         <div className={classes.ButtonContainer}>
@@ -157,42 +152,5 @@ function readAsDataURL(file) {
         fileReader.onload = () => resolve(String(fileReader.result));
         fileReader.onerror = reject;
         fileReader.readAsDataURL(file);
-    });
-}
-
-function loadImage(src) {
-    return new Promise((resolve, reject) => {
-        const img = new Image();
-        img.onload = () => resolve(img);
-        img.onerror = reject;
-        img.src = src;
-    });
-}
-
-function canvasToBlob(canvas, type, quality) {
-    return new Promise((resolve) => canvas.toBlob((b) => resolve(b), type, quality));
-}
-
-async function makeThumbnail(file, maxW, maxH, mime = 'image/webp', quality = 0.85) {
-    const dataUrl = await readAsDataURL(file);
-    const img = await loadImage(dataUrl);
-    const scale = Math.min(maxW / img.width, maxH / img.height, 1);
-    const w = Math.round(img.width * scale);
-    const h = Math.round(img.height * scale);
-    const canvas = document.createElement('canvas');
-    canvas.width = w;
-    canvas.height = h;
-    const ctx = canvas.getContext('2d');
-    ctx.drawImage(img, 0, 0, w, h);
-    const blob = await canvasToBlob(canvas, mime, quality);
-    if (blob && blob.size > 0) return blob;
-    return await canvasToBlob(canvas, 'image/jpeg', quality);
-}
-
-const blobToDataURL = (b) =>{
-    return new Promise((res) => {
-        const r = new FileReader();
-        r.onload = () => res(String(r.result));
-        r.readAsDataURL(b);
     });
 }
