@@ -1,8 +1,9 @@
 const newsletterService = require('../services/newsletterService');
 
 const createNewsletter = async (req, res) => {
+    const files = req.files;
     const data = req.body;
-    const result = await newsletterService.createNewsletter(data)
+    const result = await newsletterService.createNewsletter(data, files)
     res.send(result)
 }
 

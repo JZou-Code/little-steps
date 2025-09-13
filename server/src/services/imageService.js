@@ -1,7 +1,7 @@
 const imageDao = require('../DAO/imageDAO');
 
-const createImage = async (data) => {
-    return imageDao.createImage(data)
+const createImage = async (file, index, id) => {
+    return imageDao.createImage(file, index, id)
 }
 
 const updateImage = async (id, data) => {

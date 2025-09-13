@@ -1,10 +1,12 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import classes from '../style/CreateNewsletterPage.module.css'
 import TinyMCE from "../components/TinyMCE.jsx";
 import Button from "../components/Button.jsx";
 import {useNavigate} from "react-router-dom";
 import ImageGridPicker from "../components/ImageGridPicker.jsx";
 import Notification from "../components/Notification.jsx";
+import {createNewsletter} from "../api/manageNewsletter.js";
+import AuthContext from "../context/AuthContext.jsx";
 
 const CreateNewsletterPage = () => {
     const [title, setTitle] = useState('');
@@ -15,6 +17,8 @@ const CreateNewsletterPage = () => {
     const [isError, setIsError] = useState(false);
     const [isEmpty, setIsEmpty] = useState(false);
 
+    const authCtx = useContext(AuthContext);
+
     const navigate = useNavigate();
 
     const handleChange = (html) => {
@@ -24,7 +28,7 @@ const CreateNewsletterPage = () => {
     const handleSubmit = async () => {
         console.log('image======================================================\n', images)
         console.log('content======================================================\n', content)
-        if(!title.trim()){
+        if (!title.trim() || !content.trim()) {
             setIsEmpty(true);
             return;
         }
@@ -35,11 +39,23 @@ const CreateNewsletterPage = () => {
             for (const img of images) {
                 formData.append('files[]', img.file, img.file?.name)
             }
+            formData.append('authorId', String(authCtx.user.id));
+            formData.append('title', title);
+            formData.append('content', content);
+            const {data} = await createNewsletter(formData)
 
+            console.log(data)
+
+            if (data.code === 200 || data.code === '200') {
+                navigate('/newsletter')
+            } else {
+                setIsError(true);
+            }
         } catch (e) {
             console.log(e)
-        }finally {
-            setProcessing(false)
+            setIsError(true);
+        } finally {
+            setProcessing(false);
         }
     }
 
@@ -76,10 +92,14 @@ const CreateNewsletterPage = () => {
                 processing && <Notification message={'Processing...'} enableIcon={false}/>
             }
             {
-                isEmpty && <Notification message={'Title required'} onClick={()=>{setIsEmpty(false)}} enableIcon={true}/>
+                isEmpty && <Notification message={'Title and Content required'} onClick={() => {
+                    setIsEmpty(false)
+                }} enableIcon={true}/>
             }
             {
-                isError && <Notification message={'Something went wrong'} onClick={()=>{setIsError(false)}} enableIcon={true}/>
+                isError && <Notification message={'Something went wrong'} onClick={() => {
+                    setIsError(false)
+                }} enableIcon={true}/>
             }
         </div>
     );

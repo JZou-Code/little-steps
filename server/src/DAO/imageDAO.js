@@ -1,16 +1,23 @@
 const prisma = require('../prisma/client');
 
-async function createImage(data) {
-
-    console.log(data)
+async function createImage(file, index, id) {
     try {
-        const resData = await prisma.articleImage.create({data});
+        const resData =
+            await prisma.articleImage.create({
+                data: {
+                    newsletterId: id,
+                    storageKey: file.filename,
+                    mimeType: file.mimetype,
+                    position: index
+                }
+            });
         return {
             code: '200',
             message: 'ok',
             data: resData
         }
     } catch (e) {
+        console.log('e=====', e)
         return {
             code: '500',
             message: 'Internal server error',
@@ -43,7 +50,7 @@ async function findManyImagesByOffset(data) {
         const res = await prisma.articleImage.findMany({
             ...data,
             take: data.take + 1,
-            include: {parent: {select: {firstName:true, lastName:true}}}
+            include: {parent: {select: {firstName: true, lastName: true}}}
         });
 
         const newData = res.map(item => {

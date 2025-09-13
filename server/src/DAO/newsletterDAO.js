@@ -1,10 +1,9 @@
 const prisma = require('../prisma/client');
 
 async function createNewsletter(data) {
-
-    console.log(data)
     try {
         const resData = await prisma.newsletter.create({data});
+
         return {
             code: '200',
             message: 'ok',

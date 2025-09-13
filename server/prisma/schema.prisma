@@ -33,7 +33,7 @@ model User {
   children   Child[]
 
   newsletters   Newsletter[]   @relation("Author")
-  comments      Comment[]      @relation("CommentAuthor")
+  comments      Comment[]      @relation("CommentsToAuthor")
   MessageSender ChildMessage[] @relation("MessageSender")
 }
 
@@ -63,36 +63,37 @@ model ChildMessage {
 }
 
 model Newsletter {
-  id        String    @id @default(uuid())
-  author    User      @relation("Author", fields: [authorId], references: [id])
+  id        String   @id @default(uuid())
+  author    User     @relation("Author", fields: [authorId], references: [id])
   authorId  String
   title     String
-  body      String
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  comments  Comment[] @relation("OnNewsletter")
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
-  ArticleImage ArticleImage[]
+  comments     Comment[]      @relation("CommentsToNewsletter")
+  ArticleImage ArticleImage[] @relation("ImagesToNewsletter")
 }
 
 model Comment {
   id           String      @id @default(uuid())
   authorId     String
-  author       User        @relation("CommentAuthor", fields: [authorId], references: [id])
+  author       User        @relation("CommentsToAuthor", fields: [authorId], references: [id])
   newsletterId String?
-  newsletter   Newsletter? @relation("OnNewsletter", fields: [newsletterId], references: [id])
+  newsletter   Newsletter? @relation("CommentsToNewsletter", fields: [newsletterId], references: [id])
   content      String
   createdAt    DateTime    @default(now())
 }
 
 model ArticleImage {
   id           Int        @id @default(autoincrement())
-  newsletter   Newsletter @relation(fields: [newsletterId], references: [id], onDelete: Cascade)
+  newsletter   Newsletter @relation("ImagesToNewsletter", fields: [newsletterId], references: [id], onDelete: Cascade)
   newsletterId String
 
   storageKey String
-  position Int
-  createdAt DateTime @default(now())
+  mimeType   String
+  position   Int
+  createdAt  DateTime @default(now())
 
   @@unique([newsletterId, position])
 }
