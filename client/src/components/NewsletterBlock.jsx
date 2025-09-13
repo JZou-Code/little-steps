@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import classes from '../style/NewsletterPage.module.css'
 import DOMPurify from 'dompurify';
 import Comment from "./Comment.jsx";
+import {convertTime} from "../utils/convertTime.js";
 
 const NewsletterBlock = ({data}) => {
     const [time, setTime] = useState(data.updatedAt);
@@ -9,16 +10,6 @@ const NewsletterBlock = ({data}) => {
 
     const [isProcessing, setIsProcessing] = useState(false);
     const [isError, setIsError] = useState(false);
-
-    const convertTime = (iso, opts = {}) => {
-        return new Intl.DateTimeFormat('en-NZ', {
-            timeZone: 'Pacific/Auckland',
-            year: 'numeric', month: '2-digit', day: '2-digit',
-            hour: '2-digit', minute: '2-digit',
-            hour12: false,
-            ...opts,
-        }).format(new Date(iso));
-    }
 
     const RichHtml = ({html}) => {
         const safe = DOMPurify.sanitize(html);
@@ -68,9 +59,8 @@ const NewsletterBlock = ({data}) => {
                 <div className={container}>
                     {
                         data.ArticleImage.map(item =>
-                            <div className={classes.ImageWrapper}>
+                            <div key={item.id} className={classes.ImageWrapper}>
                                 <img
-                                    key={item.id}
                                     className={classes.Image}
                                     src={`/api/images/temp/${item.storageKey}`}
                                     alt='overall image bottom'/>

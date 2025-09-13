@@ -28,10 +28,11 @@ const NewsletterPage = () => {
             setIsLoading(true);
             const res = await fetchNewsletters(pageIndex, itemNum, orderBy);
             console.log(res)
-            setNewsletters(res.data?.data)
+            const arr = res.data?.data ?? [];
+            setNewsletters(arr.slice(0, itemNum))
 
             setDisablePrev(pageIndex === 0);
-            setDisableNext(res.data?.data?.length <= itemNum);
+            setDisableNext(arr.length <= itemNum);
         } catch (e) {
             console.log(e);
             setIsError(true)

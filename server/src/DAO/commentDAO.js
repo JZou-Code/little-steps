@@ -30,29 +30,21 @@ async function findManyComments(data) {
 async function findManyCommentsByOffset(data) {
     try {
         const res = await prisma.comment.findMany({
-            ...data,
+            skip: data.skip,
             take: data.take + 1,
-            include: {parent: {select: {firstName:true, lastName:true}}}
-        });
-
-        const newData = res.map(item => {
-            const flag = item?.parent?.firstName || item?.parent?.lastName
-            return {
-                id: item.id,
-                firstName: item.firstName,
-                lastName: item.lastName,
-                dob: item.dob,
-                gender: item.gender,
-                parent: flag ? item?.parent?.firstName + ' ' + item?.parent?.lastName : '',
-                parentId: item.parentId
+            include: {
+                author: {select: {id: true, firstName: true, lastName: true}}
+            },
+            where: {
+                newsletterId: data.id
             }
-        })
+        });
 
         return {
             code: '200',
-            hasNext: newData.length === data.take + 1,
+            hasNext: res.length === data.take + 1,
             message: 'ok',
-            data: newData
+            data: res
         }
     } catch (e) {
         return {

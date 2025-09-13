@@ -7,9 +7,9 @@ export const createComment = (data) => {
     )
 }
 
-export const fetchNewsletters = (skip, take, orderBy = {}) => {
+export const fetchComments = (skip, take, orderBy = {}, id) => {
     return axiosApi.post(
-        '/newsletter/find-many-newsletters-by-offset',
-        {skip, take, orderBy}
+        '/comment/find-many-comments-by-offset',
+        {skip, take, orderBy, id}
     )
 }
