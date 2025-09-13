@@ -4,13 +4,16 @@ import Button from "../components/Button.jsx";
 import {useNavigate} from "react-router-dom";
 import NewsletterBlock from "../components/NewsletterBlock.jsx";
 import {fetchNewsletters} from "../api/manageNewsletter.js";
+import Notification from "../components/Notification.jsx";
 
 const NewsletterPage = () => {
     const [pageIndex, setPageIndex] = useState(0);
     const [itemNum, setItemNum] = useState(10);
     const [orderBy, setOrderBy] = useState({createdAt: 'desc'});
-    const [isLoading, setIsLoading] = useState(false);
     const [newsletters, setNewsletters] = useState([]);
+
+    const [isLoading, setIsLoading] = useState(false);
+    const [isError, setIsError] = useState(false);
 
     const navigate = useNavigate();
     const handleClick = () => {
@@ -26,8 +29,12 @@ const NewsletterPage = () => {
             const res = await fetchNewsletters(pageIndex, itemNum, orderBy);
             console.log(res)
             setNewsletters(res.data?.data)
+
+            setDisablePrev(pageIndex === 0);
+            setDisableNext(res.data?.data?.length <= itemNum);
         } catch (e) {
             console.log(e);
+            setIsError(true)
         } finally {
             setIsLoading(false);
         }
@@ -69,19 +76,24 @@ const NewsletterPage = () => {
                     <NewsletterBlock key={item.id} data={item}/>
                 )
             }
-            {/*<div className={classes.ListFunction}>*/}
-            {/*    <button*/}
-            {/*        onClick={handlePrev}*/}
-            {/*        className={disablePrev ? `${classes.Button} ${classes.Disabled}` : classes.Button}>*/}
-            {/*        Previous*/}
-            {/*    </button>*/}
-            {/*    <button*/}
-            {/*        onClick={handleNext}*/}
-            {/*        className={disableNext ? `${classes.Button} ${classes.Disabled}` : classes.Button}>*/}
-            {/*        Next*/}
-            {/*    </button>*/}
-            {/*</div>*/}
-
+            <div className={classes.ButtonContainer}>
+                <button
+                    onClick={handlePrev}
+                    className={disablePrev ? `${classes.Button} ${classes.Disabled}` : classes.Button}>
+                    Previous
+                </button>
+                <button
+                    onClick={handleNext}
+                    className={disableNext ? `${classes.Button} ${classes.Disabled}` : classes.Button}>
+                    Next
+                </button>
+            </div>
+            {
+                isLoading && <Notification enableIcon={false} message={'Loading...'}/>
+            }
+            {
+                isError && <Notification enableIcon={true} message={'Something went wrong'} onClick={()=>{setIsError(false)}}/>
+            }
         </div>
     );
 };

@@ -120,6 +120,29 @@
 
 }
 
+.ButtonContainer{
+    display: flex;
+    gap: 5rem;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0;
+}
+
+.Button {
+    background-color: #FFA726;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+.Button:hover {
+    box-shadow: 0 0 2px 2px #FFCC80;
+}
+
+.Button:active {
+    box-shadow: none;
+}
+
 .Disabled {
     pointer-events: none;
     background-color: lightgray;

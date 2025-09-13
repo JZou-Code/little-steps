@@ -16,20 +16,19 @@ const NewsletterBlock = ({data}) => {
         }).format(new Date(iso));
     }
 
-    function RichHtml({ html }) {
+    const RichHtml = ({html}) => {
         const safe = DOMPurify.sanitize(html);
         return (
             <div
                 className="prose"
-                dangerouslySetInnerHTML={{ __html: safe }}
+                dangerouslySetInnerHTML={{__html: safe}}
             />
         );
     }
 
-    useEffect(() => {
-        setTime(convertTime(time, {second: '2-digit'}));
+    const selectContainer = () => {
         const num = data.ArticleImage.length
-        switch (num){
+        switch (num) {
             case 1:
                 setContainer(`${classes.ImagesContainer} ${classes.Images_1Image}`);
                 break;
@@ -43,6 +42,11 @@ const NewsletterBlock = ({data}) => {
                 setContainer(`${classes.ImagesContainer} ${classes.Images_3or5orMore}`);
                 break;
         }
+    }
+
+    useEffect(() => {
+        setTime(convertTime(time, {second: '2-digit'}));
+        selectContainer();
     }, []);
 
     return (
@@ -51,7 +55,7 @@ const NewsletterBlock = ({data}) => {
             <div className={classes.ArticleContainer}>
                 <div className={classes.Top}>
                     <div className={classes.Title}>
-                        {time}
+                        {data.title}
                     </div>
                     <div className={classes.TopInfo}>
                         Last Edited at {time}
@@ -71,7 +75,6 @@ const NewsletterBlock = ({data}) => {
                     }
                 </div>
                 <article className={classes.Article}>
-                    {/*{data.content}*/}
                     <RichHtml html={data.content}/>
                 </article>
             </div>
