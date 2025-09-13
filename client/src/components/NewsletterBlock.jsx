@@ -82,7 +82,7 @@ const NewsletterBlock = ({data}) => {
                     <RichHtml html={data.content}/>
                 </article>
             </div>
-            <Comment/>
+            <Comment newsletterId={data.id}/>
         </div>
     );
 };
