@@ -96,6 +96,7 @@
 .Article {
     text-align: justify;
     font-size: 1.2rem;
+    padding: 1rem 2rem;
 }
 
 .Article ol,
@@ -117,7 +118,12 @@
 }
 
 .CommentContainer {
-
+    width: 100%;
+    padding: 1rem 1rem;
+    margin: 0 auto;
+    min-height: 2rem;
+    border: 1px solid #FFA726;
+    border-radius: 0.3rem;
 }
 
 .ButtonContainer{
@@ -147,4 +153,41 @@
     pointer-events: none;
     background-color: lightgray;
     color: white;
+}
+
+.ReplyContainer{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 1rem 0;
+}
+
+.CommentEditor{
+
+}
+
+.ContentArea{
+    border: 1px solid #FFA726;
+    border-radius: 0.5rem;
+    margin: 1rem 0;
+    padding: 0 1rem;
+}
+
+.ReplyTo{
+    border-bottom: 1px solid #FFA726;
+    padding: 0.5rem;
+}
+
+.TextArea{
+    width: 100%;
+    height: 8rem;
+    font-size: 1.2rem;
+    padding: 1rem;
+}
+
+.CommentButtons{
+    display: flex;
+    gap: 5rem;
+    justify-content: center;
+    align-items: center;
 }

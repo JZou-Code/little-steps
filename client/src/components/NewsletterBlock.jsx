@@ -1,10 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import classes from '../style/NewsletterPage.module.css'
 import DOMPurify from 'dompurify';
+import Comment from "./Comment.jsx";
 
 const NewsletterBlock = ({data}) => {
     const [time, setTime] = useState(data.updatedAt);
     const [container, setContainer] = useState('');
+
+    const [isProcessing, setIsProcessing] = useState(false);
+    const [isError, setIsError] = useState(false);
 
     const convertTime = (iso, opts = {}) => {
         return new Intl.DateTimeFormat('en-NZ', {
@@ -78,9 +82,7 @@ const NewsletterBlock = ({data}) => {
                     <RichHtml html={data.content}/>
                 </article>
             </div>
-            <div className={classes.CommentContainer}>
-
-            </div>
+            <Comment/>
         </div>
     );
 };

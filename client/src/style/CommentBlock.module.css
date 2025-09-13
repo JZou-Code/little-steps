@@ -1,0 +1,24 @@
+.Container{
+    border-bottom: 1px solid #FFA726;
+    padding: 0.5rem 1rem;
+}
+
+.Top{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.Name{
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.CreatedAt{
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.Content{
+    padding: 0.5rem 1rem 0;
+}
