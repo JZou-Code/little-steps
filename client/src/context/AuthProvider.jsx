@@ -1,15 +1,16 @@
-import React, {useCallback, useMemo, useState} from 'react';
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import AuthContext from "./AuthContext.jsx";
 import {roles} from "../utils/roles.js";
 import useRefreshScheduler from "../hook/useRefreshScheduler.jsx";
 import useAuth from "../hook/useAuth.jsx";
+import {setupAuthInterceptors} from "../utils/setupAxios.js";
 
 const defaultAuth = {
     isLogin: false,
     user: {
         id: '',
         email: '',
-        role: roles.PARENT,
+        role: roles.OTHER,
     },
     token: ''
 };
@@ -28,7 +29,7 @@ const init = () => {
                 user: {
                     id,
                     email,
-                    role: role ?? roles.PARENT
+                    role: role ?? roles.OTHER
                 },
                 token
             };
@@ -64,13 +65,37 @@ export default function AuthProvider({children}) {
 
     useRefreshScheduler(auth.token, refresh);
 
+    const login = useCallback((authData) => {
+        if (authData) {
+            localStorage.setItem('auth', authData)
+            setAuth(authData);
+        }
+    }, []);
+
+    const logout = useCallback(() => {
+        localStorage.removeItem('auth');
+        setAuth(defaultAuth);
+        window.location.assign('/account/login');
+    }, []);
+
     const value = useMemo(() => {
         return {
             isLogin: auth.isLogin,
             user: auth.user,
-            setAuth
+            setAuth,
+            login,
+            logout
         }
     }, [auth]);
+
+    const didMount = useRef(false);
+    useEffect(() => {
+        if (didMount.current) {
+            return
+        }
+        didMount.current = true;
+        setupAuthInterceptors({logout});
+    }, [logout]);
 
     return (
         <AuthContext.Provider

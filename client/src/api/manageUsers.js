@@ -13,3 +13,20 @@ export const updateUserById = (id, data) => {
     )
 }
 
+export const requestRefresh = () => {
+    return axios.post(
+        '/api/user/refresh-token',
+        {}
+    )
+}
+
+export const requestLogout = (id) => {
+    return axios.post(
+        '/api/user/logout',
+        {
+            id
+        }
+    )
+}
+
+

@@ -6,18 +6,14 @@ const AuthContext = React.createContext({
     user: {
         id: '',
         email: '',
-        role: roles.PARENT
+        role: roles.OTHER
     },
     setAuth: () => {
-    }
-    // setIsLogin: () => {
-    // },
-    // setId: () => {
-    // },
-    // setEmail: () => {
-    // },
-    // setRole: () => {
-    // }
+    },
+    setIsLogin:()=>{},
+    setUsername: ()=>{},
+    login:  (payload) => {},
+    logout: () => {},
 });
 
 export default AuthContext;

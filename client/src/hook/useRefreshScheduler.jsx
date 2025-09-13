@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import {useEffect, useRef} from 'react';
 import {getJwtExpMs} from "../utils/jwtUtils.js";
 
 export default function useRefreshScheduler(accessToken, refresh) {
@@ -19,7 +19,7 @@ export default function useRefreshScheduler(accessToken, refresh) {
                 timerRef.current = setTimeout(() => {
                     refresh();
                 }, refreshAt);
-            }else {
+            } else {
                 refresh();
             }
         } catch (err) {

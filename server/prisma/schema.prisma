@@ -90,9 +90,8 @@ model ArticleImage {
   newsletter   Newsletter @relation(fields: [newsletterId], references: [id], onDelete: Cascade)
   newsletterId String
 
-  storageKey String // 例如: "articles/123/xxx.jpg"
+  storageKey String
   position Int
-
   createdAt DateTime @default(now())
 
   @@unique([newsletterId, position])

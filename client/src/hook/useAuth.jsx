@@ -4,6 +4,7 @@ import {pageState} from "../utils/pageState.js";
 import PageStateContext from "../context/PageStateContext.jsx";
 import AuthContext from "../context/AuthContext.jsx";
 import {roles} from "../utils/roles.js";
+import {requestLogout, requestRefresh} from "../api/manageUsers.js";
 // import axiosApi from "../api/axiosApi.js";
 
 const useAuth = () => {
@@ -21,7 +22,6 @@ const useAuth = () => {
             )
 
             const {id, email, role} = res.data.data.user
-
             const auth = {
                 token: res.data.data.accessToken,
                 user: {
@@ -44,13 +44,7 @@ const useAuth = () => {
 
     const logout = async (id) => {
         try {
-            const res = await axios.post(
-                '/api/user/logout',
-                {
-                    id
-                }
-            )
-
+            const res = await requestLogout(id);
             localStorage.removeItem('auth');
 
             authCtx.setAuth({
@@ -58,7 +52,7 @@ const useAuth = () => {
                 user: {
                     id: '',
                     email: '',
-                    role: roles.PARENT
+                    role: roles.OTHER
                 },
                 token: ''
             })
@@ -80,31 +74,35 @@ const useAuth = () => {
 
     const refreshToken = async () => {
         try {
-            const res = await axios.post(
-                '/api/user/refresh-token',
-                {}
-            )
-
+            const res = await requestRefresh();
             console.log(res)
 
-            const newAT = res.data?.data?.accessToken || res.data?.accessToken;
+            if (res.data.code === 200) {
+                const newAT = res.data?.data?.accessToken || res.data?.accessToken;
+                console.log(newAT)
+                const old = JSON.parse(localStorage.getItem('auth') || '{}');
+                console.log(old)
+                const next = {...old, token: newAT};
+                localStorage.setItem('auth', JSON.stringify(next));
 
-            console.log(newAT)
+                authCtx.setAuth(prev => ({...prev, token: newAT}));
+                return newAT;
+            } else {
+                localStorage.removeItem('auth');
+                authCtx.setAuth({
+                    isLogin: false,
+                    user: {id: '', email: '', role: roles.OTHER},
+                    token: ''
+                });
+                pageCtx.dispatch({type: pageState.NONE});
+                return false
+            }
 
-            const old = JSON.parse(localStorage.getItem('auth') || '{}');
-
-            console.log(old)
-
-            const next = {...old, token: newAT};
-            localStorage.setItem('auth', JSON.stringify(next));
-
-            authCtx.setAuth(prev => ({...prev, token: newAT}));
-            return newAT;
         } catch (e) {
             localStorage.removeItem('auth');
             authCtx.setAuth({
                 isLogin: false,
-                user: {id: '', email: '', role: roles.PARENT},
+                user: {id: '', email: '', role: roles.OTHER},
                 token: ''
             });
             pageCtx.dispatch({type: pageState.NONE});
