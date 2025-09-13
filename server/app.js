@@ -28,11 +28,13 @@ const userRouter = require('./src/routes/userRoutes');
 const childRouter = require('./src/routes/childRoutes');
 const messageRouter = require('./src/routes/messageRoutes');
 const newsletterRouter = require('./src/routes/newsletterRoutes');
+const commentRouter = require('./src/routes/commentRoutes');
 
 app.use('/user', userRouter);
 app.use('/child', childRouter);
 app.use('/message', messageRouter);
 app.use('/newsletter', newsletterRouter);
+app.use('/comment', commentRouter);
 
 const test = require('./src/testAPI/testAPI');
 app.use('/test', test)

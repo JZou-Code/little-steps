@@ -53,7 +53,7 @@ model Child {
 
 model ChildMessage {
   id        String   @id @default(uuid())
-  content   String
+  content   String   @db.LongText
   createdAt DateTime @default(now())
 
   childId  String
@@ -81,7 +81,7 @@ model Comment {
   author       User        @relation("CommentsToAuthor", fields: [authorId], references: [id])
   newsletterId String?
   newsletter   Newsletter? @relation("CommentsToNewsletter", fields: [newsletterId], references: [id])
-  content      String
+  content      String      @db.LongText
   createdAt    DateTime    @default(now())
 }
 
