@@ -17,7 +17,6 @@ async function createImage(file, index, id) {
             data: resData
         }
     } catch (e) {
-        console.log('e=====', e)
         return {
             code: '500',
             message: 'Internal server error',

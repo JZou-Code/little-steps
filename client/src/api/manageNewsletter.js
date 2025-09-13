@@ -6,3 +6,10 @@ export const createNewsletter = (data) => {
         data
     )
 }
+
+export const fetchNewsletters = (skip, take, orderBy = {}) => {
+    return axiosApi.post(
+        '/newsletter/find-many-newsletters-by-offset',
+        {skip, take, orderBy}
+    )
+}

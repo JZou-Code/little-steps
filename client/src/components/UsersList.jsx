@@ -1,6 +1,6 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import classes from '../style/AdminDashboardPage.module.css'
-import {fetchChildren, fetchUsers} from "../api/adminOperation.js";
+import {fetchUsers} from "../api/adminOperation.js";
 import Backdrop from "../UI/Backdrop/Backdrop.jsx";
 import ModifyUsers from "../components/ModifyUsers.jsx";
 import Confirm from "../components/Confirm.jsx";

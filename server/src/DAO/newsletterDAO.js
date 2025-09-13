@@ -2,14 +2,15 @@ const prisma = require('../prisma/client');
 
 async function createNewsletter(data) {
     try {
+        console.log('newsletterDAO data===================', data)
         const resData = await prisma.newsletter.create({data});
-
         return {
             code: '200',
             message: 'ok',
             data: resData
         }
     } catch (e) {
+        console.log(e)
         return {
             code: '500',
             message: 'Internal server error',
@@ -19,8 +20,6 @@ async function createNewsletter(data) {
 }
 
 async function updateNewsletter(id, data) {
-    console.log(id)
-    console.log(data)
     return prisma.newsletter.update(
         {
             where: {id},
@@ -42,27 +41,18 @@ async function findManyNewslettersByOffset(data) {
         const res = await prisma.newsletter.findMany({
             ...data,
             take: data.take + 1,
-            include: {parent: {select: {firstName:true, lastName:true}}}
-        });
-
-        const newData = res.map(item => {
-            const flag = item?.parent?.firstName || item?.parent?.lastName
-            return {
-                id: item.id,
-                firstName: item.firstName,
-                lastName: item.lastName,
-                dob: item.dob,
-                gender: item.gender,
-                parent: flag ? item?.parent?.firstName + ' ' + item?.parent?.lastName : '',
-                parentId: item.parentId
+            include: {
+                ArticleImage: {
+                    orderBy: {position: 'asc'},
+                    select: {id: true, storageKey: true, position: true, mimeType: true, createdAt: true},
+                },
             }
-        })
-
+        });
         return {
             code: '200',
-            hasNext: newData.length === data.take + 1,
+            hasNext: res.length === data.take + 1,
             message: 'ok',
-            data: newData
+            data: res
         }
     } catch (e) {
         return {

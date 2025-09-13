@@ -26,8 +26,6 @@ const CreateNewsletterPage = () => {
     }
 
     const handleSubmit = async () => {
-        console.log('image======================================================\n', images)
-        console.log('content======================================================\n', content)
         if (!title.trim() || !content.trim()) {
             setIsEmpty(true);
             return;

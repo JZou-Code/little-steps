@@ -67,7 +67,7 @@ model Newsletter {
   author    User     @relation("Author", fields: [authorId], references: [id])
   authorId  String
   title     String
-  content   String
+  content   String   @db.LongText
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -86,7 +86,7 @@ model Comment {
 }
 
 model ArticleImage {
-  id           Int        @id @default(autoincrement())
+  id           String     @id @default(uuid())
   newsletter   Newsletter @relation("ImagesToNewsletter", fields: [newsletterId], references: [id], onDelete: Cascade)
   newsletterId String
 

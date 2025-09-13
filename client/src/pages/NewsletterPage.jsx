@@ -1,13 +1,57 @@
-import React from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import classes from '../style/NewsletterPage.module.css'
 import Button from "../components/Button.jsx";
 import {useNavigate} from "react-router-dom";
 import NewsletterBlock from "../components/NewsletterBlock.jsx";
+import {fetchNewsletters} from "../api/manageNewsletter.js";
 
 const NewsletterPage = () => {
+    const [pageIndex, setPageIndex] = useState(0);
+    const [itemNum, setItemNum] = useState(10);
+    const [orderBy, setOrderBy] = useState({createdAt: 'desc'});
+    const [isLoading, setIsLoading] = useState(false);
+    const [newsletters, setNewsletters] = useState([]);
+
     const navigate = useNavigate();
-    const handleClick=()=>{
+    const handleClick = () => {
         navigate('/newsletter/create-new')
+    }
+
+    const [disablePrev, setDisablePrev] = useState(true);
+    const [disableNext, setDisableNext] = useState(false);
+
+    const loadNewsletters = useCallback(async () => {
+        try {
+            setIsLoading(true);
+            const res = await fetchNewsletters(pageIndex, itemNum, orderBy);
+            console.log(res)
+            setNewsletters(res.data?.data)
+        } catch (e) {
+            console.log(e);
+        } finally {
+            setIsLoading(false);
+        }
+    }, [pageIndex, itemNum, orderBy]);
+
+    useEffect(() => {
+        loadNewsletters();
+    }, [loadNewsletters]);
+
+    const handlePrev = () => {
+        setDisableNext(false);
+        if (pageIndex < itemNum) {
+            return
+        }
+        setPageIndex(pageIndex - itemNum);
+
+        if (pageIndex <= itemNum) {
+            setDisablePrev(true);
+        }
+    }
+
+    const handleNext = () => {
+        setDisablePrev(false);
+        setPageIndex(pageIndex + itemNum)
     }
 
     return (
@@ -20,7 +64,11 @@ const NewsletterPage = () => {
                     <Button handleClick={handleClick} name={'New Post'}/>
                 </div>
             </div>
-            <NewsletterBlock/>
+            {
+                newsletters.map(item =>
+                    <NewsletterBlock key={item.id} data={item}/>
+                )
+            }
             {/*<div className={classes.ListFunction}>*/}
             {/*    <button*/}
             {/*        onClick={handlePrev}*/}
@@ -33,6 +81,7 @@ const NewsletterPage = () => {
             {/*        Next*/}
             {/*    </button>*/}
             {/*</div>*/}
+
         </div>
     );
 };
