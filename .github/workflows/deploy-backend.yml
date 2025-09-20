@@ -46,38 +46,39 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             set -euo pipefail
-
+      
             APP_ROOT=/var/www/myapp
             APP_DIR=$APP_ROOT/current
-            ENV_FILE=$APP_ROOT/shared/.env
             ZIP=/tmp/server.zip
-
-            # 目录准备（需要 root）
+      
+            # 目录准备
             sudo mkdir -p "$APP_DIR" "$APP_ROOT/shared"
-            # 确保归属 deploy:deploy —— 因为 service 以 deploy 运行
             sudo chown -R deploy:deploy "$APP_ROOT"
-
-            # 解压 + 安装依赖 + 迁移 + 构建 都以 deploy 身份执行
+      
+            # ★ 关键：把 /tmp/server.zip 挪到 APP_DIR 并改属主，这样 deploy 用户能删
+            sudo mv "$ZIP" "$APP_DIR"/server.zip
+            sudo chown deploy:deploy "$APP_DIR"/server.zip
+      
+            # 下面都用 deploy 身份执行
             sudo -u deploy bash -lc "
               set -e
               cd '$APP_DIR'
-              unzip -o '$ZIP'
-              rm -f '$ZIP'
-
-              # 如使用 nvm，请在 deploy 用户下加载（如果没有 nvm 会自动跳过）
+      
+              # 如使用 nvm
               if command -v nvm >/dev/null 2>&1; then
                 . ~/.nvm/nvm.sh
                 nvm install 20 >/dev/null 2>&1 || true
                 nvm use 20 || true
               fi
-
+      
+              unzip -o server.zip
+              rm -f server.zip
+      
               npm ci
               npx prisma migrate deploy || true
-              if [ -f tsconfig.json ]; then
-                npm run build
-              fi
+              [ -f tsconfig.json ] && npm run build
             "
-
-            # 重启 systemd 服务
+      
             sudo systemctl restart myapp
             sudo systemctl status --no-pager --full myapp || true
+
