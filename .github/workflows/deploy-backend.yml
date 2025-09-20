@@ -57,13 +57,6 @@ jobs:
             # 确保归属 deploy:deploy —— 因为 service 以 deploy 运行
             sudo chown -R deploy:deploy "$APP_ROOT"
 
-            # （可选）更新环境变量文件（如果你提供了 BASE64）
-            if [ -n "${{ secrets.BACKEND_ENV_BASE64 || '' }}" ]; then
-              echo "${{ secrets.BACKEND_ENV_BASE64 }}" | base64 -d | sudo tee "$ENV_FILE" >/dev/null
-              sudo chown deploy:deploy "$ENV_FILE"
-              sudo chmod 600 "$ENV_FILE"
-            fi
-
             # 解压 + 安装依赖 + 迁移 + 构建 都以 deploy 身份执行
             sudo -u deploy bash -lc "
               set -e
