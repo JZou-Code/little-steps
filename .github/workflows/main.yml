@@ -1,0 +1,95 @@
+name: Deploy Frontend (client → S3 + CloudFront)
+
+on:
+  push:
+    branches: [ main ]
+    paths: [ 'client/**' ]    # 仅 client 目录变更时触发
+  workflow_dispatch:          # 手动触发（可选）
+
+concurrency:
+  group: deploy-frontend
+  cancel-in-progress: true
+
+permissions:
+  id-token: write             # OIDC 必须
+  contents: read
+
+# ====== 建议在 Settings → Secrets and variables → Actions → Variables 里配置以下变量 ======
+# vars.AWS_REGION            例如 ap-southeast-2
+# vars.S3_BUCKET             你的前端静态桶名（不要写 s3://）
+# vars.S3_PREFIX             可留空；部署到桶内前缀时写如 app/
+# vars.CF_DISTRIBUTION_ID    CloudFront 分发 ID（如不使用 CloudFront 可留空）
+# vars.AWS_ROLE_TO_ASSUME    你在 IAM 中创建的可代入角色 ARN（OIDC），例如：
+#                             arn:aws:iam::123456789012:role/GitHubActionsDeployRole
+env:
+  AWS_REGION:           ${{ vars.AWS_REGION }}
+  S3_BUCKET:            ${{ vars.S3_BUCKET }}
+  S3_PREFIX:            ${{ vars.S3_PREFIX }}
+  CF_DISTRIBUTION_ID:   ${{ vars.CF_DISTRIBUTION_ID }}
+  AWS_ROLE_TO_ASSUME:   ${{ vars.AWS_ROLE_TO_ASSUME }}
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: client   # 在 client 下执行所有 npm 命令
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: 'npm'
+          cache-dependency-path: client/package-lock.json
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      # ----- 配置 AWS 凭证（OIDC 方式）-----
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ env.AWS_ROLE_TO_ASSUME }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      # ----- 同步静态资源（长缓存，排除 index.html）-----
+      - name: Upload static assets (except index.html) with long cache
+        run: |
+          aws s3 sync ./client/dist/ "s3://${{ vars.S3_BUCKET }}/" \
+            --delete \
+            --exclude "index.html" \
+            --cache-control "public,max-age=31536000,immutable"
+
+      # ----- 单独上传 index.html（不缓存）-----
+      - name: Upload index.html with no-cache
+        run: |
+          aws s3 cp ./client/dist/index.html "s3://${{ vars.S3_BUCKET }}/index.html" \
+            --cache-control "no-cache, no-store, must-revalidate" \
+            --content-type "text/html"
+
+      # ----- CloudFront 失效（如未使用 CloudFront，可删除该步）-----
+      - name: Invalidate CloudFront
+        if: env.CF_DISTRIBUTION_ID != ''
+        shell: bash
+        run: |
+          PREF="${S3_PREFIX}"
+          # 失效路径需要与站点挂载路径一致
+          if [[ -z "$PREF" ]]; then
+            aws cloudfront create-invalidation \
+              --distribution-id "${CF_DISTRIBUTION_ID}" \
+              --paths "/index.html" "/"
+          else
+            # 确保以 / 开头、无重复斜杠
+            [[ "${PREF:0:1}" == "/" ]] || PREF="/${PREF}"
+            [[ "${PREF: -1}" == "/" ]] || PREF="${PREF}/"
+            aws cloudfront create-invalidation \
+              --distribution-id "${CF_DISTRIBUTION_ID}" \
+              --paths "${PREF}index.html" "${PREF}"
+          fi
