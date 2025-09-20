@@ -49,20 +49,31 @@ jobs:
       
             APP_ROOT=/var/www/myapp
             APP_DIR=$APP_ROOT/current
+            ENV_FILE=$APP_ROOT/shared/.env
             ZIP=/tmp/server.zip
       
             # 目录准备
             sudo mkdir -p "$APP_DIR" "$APP_ROOT/shared"
             sudo chown -R deploy:deploy "$APP_ROOT"
       
-            # ★ 关键：把 /tmp/server.zip 挪到 APP_DIR 并改属主，这样 deploy 用户能删
+            # 如你用 Secrets 同步 .env（可选）
+            if [ -n "${{ secrets.BACKEND_ENV_BASE64 || '' }}" ]; then
+              echo "${{ secrets.BACKEND_ENV_BASE64 }}" | base64 -d | sudo tee "$ENV_FILE" >/dev/null
+              sudo chown deploy:deploy "$ENV_FILE"
+              sudo chmod 600 "$ENV_FILE"
+            fi
+      
+            # 把 /tmp/server.zip 挪到代码目录并改属主
             sudo mv "$ZIP" "$APP_DIR"/server.zip
             sudo chown deploy:deploy "$APP_DIR"/server.zip
       
-            # 下面都用 deploy 身份执行
+            # 下面都以 deploy 身份执行
             sudo -u deploy bash -lc "
               set -e
               cd '$APP_DIR'
+      
+              # 确保 Prisma 能读到环境变量：把 shared/.env 链接为项目根 .env  ← ★ 新增
+              ln -sf '$ENV_FILE' .env
       
               # 如使用 nvm
               if command -v nvm >/dev/null 2>&1; then
@@ -75,10 +86,10 @@ jobs:
               rm -f server.zip
       
               npm ci
+              # 这里 Prisma 就能从 ./\.env 读到 DATABASE_URL 了
               npx prisma migrate deploy || true
               [ -f tsconfig.json ] && npm run build
             "
       
             sudo systemctl restart myapp
             sudo systemctl status --no-pager --full myapp || true
-
