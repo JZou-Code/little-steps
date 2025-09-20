@@ -49,51 +49,42 @@ jobs:
           port: 22
           script: |
             set -euo pipefail
-
+      
             APP_ROOT=/var/www/myapp
             APP_DIR=$APP_ROOT/current
             ENV_FILE=$APP_ROOT/shared/.env
             ZIP=/tmp/server.zip
-
-            # 目录准备
+      
             sudo mkdir -p "$APP_DIR" "$APP_ROOT/shared"
             sudo chown -R deploy:deploy "$APP_ROOT"
-
-            # 如需用 Secret 同步 /var/www/myapp/shared/.env（可选）
-            if [ -n "${{ secrets.BACKEND_ENV_BASE64 || '' }}" ]; then
-              echo "${{ secrets.BACKEND_ENV_BASE64 }}" | base64 -d | sudo tee "$ENV_FILE" >/dev/null
-              sudo chown deploy:deploy "$ENV_FILE"
-              sudo chmod 600 "$ENV_FILE"
-            fi
-
-            # 将 /tmp/server.zip 移到代码目录并改属主
+      
             sudo mv "$ZIP" "$APP_DIR"/server.zip
             sudo chown deploy:deploy "$APP_DIR"/server.zip
-
-            # 以 deploy 身份执行后续
+      
             sudo -u deploy bash -lc "
               set -e
               cd '$APP_DIR'
-
-              # nvm（若存在）
+      
               if command -v nvm >/dev/null 2>&1; then
                 . ~/.nvm/nvm.sh
                 nvm install 20 >/dev/null 2>&1 || true
                 nvm use 20 || true
               fi
-
+      
               unzip -o server.zip
               rm -f server.zip
-
-              # 让 Prisma CLI 能加载环境变量
+      
               ln -sf '$ENV_FILE' .env
-
+      
               npm ci
               npx prisma migrate deploy || true
-              [ -f tsconfig.json ] && npm run build
+      
+              # ✅ 用 if…fi，避免 set -e 因测试返回 1 而退出
+              if [ -f tsconfig.json ]; then
+                npm run build
+              fi
             "
-
-            # 重启并在失败时打印日志
+      
             sudo systemctl daemon-reload || true
             if ! sudo systemctl restart myapp; then
               echo '=== myapp restart failed, recent logs ==='
@@ -101,5 +92,4 @@ jobs:
               exit 1
             fi
             sudo systemctl status --no-pager --full myapp || true
-
             echo 'DEPLOY OK'
