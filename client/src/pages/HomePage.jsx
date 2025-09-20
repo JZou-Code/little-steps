@@ -13,7 +13,6 @@ const HomePage = () => {
 
     return (
         <div className={classes.Container}>
-            <h1 style={{textAlign:'center'}}>Test automated deployment AGAIN!!!</h1>
             <section className={classes.Overall}>
                 <div className={classes.OverallTop}>
                     <div className={classes.OverallTitle}>
