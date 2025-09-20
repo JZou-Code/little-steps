@@ -1,5 +1,8 @@
 import React from 'react';
 import classes from '../style/ContactPage.module.css'
+import draw from '../assets/contactpage/draw.jpg'
+import message from '../assets/contactpage/message.jpg'
+import room from '../assets/contactpage/room.jpg'
 
 const Contact = () => {
     return (
@@ -17,7 +20,7 @@ const Contact = () => {
             <section className={classes.ContentBlock}>
                 <div className={classes.ImageContainer}>
                     <img className={classes.Image} alt='Newsletter'
-                         src='../public/images/contactpage/room.jpg'/>
+                         src={room}/>
                 </div>
                 <div className={classes.Content}>
                     <div className={classes.Title}>
@@ -34,7 +37,7 @@ const Contact = () => {
             <section className={classes.ContentBlock}>
                 <div className={classes.ImageContainer}>
                     <img className={classes.Image} alt='Newsletter'
-                         src='../public/images/contactpage/message.jpg'/>
+                         src={message}/>
                 </div>
                 <div className={classes.Content}>
                     <div className={classes.Title}>
@@ -82,7 +85,7 @@ const Contact = () => {
             <section className={classes.ContentBlock}>
                 <div className={classes.ImageContainer}>
                     <img className={classes.Image} alt='Newsletter'
-                         src='../public/images/contactpage/draw.jpg'/>
+                         src={draw}/>
                 </div>
                 <div className={classes.Content}>
                     <div className={classes.Title}>

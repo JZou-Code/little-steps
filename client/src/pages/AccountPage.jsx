@@ -3,6 +3,8 @@ import classes from '../style/AccountPage.module.css'
 import {useNavigate} from "react-router-dom";
 import AuthContext from "../context/AuthContext.jsx";
 import {roles} from "../utils/roles.js";
+import myChildren from '../assets/account-page/my-children.jpg'
+import newsletterImage from '../assets/account-page/newsletter.jpg'
 
 const AccountPage = () => {
     const navigate = useNavigate();
@@ -25,7 +27,7 @@ const AccountPage = () => {
             <section className={classes.ContentBlock}>
                 <div className={classes.ImageContainer}>
                     <img className={classes.Image} alt='Newsletter'
-                         src='../public/images/account-page/newsletter.jpg'/>
+                         src={newsletterImage}/>
                 </div>
                 <div className={classes.Content}>
                     <div className={classes.Title}>
@@ -63,13 +65,13 @@ const AccountPage = () => {
                 </div>
                 <div className={classes.ImageContainer}>
                     <img className={classes.Image} alt='Newsletter'
-                         src='../public/images/account-page/newsletter.jpg'/>
+                         src={myChildren}/>
                 </div>
             </section>
             <section className={classes.ContentBlock}>
                 <div className={classes.ImageContainer}>
                     <img className={classes.Image} alt='Newsletter'
-                         src='../public/images/account-page/newsletter.jpg'/>
+                         src={newsletterImage}/>
                 </div>
                 <div className={classes.Content}>
                     <div className={classes.Title}>
@@ -106,7 +108,7 @@ const AccountPage = () => {
                     </div>
                     <div className={classes.ImageContainer}>
                         <img className={classes.Image} alt='Newsletter'
-                             src='../public/images/account-page/newsletter.jpg'/>
+                             src={myChildren}/>
                     </div>
                 </section>
             }
