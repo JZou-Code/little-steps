@@ -3,10 +3,13 @@ const router = express.Router();
 const newsletterController = require('../controllers/newsletterController')
 
 const multer = require('multer');
-const path = require("path");
+// const path = require("path");
+// const upload = multer({
+//     dest: path.join(__dirname, '../../public/images/temp'),
+// })
 const upload = multer({
-    dest: path.join(__dirname, '../../public/images/temp'),
-})
+    storage: multer.memoryStorage()
+});
 
 router.post('/create-newsletter', upload.array('files[]', 9), newsletterController.createNewsletter)
 router.put('/update-newsletter', newsletterController.updateNewsletter)

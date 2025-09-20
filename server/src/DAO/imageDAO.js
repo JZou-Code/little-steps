@@ -1,13 +1,13 @@
 const prisma = require('../prisma/client');
 
-async function createImage(file, index, id) {
+async function createImage(key, mimeType, index, id) {
     try {
         const resData =
             await prisma.articleImage.create({
                 data: {
                     newsletterId: id,
-                    storageKey: file.filename,
-                    mimeType: file.mimetype,
+                    storageKey: key,
+                    mimeType,
                     position: index
                 }
             });

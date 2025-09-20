@@ -62,8 +62,8 @@ const NewsletterBlock = ({data}) => {
                             <div key={item.id} className={classes.ImageWrapper}>
                                 <img
                                     className={classes.Image}
-                                    src={`/api/images/temp/${item.storageKey}`}
-                                    alt='overall image bottom'/>
+                                    src={`https://d1xw2ny1uxkw0s.cloudfront.net/${item.storageKey}`}
+                                    alt='article images'/>
                             </div>
                         )
                     }

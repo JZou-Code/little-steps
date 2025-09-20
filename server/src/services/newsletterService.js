@@ -9,8 +9,6 @@ const createNewsletter = async (data, files) => {
         data: {}
     }
 
-    console.log('res==============', res)
-
     if(res.code !== 200 && res.code !== '200'){
         return errorObj
     }

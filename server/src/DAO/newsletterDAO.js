@@ -2,7 +2,6 @@ const prisma = require('../prisma/client');
 
 async function createNewsletter(data) {
     try {
-        console.log('newsletterDAO data===================', data)
         const resData = await prisma.newsletter.create({data});
         return {
             code: '200',
