@@ -20,7 +20,7 @@ export const requestSignUp = (data) => {
     const newData = {...data, role: roles.OTHER}
 
     return axios.post(
-        'http://localhost:3000/api/user/create-user',
+        '/api/user/create-user',
         newData
     )
 }
