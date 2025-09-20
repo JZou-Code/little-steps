@@ -1,0 +1,90 @@
+name: Deploy Backend (EC2 + systemd)
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'server/**'
+      - '.github/workflows/deploy-backend.yml'
+  workflow_dispatch: {}
+
+concurrency:
+  group: deploy-backend
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Archive server
+        run: |
+          cd server
+          rm -rf node_modules
+          zip -r ../server.zip .
+
+      - name: Copy bundle to EC2 (via SCP)
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}         # 可以是 ec2-user 或 deploy（见下方说明）
+          key: ${{ secrets.EC2_SSH_KEY }}
+          source: "server.zip"
+          target: "/tmp"                            # 上传到临时目录
+
+      - name: Deploy on EC2 & restart myapp (systemd)
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            set -euo pipefail
+
+            APP_ROOT=/var/www/myapp
+            APP_DIR=$APP_ROOT/current
+            ENV_FILE=$APP_ROOT/shared/.env
+            ZIP=/tmp/server.zip
+
+            # 目录准备（需要 root）
+            sudo mkdir -p "$APP_DIR" "$APP_ROOT/shared"
+            # 确保归属 deploy:deploy —— 因为 service 以 deploy 运行
+            sudo chown -R deploy:deploy "$APP_ROOT"
+
+            # （可选）更新环境变量文件（如果你提供了 BASE64）
+            if [ -n "${{ secrets.BACKEND_ENV_BASE64 || '' }}" ]; then
+              echo "${{ secrets.BACKEND_ENV_BASE64 }}" | base64 -d | sudo tee "$ENV_FILE" >/dev/null
+              sudo chown deploy:deploy "$ENV_FILE"
+              sudo chmod 600 "$ENV_FILE"
+            fi
+
+            # 解压 + 安装依赖 + 迁移 + 构建 都以 deploy 身份执行
+            sudo -u deploy bash -lc "
+              set -e
+              cd '$APP_DIR'
+              unzip -o '$ZIP'
+              rm -f '$ZIP'
+
+              # 如使用 nvm，请在 deploy 用户下加载（如果没有 nvm 会自动跳过）
+              if command -v nvm >/dev/null 2>&1; then
+                . ~/.nvm/nvm.sh
+                nvm install 20 >/dev/null 2>&1 || true
+                nvm use 20 || true
+              fi
+
+              npm ci
+              npx prisma migrate deploy || true
+              if [ -f tsconfig.json ]; then
+                npm run build
+              fi
+            "
+
+            # 重启 systemd 服务
+            sudo systemctl restart myapp
+            sudo systemctl status --no-pager --full myapp || true
