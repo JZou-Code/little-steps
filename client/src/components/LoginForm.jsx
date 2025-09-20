@@ -23,9 +23,6 @@ const LoginForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         const isOk = await login(email, password, setErrorMsg)
-
-        console.log(isOk)
-
         if (isOk) {
             navigate(from, {replace: true})
         }

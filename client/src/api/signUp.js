@@ -3,13 +3,13 @@ import {roles} from "../utils/roles.js";
 
 export const requestCaptcha = () => {
     return axios.get(
-        'api/captcha'
+        '/api/captcha'
     )
 }
 
 export const requestValidationCode = (email) => {
     return axios.post(
-        'api/send-validation-code',
+        '/api/send-validation-code',
         {
             email
         }
@@ -20,7 +20,7 @@ export const requestSignUp = (data) => {
     const newData = {...data, role: roles.OTHER}
 
     return axios.post(
-        'http://localhost:3000/user/create-user',
+        'http://localhost:3000/api/user/create-user',
         newData
     )
 }
