@@ -33,10 +33,12 @@ jobs:
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}         # 可以是 ec2-user 或 deploy（见下方说明）
+          username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
           source: "server.zip"
-          target: "/tmp"                            # 上传到临时目录
+          target: "/tmp"
+          debug: true
 
       - name: Deploy on EC2 & restart myapp (systemd)
         uses: appleboy/ssh-action@v1.0.3
@@ -44,52 +46,60 @@ jobs:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
+          port: 22
           script: |
             set -euo pipefail
-      
+
             APP_ROOT=/var/www/myapp
             APP_DIR=$APP_ROOT/current
             ENV_FILE=$APP_ROOT/shared/.env
             ZIP=/tmp/server.zip
-      
+
             # 目录准备
             sudo mkdir -p "$APP_DIR" "$APP_ROOT/shared"
             sudo chown -R deploy:deploy "$APP_ROOT"
-      
-            # 如你用 Secrets 同步 .env（可选）
+
+            # 如需用 Secret 同步 /var/www/myapp/shared/.env（可选）
             if [ -n "${{ secrets.BACKEND_ENV_BASE64 || '' }}" ]; then
               echo "${{ secrets.BACKEND_ENV_BASE64 }}" | base64 -d | sudo tee "$ENV_FILE" >/dev/null
               sudo chown deploy:deploy "$ENV_FILE"
               sudo chmod 600 "$ENV_FILE"
             fi
-      
-            # 把 /tmp/server.zip 挪到代码目录并改属主
+
+            # 将 /tmp/server.zip 移到代码目录并改属主
             sudo mv "$ZIP" "$APP_DIR"/server.zip
             sudo chown deploy:deploy "$APP_DIR"/server.zip
-      
-            # 下面都以 deploy 身份执行
+
+            # 以 deploy 身份执行后续
             sudo -u deploy bash -lc "
               set -e
               cd '$APP_DIR'
-      
-              # 确保 Prisma 能读到环境变量：把 shared/.env 链接为项目根 .env  ← ★ 新增
-              ln -sf '$ENV_FILE' .env
-      
-              # 如使用 nvm
+
+              # nvm（若存在）
               if command -v nvm >/dev/null 2>&1; then
                 . ~/.nvm/nvm.sh
                 nvm install 20 >/dev/null 2>&1 || true
                 nvm use 20 || true
               fi
-      
+
               unzip -o server.zip
               rm -f server.zip
-      
+
+              # 让 Prisma CLI 能加载环境变量
+              ln -sf '$ENV_FILE' .env
+
               npm ci
-              # 这里 Prisma 就能从 ./\.env 读到 DATABASE_URL 了
               npx prisma migrate deploy || true
               [ -f tsconfig.json ] && npm run build
             "
-      
-            sudo systemctl restart myapp
+
+            # 重启并在失败时打印日志
+            sudo systemctl daemon-reload || true
+            if ! sudo systemctl restart myapp; then
+              echo '=== myapp restart failed, recent logs ==='
+              journalctl -u myapp -n 200 --no-pager || true
+              exit 1
+            fi
             sudo systemctl status --no-pager --full myapp || true
+
+            echo 'DEPLOY OK'
