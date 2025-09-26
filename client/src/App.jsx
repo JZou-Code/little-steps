@@ -3,6 +3,7 @@ import classes from './style/App.module.css'
 import Header from "./components/Header.jsx";
 import PageStateProvider from "./context/PageStateProvider.jsx";
 import AuthProvider from "./context/AuthProvider.jsx";
+import Footer from "./components/Footer.jsx";
 
 function App() {
     return (
@@ -12,8 +13,11 @@ function App() {
                     <div className={classes.All}>
                         <Header/>
                         <div className={classes.Container}>
-                            <RoutesController/>
+                            <div className={classes.BodyContent}>
+                                <RoutesController/>
+                            </div>
                         </div>
+                        <Footer/>
                     </div>
                 </PageStateProvider>
             </AuthProvider>

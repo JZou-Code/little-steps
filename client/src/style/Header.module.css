@@ -1,6 +1,13 @@
-.Container {
-    padding: 1rem 2rem;
+.Background{
+    background-color: #fff7eb;
     border-bottom: 1px solid #FFA726;
+    height: 11em;
+}
+
+.Container {
+    padding: 1rem 2rem 0.6rem;
+    max-width: 1280px;
+    margin: 0 auto;
 }
 
 .TitleArea {
@@ -13,6 +20,11 @@
 .Title {
     font-size: 2rem;
     font-weight: bold;
+    height: 5rem;
+}
+
+.Logo{
+    height: 100%;
 }
 
 .Greeting{

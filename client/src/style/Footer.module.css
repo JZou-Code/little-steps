@@ -1,0 +1,76 @@
+.Background{
+    width: 100%;
+    background-color: #c8d8c5;
+    height: 14rem;
+    font-size: 1.2rem;
+}
+
+.Container{
+    max-width: 1280px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.LogoContainer{
+    width: 40%;
+    height: 20%;
+}
+
+.LogoWrapper{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Logo{
+    height: 6rem;
+}
+
+.LogoText{
+    font-size: 1rem;
+    color: rgba(78, 52, 46, 0.5);
+    padding: 1rem 2rem;
+}
+
+.ContentContainer{
+    width: 30%;
+}
+
+.ContentTitle{
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.Content{
+    text-align: center;
+    line-height: 1.6rem;
+}
+
+.Contact{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    line-height: 1.6rem;
+}
+
+.Link{
+    cursor: pointer;
+    line-height: 1.6rem;
+    transition: 0.1s linear;
+}
+
+.Link:hover{
+    font-size: 1.4rem;
+}
+
+.Link:active{
+    font-size: 1.2rem;
+}
+
+

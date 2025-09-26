@@ -4,22 +4,21 @@ import classes from '../style/Header.module.css'
 import AuthContext from "../context/AuthContext.jsx";
 import HeaderAccount from "./HeaderAccount.jsx";
 import HeaderLogin from "./HeaderLogin.jsx";
+import logo from '../assets/logo/logo.jpg'
 
 
 const Header = () => {
     const ctx = useContext(AuthContext);
 
     return (
-        <>
+        <div className={classes.Background}>
             <div className={classes.Container}>
                 <div className={classes.TitleArea}>
-
-                    <div>
-                        <div className={classes.Title}>Little Steps</div>
+                    <div className={classes.Title}>
+                        {/*Little Steps*/}
+                        <img className={classes.Logo} src={logo} alt={'logo'}/>
                     </div>
-
                     {ctx.isLogin ? <HeaderAccount/> : <HeaderLogin/>}
-
                 </div>
 
                 <div className={classes.LinkContainer}>
@@ -56,7 +55,7 @@ const Header = () => {
                 </div>
 
             </div>
-        </>
+        </div>
     );
 };
 

@@ -1,9 +1,14 @@
-.Container{
+.All {
+    color: #4E342E;;
 }
 
-.All{
-    color: #4E342E;;
+.Container {
+    background-color: #f7e6c3;
+    min-height: calc(100vh - 25rem);
+}
+
+.BodyContent{
     max-width: 1280px;
     margin: 0 auto;
-    padding: 2rem 2rem 0;
+    padding: 0 2rem ;
 }

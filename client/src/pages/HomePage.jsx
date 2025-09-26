@@ -55,10 +55,12 @@ const HomePage = () => {
                             <li>Creative Activities</li>
                             <li>Heartfelt Support</li>
                             <li>Individualised Attention</li>
+                        </ul>
+                        <ul>
                             <li>Joyful Growth</li>
                             <li>Community Engagement</li>
                             <li>Convenient Hamilton Location</li>
-                            <li>Established Since 2025</li>
+                            {/*<li>Established Since 2025</li>*/}
                         </ul>
                     </div>
                 </div>
