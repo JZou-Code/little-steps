@@ -1,4 +1,35 @@
 .Container {
-    padding: 2rem;
+    padding: 4rem 2rem;
     font-size: 1.2rem;
+    line-height: 2rem;
+}
+
+.Section{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.ImageContainer{
+    width: 42%;
+}
+
+.Image{
+    width: 100%;
+    border-radius: 2rem;
+}
+
+.Description{
+    width: 52%;
+}
+
+.Title{
+    font-size: 2rem;
+    text-align: center;
+    font-weight: bold;
+}
+
+.Content{
+
 }
