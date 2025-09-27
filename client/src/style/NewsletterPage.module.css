@@ -142,6 +142,17 @@
     cursor: pointer;
 }
 
+.IconButton{
+    color: #FFA726;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.IconDisabled {
+    pointer-events: none;
+    color: lightgray;
+}
+
 .Button:hover {
     box-shadow: 0 0 2px 2px #FFCC80;
 }

@@ -37,7 +37,8 @@ async function findManyCommentsByOffset(data) {
             },
             where: {
                 newsletterId: data.id
-            }
+            },
+            orderBy: data.orderBy
         });
 
         return {

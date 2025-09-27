@@ -6,6 +6,8 @@ import {createComment, fetchComments} from "../api/manageComment.js";
 import AuthContext from "../context/AuthContext.jsx";
 import ErrorNotification from "./ErrorNotification.jsx";
 import OtherNotification from "./OtherNotification.jsx";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faAngleLeft, faAngleRight} from "@fortawesome/free-solid-svg-icons";
 
 const Comment = (props) => {
     const [isReply, setIsReply] = useState(false);
@@ -33,6 +35,8 @@ const Comment = (props) => {
             if (res.data?.data?.length !== 0) {
                 setIsEmpty(false)
             }
+
+            console.log(res)
 
             setDisablePrev(pageIndex === 0);
             setDisableNext(arr.length <= itemNum);
@@ -112,16 +116,14 @@ const Comment = (props) => {
                     }
 
                     <div style={{fontSize: '0.8rem'}} className={classes.ButtonContainer}>
-                        <button
-                            onClick={handlePrev}
-                            className={disablePrev ? `${classes.Button} ${classes.Disabled}` : classes.Button}>
-                            Previous
-                        </button>
-                        <button
-                            onClick={handleNext}
-                            className={disableNext ? `${classes.Button} ${classes.Disabled}` : classes.Button}>
-                            Next
-                        </button>
+                        <FontAwesomeIcon
+                            icon={faAngleLeft}
+                            className={disablePrev ? `${classes.IconButton} ${classes.IconDisabled}` : classes.IconButton}
+                            onClick={handlePrev}/>
+                        <FontAwesomeIcon
+                            icon={faAngleRight}
+                            className={disableNext ? `${classes.IconButton} ${classes.IconDisabled}` : classes.IconButton}
+                            onClick={handleNext}/>
                     </div>
 
                 </div>
