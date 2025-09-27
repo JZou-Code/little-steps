@@ -1,10 +1,6 @@
-import axios from "axios";
 import axiosApi from "./axiosApi.js";
 
 export const deleteChildById = (id) => {
-    // return axios.delete(
-    //     `http://localhost:3000/child/delete-child/${id}`,
-    // )
     return axiosApi.delete(
         `/child/delete-child/${id}`,
     )
