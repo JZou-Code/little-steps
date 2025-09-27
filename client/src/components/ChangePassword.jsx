@@ -57,8 +57,8 @@ const ChangePassword = (props) => {
             }
             {
                 isSucceed && <SuccessfulNotification
-                    message={''}
-                    buttonName={''}
+                    message={'Your password has been changed successfully Use your new password to login in.'}
+                    buttonName={'Close'}
                     onClick={() => {
                         reset();
                         props.onCancel();
