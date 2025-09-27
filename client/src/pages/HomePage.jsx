@@ -91,7 +91,7 @@ const HomePage = () => {
                         childhood steps in Hamilton.
                     </div>
                     <div className={classes.ButtonContainer}>
-                        <button onClick={()=>{navigate('/about')}} className={classes.Button}>
+                        <button onClick={()=>{navigate('/contact')}} className={classes.Button}>
                             About Us
                         </button>
                     </div>

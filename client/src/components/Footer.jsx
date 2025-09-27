@@ -14,7 +14,8 @@ const Footer = () => {
                         <img className={classes.Logo} src={logo} alt={'logo'}/>
                     </div>
                     <div className={classes.LogoText}>
-                        A warm, play-based early childhood centre in Hamilton, where learning happens through curiosity, care, and joyful exploration.
+                        A warm, play-based early childhood centre in Hamilton, where learning happens through curiosity,
+                        care, and joyful exploration.
                     </div>
                 </section>
                 <section className={classes.ContentContainer}>
@@ -22,10 +23,22 @@ const Footer = () => {
                         Contact
                     </div>
                     <div className={classes.Contact}>
-                        <div>Phone: +64 (0)X XXX XXXX</div>
-                        <div>Email: hello@littlesteps.com</div>
-                        <div>Address: 123 Sample Street, Hamilton, Waikato, New Zealand</div>
-                        <div>Open hours: Mon–Fri 7:30am–5:30pm (closed public holidays)</div>
+                        <div className={classes.Line}>
+                            <div className={classes.LineTitle}>Phone:</div>
+                            <div className={classes.LineContent}>+64 (0)X XXX XXXX</div>
+                        </div>
+                        <div className={classes.Line}>
+                            <div className={classes.LineTitle}>Email:</div>
+                            <div className={classes.LineContent}>hello@littlesteps.com</div>
+                        </div>
+                        <div className={classes.Line}>
+                            <div className={classes.LineTitle}>Address:</div>
+                            <div className={classes.LineContent}>123 Sample Street, Hamilton</div>
+                        </div>
+                        <div className={classes.Line}>
+                            <div className={classes.LineTitle}>Open:</div>
+                            <div className={classes.LineContent}>Mon–Fri 7:30am–5:30pm</div>
+                        </div>
                     </div>
                 </section>
                 <section className={classes.ContentContainer}>
@@ -34,11 +47,26 @@ const Footer = () => {
                     </div>
                     <div className={classes.Content}>
                         <ul>
-                            <li className={classes.Link} onClick={()=>{navigate('/')}}>Home</li>
-                            <li className={classes.Link} onClick={()=>{navigate('/gallery')}}>Gallery</li>
-                            <li className={classes.Link} onClick={()=>{navigate('/contact')}}>Contact</li>
-                            <li className={classes.Link} onClick={()=>{navigate('/newsletter')}}>Newsletter</li>
-                            <li className={classes.Link} onClick={()=>{navigate('/account')}}>Account</li>
+                            <li className={classes.Link} onClick={() => {
+                                navigate('/')
+                            }}>Home
+                            </li>
+                            <li className={classes.Link} onClick={() => {
+                                navigate('/gallery')
+                            }}>Gallery
+                            </li>
+                            <li className={classes.Link} onClick={() => {
+                                navigate('/contact')
+                            }}>Contact
+                            </li>
+                            <li className={classes.Link} onClick={() => {
+                                navigate('/newsletter')
+                            }}>Newsletter
+                            </li>
+                            <li className={classes.Link} onClick={() => {
+                                navigate('/account')
+                            }}>Account
+                            </li>
                         </ul>
                     </div>
                 </section>
@@ -47,7 +75,7 @@ const Footer = () => {
                         Careers & volunteering
                     </div>
                     <div className={classes.Content}>
-                        Send email to us: <br/>
+                        Send email to us your CV: <br/>
                         career@example.nz
                     </div>
                 </section>
