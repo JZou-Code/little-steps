@@ -30,7 +30,7 @@ export const requestLogout = (id) => {
 }
 
 export const requestChangePassword = (data) => {
-    return axiosApi.post(
+    return axiosApi.put(
         '/user/change-password',
         data
     )
