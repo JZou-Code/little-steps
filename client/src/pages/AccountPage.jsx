@@ -1,14 +1,20 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import classes from '../style/AccountPage.module.css'
 import {useNavigate} from "react-router-dom";
 import AuthContext from "../context/AuthContext.jsx";
 import {roles} from "../utils/roles.js";
 import myChildren from '../assets/account-page/my-children.jpg'
 import newsletterImage from '../assets/account-page/newsletter.jpg'
+import Backdrop from "../UI/Backdrop/Backdrop.jsx";
+import ChangePassword from "../components/ChangePassword.jsx";
+import OtherNotification from "../components/OtherNotification.jsx";
+import SuccessfulNotification from "../components/SuccessfulNotification.jsx";
+import ErrorNotification from "../components/ErrorNotification.jsx";
 
 const AccountPage = () => {
     const navigate = useNavigate();
     const authCtx = useContext(AuthContext);
+    const [isChanging, setIsChanging] = useState(false);
 
     const navigateToNewsletter = () => {
         navigate('/newsletter')
@@ -16,6 +22,14 @@ const AccountPage = () => {
 
     const navigateToChildMessage = () => {
         navigate('/child-message')
+    }
+
+    const popupBoard = () => {
+        setIsChanging(true);
+    }
+
+    const cancelChange = () => {
+        setIsChanging(false);
     }
 
     const navigateToAdmin = () => {
@@ -45,6 +59,7 @@ const AccountPage = () => {
                     </div>
                 </div>
             </section>
+
             <section className={classes.ContentBlock}>
                 <div className={classes.Content}>
                     <div className={classes.Title}>
@@ -68,6 +83,7 @@ const AccountPage = () => {
                          src={myChildren}/>
                 </div>
             </section>
+
             <section className={classes.ContentBlock}>
                 <div className={classes.ImageContainer}>
                     <img className={classes.Image} alt='Newsletter'
@@ -81,8 +97,8 @@ const AccountPage = () => {
                         Easily change your password here to keep your account secure and prevent unauthorized access.
                     </div>
                     <div className={classes.ButtonContainer}>
-                        <button onClick={navigateToNewsletter} className={classes.Button}>
-                            Go
+                        <button onClick={popupBoard} className={classes.Button}>
+                            Change
                         </button>
                     </div>
                 </div>
@@ -111,6 +127,11 @@ const AccountPage = () => {
                              src={myChildren}/>
                     </div>
                 </section>
+            }
+            {isChanging &&
+                <Backdrop>
+                    <ChangePassword onCancel={cancelChange}/>
+                </Backdrop>
             }
         </div>
     );

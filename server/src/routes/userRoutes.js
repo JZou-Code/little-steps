@@ -19,6 +19,6 @@ router.get('/find-user-by-email', userController.findUserByEmail)
 router.get('/find-many-users', userController.findManyUsers)
 router.post('/find-many-users-by-offset', userController.findManyUsersByOffset)
 router.delete('/delete-user/:id', userController.deleteUser)
-router.put('/change-password', userController.login)
+router.put('/change-password', userController.changePassword)
 
 module.exports = router;

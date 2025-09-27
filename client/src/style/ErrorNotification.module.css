@@ -1,0 +1,52 @@
+.Container{
+    width: 25rem;
+    height: 10rem;
+    background-color: #fcf0f0;
+    border-radius: 1rem;
+    position: absolute;
+    inset: 0;
+    margin: auto;
+    color: #b81c1c;
+    padding: 3rem 2rem;
+}
+
+.CancelIcon{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    color: #ed4343;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.CancelIcon:hover{
+    transform: rotate(90deg);
+    color: orange;
+}
+
+.Body{
+    display: flex;
+    width: fit-content;
+    margin: 0 auto;
+}
+
+.Content{
+    padding-left: 1rem;
+    line-height: 2rem;
+}
+
+.ErrorIcon{
+    font-size: 2.5rem;
+    color: #ef4444;
+}
+
+.Title{
+    color: #991b1b;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.Message{
+    font-size: 1.2rem ;
+}

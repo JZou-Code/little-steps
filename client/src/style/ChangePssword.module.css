@@ -1,0 +1,112 @@
+.Card{
+    width: 40rem;
+    height: 24rem;
+    background-color: white;
+    position: absolute;
+    top: 30%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    border-radius: 0.6rem;
+    padding: 1.5rem 3rem;
+    color: #4E342E;
+}
+
+.Icon{
+    position: absolute;
+    top: 1rem;
+    right: 2rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.Icon:hover{
+    transform: rotate(90deg);
+    color: red;
+}
+
+.Title{
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+.InputContainer{
+    width: 90%;
+    margin: 1rem auto;
+    font-size: 0.9rem;
+}
+
+.InputTitle{
+}
+
+.Input{
+    width: 100%;
+    border: 1px solid #000;
+    padding: 0.5rem 1rem;
+    border-radius: 0.3rem;
+    background-color: #f4f4f4;
+    color: #969696;
+    margin-top: 0.5rem;
+}
+
+.CardButton{
+    width: 100%;
+    background-color: #FFA726;
+    color: white;
+    padding: 0.5rem 0;
+    border-radius: 0.3rem;
+    cursor: pointer;
+}
+
+.CardButton:hover{
+    box-shadow: 0 0 3px 2px #FFA726;
+}
+
+.CardButton:active{
+    box-shadow: none;
+}
+
+.MessageContainer{
+    padding: 4rem 1rem;
+}
+
+.ImageBox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ErrorImage{
+    color: orangered;
+    font-size: 7rem;
+}
+
+.Image{
+    width: 25%;
+}
+
+.MessageTitle{
+    font-weight: bold;
+    font-size: 1.2rem;
+    text-align: center;
+    margin: 1.5rem 0;
+}
+
+.MessageText{
+    width: 80%;
+    color: #6a6a6a;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.Message{
+    margin-top: 0.2rem;
+    color: red;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    font-size: 0.8rem;
+}

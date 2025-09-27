@@ -29,4 +29,9 @@ export const requestLogout = (id) => {
     )
 }
 
-
+export const requestChangePassword = (data) => {
+    return axiosApi.post(
+        '/user/logout',
+        data
+    )
+}

@@ -1,6 +1,4 @@
 const userService = require('../services/userService');
-const {JWT_ACCESS_SECRET, ACCESS_EXPIRES_IN, JWT_REFRESH_SECRET} = require("../auth/config");
-const jwt = require("jsonwebtoken");
 
 const createUser = async (req, res) => {
     const data = req.body;
@@ -47,8 +45,6 @@ const logout = async (req, res) => {
         }
         res.status(200).json({ message: 'Logged out successfully' });
     });
-
-    // res.status(200).json({ message: 'Logged out successfully' });
 }
 
 const refresh = (req, res) => {
@@ -115,8 +111,8 @@ const deleteUser = async (req, res) => {
 }
 
 const changePassword = async (req, res) => {
-    const {id, password} = req.body;
-    const result = await userService.changePassword(id, password)
+    const {id, currentPwd, newPwd} = req.body;
+    const result = await userService.changePassword(id, currentPwd, newPwd)
     res.send(result)
 }
 

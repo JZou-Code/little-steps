@@ -47,13 +47,13 @@ const refresh = (refreshToken) => {
     try {
         const decoded = jwt.verify(refreshToken, JWT_REFRESH_SECRET);
         const newAccessToken = jwt.sign(
-            { sub: decoded.sub, role: decoded.role },
+            {sub: decoded.sub, role: decoded.role},
             JWT_ACCESS_SECRET,
-            { expiresIn: ACCESS_EXPIRES_IN }
+            {expiresIn: ACCESS_EXPIRES_IN}
         );
-        return { code: 200, message: 'ok', data: { accessToken: newAccessToken } };
+        return {code: 200, message: 'ok', data: {accessToken: newAccessToken}};
     } catch (e) {
-        return { code: 403, message: 'Invalid refresh token', data: {} };
+        return {code: 403, message: 'Invalid refresh token', data: {}};
     }
 }
 
@@ -81,17 +81,34 @@ const deleteUser = (id) => {
     return userDao.deleteUser(id);
 }
 
-const changePassword = async (id, newPwd) => {
+const changePassword = async (id, currentPwd, newPwd) => {
     const storedData = await userDao.findUser(id);
-    const hashedPwd = storedData.password;
-    const result = await saltTool.verify(hashedPwd, newPwd)
-    if (result) {
+    if (!storedData) {
         return {
-            code: '409',
+            code: '404',
             data: null,
-            message: 'Password cannot be the same as the current one.'
+            message: 'User not found.'
         }
     }
+    const hashedPwd = storedData.password;
+    const ok = await saltTool.verify(hashedPwd, currentPwd)
+    if (!ok) {
+        return {
+            code: '401',
+            data: null,
+            message: 'Current password is incorrect.'
+        };
+    }
+
+    const sameAsOld = await saltTool.verify(hashedPwd, newPwd);
+    if (sameAsOld) {
+        return {
+            code: 409,
+            data: null,
+            message: 'New password must be different from the current one.'
+        };
+    }
+
     const newHashedPwd = await saltTool.hash(newPwd);
     const newData = await userDao.updateUser(id, {password: newHashedPwd})
     return {
