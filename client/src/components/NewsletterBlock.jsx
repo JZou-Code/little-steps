@@ -42,7 +42,6 @@ const NewsletterBlock = ({data}) => {
     }, []);
 
     return (
-
         <div className={classes.ItemContainer}>
             <div className={classes.ArticleContainer}>
                 <div className={classes.Top}>

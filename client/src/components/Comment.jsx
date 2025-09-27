@@ -7,7 +7,8 @@ import AuthContext from "../context/AuthContext.jsx";
 import ErrorNotification from "./ErrorNotification.jsx";
 import OtherNotification from "./OtherNotification.jsx";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faAngleLeft, faAngleRight} from "@fortawesome/free-solid-svg-icons";
+import {faAngleLeft, faAngleRight, faCommentDots} from "@fortawesome/free-solid-svg-icons";
+import {faReply} from "@fortawesome/free-solid-svg-icons/faReply";
 
 const Comment = (props) => {
     const [isReply, setIsReply] = useState(false);
@@ -35,8 +36,6 @@ const Comment = (props) => {
             if (res.data?.data?.length !== 0) {
                 setIsEmpty(false)
             }
-
-            console.log(res)
 
             setDisablePrev(pageIndex === 0);
             setDisableNext(arr.length <= itemNum);
@@ -106,28 +105,9 @@ const Comment = (props) => {
     return (
         <>
             <div className={classes.ReplyContainer}>
-                <Button name={'Reply'} handleClick={() => setIsReply(true)}/>
+                {/*<Button name={'Reply'} handleClick={() => setIsReply(true)}/>*/}
+                <FontAwesomeIcon className={classes.ReplyIcon} icon={faReply} onClick={() => setIsReply(true)}/>
             </div>
-            {
-                !isEmpty &&
-                <div className={classes.CommentContainer}>
-                    {
-                        comments.map(item => <CommentBlock key={item.id} data={item}/>)
-                    }
-
-                    <div style={{fontSize: '0.8rem'}} className={classes.ButtonContainer}>
-                        <FontAwesomeIcon
-                            icon={faAngleLeft}
-                            className={disablePrev ? `${classes.IconButton} ${classes.IconDisabled}` : classes.IconButton}
-                            onClick={handlePrev}/>
-                        <FontAwesomeIcon
-                            icon={faAngleRight}
-                            className={disableNext ? `${classes.IconButton} ${classes.IconDisabled}` : classes.IconButton}
-                            onClick={handleNext}/>
-                    </div>
-
-                </div>
-            }
             {
                 isReply &&
                 <div className={classes.CommentEditor}>
@@ -149,6 +129,26 @@ const Comment = (props) => {
                         <Button name={'Submit'} handleClick={handleSubmit}/>
                         <Button name={'Cancel'} handleClick={handleCancel}/>
                     </div>
+                </div>
+            }
+            {
+                !isEmpty &&
+                <div className={classes.CommentContainer}>
+                    {
+                        comments.map(item => <CommentBlock key={item.id} data={item}/>)
+                    }
+
+                    <div style={{fontSize: '0.8rem'}} className={classes.ButtonContainer}>
+                        <FontAwesomeIcon
+                            icon={faAngleLeft}
+                            className={disablePrev ? `${classes.IconButton} ${classes.IconDisabled}` : classes.IconButton}
+                            onClick={handlePrev}/>
+                        <FontAwesomeIcon
+                            icon={faAngleRight}
+                            className={disableNext ? `${classes.IconButton} ${classes.IconDisabled}` : classes.IconButton}
+                            onClick={handleNext}/>
+                    </div>
+
                 </div>
             }
             {

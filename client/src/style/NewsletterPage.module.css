@@ -1,6 +1,5 @@
 .Container {
     padding: 1rem 15%;
-    /*background-color: rgba(255, 210, 128, 0.5);*/
 }
 
 .TopSection {
@@ -24,7 +23,7 @@
     width: 80%;
     margin: 2rem auto 0;
     padding: 1rem 2rem;
-    border: 1px solid #FFA726;
+    border: 2px solid #FFA726;
     border-radius: 0.5rem;
 }
 
@@ -142,17 +141,6 @@
     cursor: pointer;
 }
 
-.IconButton{
-    color: #FFA726;
-    font-size: 1.2rem;
-    cursor: pointer;
-}
-
-.IconDisabled {
-    pointer-events: none;
-    color: lightgray;
-}
-
 .Button:hover {
     box-shadow: 0 0 2px 2px #FFCC80;
 }
@@ -165,6 +153,25 @@
     pointer-events: none;
     background-color: lightgray;
     color: white;
+}
+
+.IconButton{
+    color: #FFA726;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.IconButton:hover{
+    transform: scale(1.2);
+}
+
+.IconButton:active{
+    transform: scale(1);
+}
+
+.IconDisabled {
+    pointer-events: none;
+    color: lightgray;
 }
 
 .ReplyContainer{
@@ -202,4 +209,18 @@
     gap: 5rem;
     justify-content: center;
     align-items: center;
+    margin-bottom: 1rem;
+}
+
+.ReplyIcon{
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.ReplyIcon:hover{
+    transform: scale(1.2);
+}
+
+.ReplyIcon:active{
+    transform: scale(1);
 }

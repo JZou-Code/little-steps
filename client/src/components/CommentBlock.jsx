@@ -4,10 +4,6 @@ import {convertTime} from "../utils/convertTime.js";
 
 const CommentBlock = ({data}) => {
     const [time, setTime] = useState(data.createdAt);
-
-    const [isProcessing, setIsProcessing] = useState(false);
-    const [isError, setIsError] = useState(false);
-
     useEffect(() => {
         setTime(convertTime(time, {second: '2-digit'}));
     }, []);

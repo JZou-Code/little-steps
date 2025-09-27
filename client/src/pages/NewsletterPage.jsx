@@ -28,7 +28,6 @@ const NewsletterPage = () => {
         try {
             setIsLoading(true);
             const res = await fetchNewsletters(pageIndex, itemNum, orderBy);
-            console.log(res)
             const arr = res.data?.data ?? [];
             setNewsletters(arr.slice(0, itemNum))
 
