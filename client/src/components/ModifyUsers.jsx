@@ -8,7 +8,7 @@ import {updateUserById} from "../api/manageUsers.js";
 const ModifyUsers = ({data, onCancel, setupMsg, loadUsers}) => {
     const [firstName, setFirstName] = useState(data?.firstName || '');
     const [lastName, setLastName] = useState(data?.lastName || '');
-    const [role, setRole] = useState(data?.role || roles.PARENT);
+    const [role, setRole] = useState(data?.role === roles.TEACHER ? roles.TEACHER : roles.PARENT);
 
     const submitHandler = async (e) => {
         e.preventDefault();

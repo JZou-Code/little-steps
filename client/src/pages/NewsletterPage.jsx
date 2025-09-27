@@ -6,6 +6,7 @@ import NewsletterBlock from "../components/NewsletterBlock.jsx";
 import {fetchNewsletters} from "../api/manageNewsletter.js";
 import OtherNotification from "../components/OtherNotification.jsx";
 import ErrorNotification from "../components/ErrorNotification.jsx";
+import {roles} from "../utils/roles.js";
 
 const NewsletterPage = () => {
     const [pageIndex, setPageIndex] = useState(0);
@@ -15,6 +16,8 @@ const NewsletterPage = () => {
 
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
+
+    const [showCreate, setShowCreate] = useState(false)
 
     const navigate = useNavigate();
     const handleClick = () => {
@@ -41,9 +44,19 @@ const NewsletterPage = () => {
         }
     }, [pageIndex, itemNum, orderBy]);
 
+    const redirectToHome = (role) => {
+        if (role === roles.OTHER) {
+            navigate('/', {state: {noPermission: true}})
+        }
+    }
+
     useEffect(() => {
+        const auth = JSON.parse(localStorage.getItem('auth'));
+        const role = auth.user.role
+        redirectToHome(role);
         loadNewsletters();
-    }, [loadNewsletters]);
+        setShowCreate(role === roles.ADMIN || role === roles.TEACHER)
+    }, [loadNewsletters, setShowCreate]);
 
     const handlePrev = () => {
         setDisableNext(false);
@@ -68,9 +81,12 @@ const NewsletterPage = () => {
                 <div className={classes.TopTitle}>
                     Newsletter
                 </div>
-                <div className={classes.Create}>
-                    <Button handleClick={handleClick} name={'New Post'}/>
-                </div>
+                {
+                    showCreate &&
+                    <div className={classes.Create}>
+                        <Button handleClick={handleClick} name={'New Post'}/>
+                    </div>
+                }
             </div>
             {
                 newsletters.map(item =>
@@ -93,7 +109,9 @@ const NewsletterPage = () => {
                 isLoading && <OtherNotification message={'Loading...'}/>
             }
             {
-                isError && <ErrorNotification message={'Something went wrong'} onClick={()=>{setIsError(false)}}/>
+                isError && <ErrorNotification message={'Something went wrong'} onClick={() => {
+                    setIsError(false)
+                }}/>
             }
         </div>
     );

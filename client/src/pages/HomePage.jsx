@@ -1,15 +1,25 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import classes from '../style/HomePage.module.css'
-import {useNavigate} from "react-router-dom";
+import {useLocation, useNavigate} from "react-router-dom";
 import overallTop from '../assets/homepage/overallTop.jpg'
 import overallBot from '../assets/homepage/overallBot.jpg'
 import reason1 from '../assets/homepage/reason-1.jpg'
 import reason2 from '../assets/homepage/reason-2.jpg'
 import reason3 from '../assets/homepage/reason-3.jpg'
+import ErrorNotification from "../components/ErrorNotification.jsx";
 
 
 const HomePage = () => {
+    const [noPermission, setNoPermission] = useState(false);
+
     const navigate = useNavigate();
+    const {state} = useLocation();
+
+    useEffect(() => {
+        if (state?.noPermission){
+            setNoPermission(true);
+        }
+    }, [setNoPermission]);
 
     return (
         <div className={classes.Container}>
@@ -60,7 +70,6 @@ const HomePage = () => {
                             <li>Joyful Growth</li>
                             <li>Community Engagement</li>
                             <li>Convenient Hamilton Location</li>
-                            {/*<li>Established Since 2025</li>*/}
                         </ul>
                     </div>
                 </div>
@@ -88,6 +97,9 @@ const HomePage = () => {
                     </div>
                 </div>
             </section>
+            {
+                noPermission && <ErrorNotification message={'Insufficient permissions. You can’t access this page.'} onClick={()=>{setNoPermission(false)}}/>
+            }
         </div>
     );
 };

@@ -1,4 +1,4 @@
-import React, {useContext, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import classes from '../style/AccountPage.module.css'
 import {useNavigate} from "react-router-dom";
 import AuthContext from "../context/AuthContext.jsx";
@@ -7,9 +7,6 @@ import myChildren from '../assets/account-page/my-children.jpg'
 import newsletterImage from '../assets/account-page/newsletter.jpg'
 import Backdrop from "../UI/Backdrop/Backdrop.jsx";
 import ChangePassword from "../components/ChangePassword.jsx";
-import OtherNotification from "../components/OtherNotification.jsx";
-import SuccessfulNotification from "../components/SuccessfulNotification.jsx";
-import ErrorNotification from "../components/ErrorNotification.jsx";
 
 const AccountPage = () => {
     const navigate = useNavigate();
@@ -35,6 +32,16 @@ const AccountPage = () => {
     const navigateToAdmin = () => {
         navigate('/admin-dashboard')
     }
+
+    const redirectToHome = (role) => {
+        if (role === roles.OTHER) {
+            navigate('/', {state: {noPermission: true}})
+        }
+    }
+
+    useEffect(() => {
+        redirectToHome(authCtx.user.role);
+    }, [redirectToHome]);
 
     return (
         <div className={classes.Container}>
