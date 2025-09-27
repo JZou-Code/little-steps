@@ -31,7 +31,7 @@ export const requestLogout = (id) => {
 
 export const requestChangePassword = (data) => {
     return axiosApi.post(
-        '/change-password',
+        '/user/change-password',
         data
     )
 }
