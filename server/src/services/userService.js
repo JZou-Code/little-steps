@@ -94,7 +94,7 @@ const changePassword = async (id, currentPwd, newPwd) => {
     const ok = await saltTool.verify(hashedPwd, currentPwd)
     if (!ok) {
         return {
-            code: '401',
+            code: '422',
             data: null,
             message: 'Current password is incorrect.'
         };

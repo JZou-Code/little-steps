@@ -26,7 +26,8 @@ const ChangePasswordForm = (props) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const id = localStorage.getItem('auth').user?.id
+        const auth = JSON.parse(localStorage.getItem('auth'));
+        const id = auth.user.id;
         const invalid = validationRules.find(rule => !rule.check());
         if (invalid) {
             setErrorMsg(invalid.message);

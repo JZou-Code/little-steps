@@ -3,14 +3,12 @@ import classes from '../style/ChangePssword.module.css'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faXmark} from "@fortawesome/free-solid-svg-icons";
 import ChangePasswordForm from "./ChangePasswordForm.jsx";
-import ChangeMessage from "./ChangeMessage.jsx";
 import {requestChangePassword} from "../api/manageUsers.js";
 import OtherNotification from "./OtherNotification.jsx";
 import ErrorNotification from "./ErrorNotification.jsx";
 import SuccessfulNotification from "./SuccessfulNotification.jsx";
 
 const ChangePassword = (props) => {
-    // const [showForm, setShowForm] = useState(true);
     const [isProcessing, setIsProcessing] = useState(false);
     const [isError, setIsError] = useState(false);
     const [isSucceed, setIsSucceed] = useState(false);
@@ -58,7 +56,13 @@ const ChangePassword = (props) => {
                 isError && <ErrorNotification message={errorMessage} onClick={reset}/>
             }
             {
-                isSucceed && <SuccessfulNotification message={''} buttonName={''}/>
+                isSucceed && <SuccessfulNotification
+                    message={''}
+                    buttonName={''}
+                    onClick={() => {
+                        reset();
+                        props.onCancel();
+                    }}/>
             }
         </div>
     );
