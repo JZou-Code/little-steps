@@ -4,7 +4,8 @@ import Button from "./Button.jsx";
 import CommentBlock from "./CommentBlock.jsx";
 import {createComment, fetchComments} from "../api/manageComment.js";
 import AuthContext from "../context/AuthContext.jsx";
-import Notification from "./Notification.jsx";
+import ErrorNotification from "./ErrorNotification.jsx";
+import OtherNotification from "./OtherNotification.jsx";
 
 const Comment = (props) => {
     const [isReply, setIsReply] = useState(false);
@@ -149,15 +150,15 @@ const Comment = (props) => {
                 </div>
             }
             {
-                isError && <Notification enableIcon={true} message={'Something went wrong'} onClick={() => {
+                isError && <ErrorNotification message={'Something went wrong'} onClick={() => {
                     setIsError(false)
                 }}/>
             }
             {
-                processing && <Notification enableIcon={false} message={'Processing...'}/>
+                processing && <OtherNotification message={'Processing...'}/>
             }
             {
-                isLoading && <Notification enableIcon={false} message={'Loading...'}/>
+                isLoading && <OtherNotification message={'Loading...'}/>
             }
         </>
     );

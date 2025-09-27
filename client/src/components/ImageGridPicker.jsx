@@ -1,7 +1,7 @@
 import React, {useRef, useState} from 'react';
 import classes from '../style/ImageGridPicker.module.css'
 import Button from "./Button.jsx";
-import Notification from "./Notification.jsx";
+import ErrorNotification from "./ErrorNotification.jsx";
 
 export default function ImageGridPicker({
                                             maxCount = 9,
@@ -140,7 +140,7 @@ export default function ImageGridPicker({
                 ))}
             </div>
             {
-                notify && <Notification message={notifyMessage} onClick={handleCancel} enableIcon={true}/>
+                notify && <ErrorNotification message={notifyMessage} onClick={handleCancel}/>
             }
         </div>
     );

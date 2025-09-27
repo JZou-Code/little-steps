@@ -1,6 +1,6 @@
 import React from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faSpinner, faXmark} from "@fortawesome/free-solid-svg-icons";
+import {faSpinner} from "@fortawesome/free-solid-svg-icons";
 import classes from '../style/OtherNotification.module.css'
 import Backdrop from "../UI/Backdrop/Backdrop.jsx";
 

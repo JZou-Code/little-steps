@@ -4,9 +4,10 @@ import TinyMCE from "../components/TinyMCE.jsx";
 import Button from "../components/Button.jsx";
 import {useNavigate} from "react-router-dom";
 import ImageGridPicker from "../components/ImageGridPicker.jsx";
-import Notification from "../components/Notification.jsx";
 import {createNewsletter} from "../api/manageNewsletter.js";
 import AuthContext from "../context/AuthContext.jsx";
+import OtherNotification from "../components/OtherNotification.jsx";
+import ErrorNotification from "../components/ErrorNotification.jsx";
 
 const CreateNewsletterPage = () => {
     const [title, setTitle] = useState('');
@@ -87,17 +88,17 @@ const CreateNewsletterPage = () => {
                 <Button handleClick={handleCancel} name={'Cancel'}/>
             </div>
             {
-                processing && <Notification message={'Processing...'} enableIcon={false}/>
+                processing && <OtherNotification message={'Processing...'}/>
             }
             {
-                isEmpty && <Notification message={'Title and Content required'} onClick={() => {
+                isEmpty && <ErrorNotification message={'Title and Content required'} onClick={() => {
                     setIsEmpty(false)
-                }} enableIcon={true}/>
+                }}/>
             }
             {
-                isError && <Notification message={'Something went wrong'} onClick={() => {
+                isError && <ErrorNotification message={'Something went wrong'} onClick={() => {
                     setIsError(false)
-                }} enableIcon={true}/>
+                }}/>
             }
         </div>
     );

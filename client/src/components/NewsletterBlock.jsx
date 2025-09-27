@@ -8,9 +8,6 @@ const NewsletterBlock = ({data}) => {
     const [time, setTime] = useState(data.updatedAt);
     const [container, setContainer] = useState('');
 
-    const [isProcessing, setIsProcessing] = useState(false);
-    const [isError, setIsError] = useState(false);
-
     const RichHtml = ({html}) => {
         const safe = DOMPurify.sanitize(html);
         return (

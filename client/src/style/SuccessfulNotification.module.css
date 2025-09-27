@@ -1,6 +1,6 @@
 .Container{
     width: 25rem;
-    height: 10rem;
+    height: 12rem;
     background-color: #e8f8ef;
     border-radius: 1rem;
     position: absolute;
@@ -52,7 +52,7 @@
 }
 
 .ButtonWrapper{
-    text-align: center;
+    text-align: right;
     margin-top: 0.5rem;
 }
 

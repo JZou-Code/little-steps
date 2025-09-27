@@ -4,7 +4,8 @@ import Button from "../components/Button.jsx";
 import {useNavigate} from "react-router-dom";
 import NewsletterBlock from "../components/NewsletterBlock.jsx";
 import {fetchNewsletters} from "../api/manageNewsletter.js";
-import Notification from "../components/Notification.jsx";
+import OtherNotification from "../components/OtherNotification.jsx";
+import ErrorNotification from "../components/ErrorNotification.jsx";
 
 const NewsletterPage = () => {
     const [pageIndex, setPageIndex] = useState(0);
@@ -90,10 +91,10 @@ const NewsletterPage = () => {
                 </button>
             </div>
             {
-                isLoading && <Notification enableIcon={false} message={'Loading...'}/>
+                isLoading && <OtherNotification message={'Loading...'}/>
             }
             {
-                isError && <Notification enableIcon={true} message={'Something went wrong'} onClick={()=>{setIsError(false)}}/>
+                isError && <ErrorNotification message={'Something went wrong'} onClick={()=>{setIsError(false)}}/>
             }
         </div>
     );
