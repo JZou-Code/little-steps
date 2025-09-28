@@ -4,7 +4,7 @@ import classes from '../style/Header.module.css'
 import AuthContext from "../context/AuthContext.jsx";
 import HeaderAccount from "./HeaderAccount.jsx";
 import HeaderLogin from "./HeaderLogin.jsx";
-import logo from '../assets/logo/logo.jpg'
+import logo from '../assets/logo/logo.png'
 
 
 const Header = () => {

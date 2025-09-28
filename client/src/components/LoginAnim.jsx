@@ -1,8 +1,8 @@
 import React from 'react';
 import classes from '../style/LoginAnimi.module.css'
-import cover1 from '../assets/animation-images/cover1.jpg'
-import cover2 from '../assets/animation-images/cover2.jpg'
-import cover3 from '../assets/animation-images/cover3.jpg'
+import cover1 from '../assets/animation-images/cover-1.png'
+import cover2 from '../assets/animation-images/cover-2.png'
+import cover3 from '../assets/animation-images/cover-3.png'
 
 const LoginAnim = () => {
     return (
