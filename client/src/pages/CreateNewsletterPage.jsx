@@ -3,7 +3,7 @@ import classes from '../style/CreateNewsletterPage.module.css'
 import TinyMCE from "../components/editor/TinyMCE.jsx";
 import Button from "../components/common/Button.jsx";
 import {useNavigate} from "react-router-dom";
-import ImageGridPicker from "../components/common/ImageGridPicker.jsx";
+import ImageGridPicker from "../components/features/ImageGridPicker.jsx";
 import {createNewsletter} from "../api/manageNewsletter.js";
 import AuthContext from "../context/AuthContext.jsx";
 import OtherNotification from "../components/common/notifications/OtherNotification.jsx";

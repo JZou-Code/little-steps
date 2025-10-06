@@ -1,7 +1,7 @@
 import React, {useContext, useState} from 'react';
 import classes from "../../style/Forms.module.css";
 import {pageState} from "../../utils/pageState.js";
-import ValidationCode from "../common/ValidationCode.jsx";
+import ValidationCode from "../features/ValidationCode.jsx";
 import PageStateContext from "../../context/PageStateContext.jsx";
 import ErrorNotification from "../common/notifications/ErrorNotification.jsx";
 import {isValidEmail, isValidPassword} from "../../utils/regex.js";

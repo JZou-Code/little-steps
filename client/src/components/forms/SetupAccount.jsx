@@ -1,6 +1,6 @@
 import React from 'react';
 import classes from '../../style/LoginPage.module.css'
-import LoginAnim from "../common/LoginAnim.jsx";
+import LoginAnim from "../features/LoginAnim.jsx";
 import FormContainer from "./FormContainer.jsx";
 
 

@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {NavLink} from "react-router-dom";
+import {NavLink, useNavigate} from "react-router-dom";
 import classes from '../../style/Header.module.css'
 import AuthContext from "../../context/AuthContext.jsx";
 import HeaderAccount from "./HeaderAccount.jsx";
@@ -9,13 +9,16 @@ import logo from '../../assets/logo/logo.png'
 
 const Header = () => {
     const ctx = useContext(AuthContext);
+    const navigate = useNavigate();
+    const toHome = ()=>{
+        navigate('/')
+    }
 
     return (
         <div className={classes.Background}>
             <div className={classes.Container}>
                 <div className={classes.TitleArea}>
-                    <div className={classes.Title}>
-                        {/*Little Steps*/}
+                    <div onClick={toHome} className={classes.Title}>
                         <img className={classes.Logo} src={logo} alt={'logo'}/>
                     </div>
                     {ctx.isLogin ? <HeaderAccount/> : <HeaderLogin/>}

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import classes from '../style/AddChildPage.module.css'
 import {useLocation, useNavigate} from "react-router-dom";
-import LoginAnim from "../components/common/LoginAnim.jsx";
+import LoginAnim from "../components/features/LoginAnim.jsx";
 import {addNewChild} from "../api/manageChildren.js";
 
 const AddChildPage = () => {

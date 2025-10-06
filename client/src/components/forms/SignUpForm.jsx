@@ -6,7 +6,7 @@ import {isValidEmail, isValidPassword, isValidUsername} from "../../utils/regex.
 import {pageState} from "../../utils/pageState.js";
 // import ValidationCode from "./ValidationCode.jsx";
 import PageStateContext from "../../context/PageStateContext.jsx";
-import ValidationCode from "../common/ValidationCode.jsx";
+import ValidationCode from "../features/ValidationCode.jsx";
 import Captcha from "../common/Captcha.jsx";
 import {useNavigate} from "react-router-dom";
 import {requestSignUp} from "../../api/signUp.js";

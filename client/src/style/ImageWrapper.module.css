@@ -1,0 +1,11 @@
+.Container{
+
+}
+
+.Image{
+    max-width: 90vw;
+    max-height: 90vw;
+    position: absolute;
+    inset: 0;
+    margin: auto;
+}

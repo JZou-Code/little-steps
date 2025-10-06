@@ -1,7 +1,7 @@
 import React, {useRef, useState} from 'react';
 import classes from '../../style/ImageGridPicker.module.css'
-import Button from "./Button.jsx";
-import ErrorNotification from "./notifications/ErrorNotification.jsx";
+import Button from "../common/Button.jsx";
+import ErrorNotification from "../common/notifications/ErrorNotification.jsx";
 
 export default function ImageGridPicker({
                                             maxCount = 9,

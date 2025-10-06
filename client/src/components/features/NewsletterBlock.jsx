@@ -3,10 +3,13 @@ import classes from '../../style/NewsletterPage.module.css'
 import DOMPurify from 'dompurify';
 import Comment from "./Comment.jsx";
 import {convertTime} from "../../utils/convertTime.js";
+import ImageWrapper from "./ImageWrapper.jsx";
 
 const NewsletterBlock = ({data}) => {
     const [time, setTime] = useState(data.updatedAt);
     const [container, setContainer] = useState('');
+    const [open, setOpen] = useState(false);
+    const [src, setSrc] = useState('')
 
     const RichHtml = ({html}) => {
         const safe = DOMPurify.sanitize(html);
@@ -36,6 +39,11 @@ const NewsletterBlock = ({data}) => {
         }
     }
 
+    const viewDetailedImage = (src) => {
+        setSrc(src);
+        setOpen(true);
+    }
+
     useEffect(() => {
         setTime(convertTime(time, {second: '2-digit'}));
         selectContainer();
@@ -57,6 +65,9 @@ const NewsletterBlock = ({data}) => {
                         data.ArticleImage.map(item =>
                             <div key={item.id} className={classes.ImageWrapper}>
                                 <img
+                                    onClick={() => {
+                                        viewDetailedImage(`https://d1xw2ny1uxkw0s.cloudfront.net/${item.storageKey}`)
+                                    }}
                                     className={classes.Image}
                                     src={`https://d1xw2ny1uxkw0s.cloudfront.net/${item.storageKey}`}
                                     alt='article images'/>
@@ -69,6 +80,12 @@ const NewsletterBlock = ({data}) => {
                 </article>
             </div>
             <Comment newsletterId={data.id}/>
+            {
+                open &&
+                <div onClick={()=>{setOpen(false)}}>
+                    <ImageWrapper src={src}/>
+                </div>
+            }
         </div>
     );
 };
