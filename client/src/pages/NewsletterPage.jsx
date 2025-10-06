@@ -1,11 +1,11 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import classes from '../style/NewsletterPage.module.css'
-import Button from "../components/Button.jsx";
+import Button from "../components/common/Button.jsx";
 import {useNavigate} from "react-router-dom";
-import NewsletterBlock from "../components/NewsletterBlock.jsx";
+import NewsletterBlock from "../components/features/NewsletterBlock.jsx";
 import {fetchNewsletters} from "../api/manageNewsletter.js";
-import OtherNotification from "../components/OtherNotification.jsx";
-import ErrorNotification from "../components/ErrorNotification.jsx";
+import OtherNotification from "../components/common/notifications/OtherNotification.jsx";
+import ErrorNotification from "../components/common/notifications/ErrorNotification.jsx";
 import {roles} from "../utils/roles.js";
 
 const NewsletterPage = () => {

@@ -74,5 +74,5 @@ q::after {
     content: '';
 }
 
-
+@media (max-width: 1066px){ html { font-size: 1.5vw; } }
 

@@ -6,7 +6,7 @@ import overallBot from '../assets/homepage/overallBot.jpg'
 import reason1 from '../assets/homepage/reason-1.jpg'
 import reason2 from '../assets/homepage/reason-2.jpg'
 import reason3 from '../assets/homepage/reason-3.jpg'
-import ErrorNotification from "../components/ErrorNotification.jsx";
+import ErrorNotification from "../components/common/notifications/ErrorNotification.jsx";
 
 
 const HomePage = () => {

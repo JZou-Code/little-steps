@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import classes from '../style/AddChildPage.module.css'
 import {useLocation, useNavigate} from "react-router-dom";
-import LoginAnim from "../components/LoginAnim.jsx";
+import LoginAnim from "../components/common/LoginAnim.jsx";
 import {addNewChild} from "../api/manageChildren.js";
 
 const AddChildPage = () => {
@@ -11,9 +11,6 @@ const AddChildPage = () => {
     const [gender, setGender] = useState('male');
 
     const [message, setMessage] = useState('')
-
-    const location = useLocation();
-    const from = location.state?.from?.pathname || '/';
 
     const navigate = useNavigate();
 

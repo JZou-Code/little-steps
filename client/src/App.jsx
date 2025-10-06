@@ -1,9 +1,9 @@
 import RoutesController from "./RoutesController.jsx";
 import classes from './style/App.module.css'
-import Header from "./components/Header.jsx";
+import Header from "./components/common/Header.jsx";
 import PageStateProvider from "./context/PageStateProvider.jsx";
 import AuthProvider from "./context/AuthProvider.jsx";
-import Footer from "./components/Footer.jsx";
+import Footer from "./components/common/Footer.jsx";
 
 function App() {
     return (

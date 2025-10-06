@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import classes from '../style/AdminDashboardPage.module.css'
-import UsersList from "../components/UsersList.jsx";
-import ChildrenList from "../components/ChildrenList.jsx";
+import UsersList from "../components/admin-dashboard/UsersList.jsx";
+import ChildrenList from "../components/admin-dashboard/ChildrenList.jsx";
 import {forms} from "../utils/forms.js";
-import BindChildToParent from "../components/BindChildToParent.jsx";
+import BindChildToParent from "../components/admin-dashboard/BindChildToParent.jsx";
 import {useNavigate} from "react-router-dom";
 
 const AdminDashboardPage = () => {

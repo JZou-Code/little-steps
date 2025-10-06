@@ -6,7 +6,7 @@ import {roles} from "../utils/roles.js";
 import myChildren from '../assets/account-page/my-children.jpg'
 import newsletterImage from '../assets/account-page/newsletter.jpg'
 import Backdrop from "../UI/Backdrop/Backdrop.jsx";
-import ChangePassword from "../components/ChangePassword.jsx";
+import ChangePassword from "../components/forms/ChangePassword.jsx";
 
 const AccountPage = () => {
     const navigate = useNavigate();
