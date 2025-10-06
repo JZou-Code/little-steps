@@ -7,33 +7,6 @@ import room from '../assets/contactpage/room.jpg'
 const Contact = () => {
     return (
         <div className={classes.Container}>
-            <section className={classes.HeaderContainer}>
-                <div className={classes.Header}>
-                    Contact Us
-                </div>
-                <div className={classes.Description}>
-                    Families and whānau are central to children’s learning. Reach us any time during open hours, or
-                    leave a message after hours and we’ll respond the next working day.
-                </div>
-            </section>
-
-            <section className={classes.ContentBlock}>
-                <div className={classes.ImageContainer}>
-                    <img className={classes.Image} alt='Newsletter'
-                         src={room}/>
-                </div>
-                <div className={classes.Content}>
-                    <div className={classes.Title}>
-                        Book a visit
-                    </div>
-                    <div className={classes.Text}>
-                        Schedule a 20–30 minute tour to meet our teachers, explore learning spaces, and discuss your
-                        child’s needs. We offer morning and afternoon slots.
-                    </div>
-
-                </div>
-            </section>
-
             <section className={classes.ContentBlock}>
                 <div className={classes.ImageContainer}>
                     <img className={classes.Image} alt='Newsletter'
@@ -79,6 +52,23 @@ const Contact = () => {
                             </li>
                         </ul>
                     </div>
+                </div>
+            </section>
+
+            <section className={classes.ContentBlock}>
+                <div className={classes.ImageContainer}>
+                    <img className={classes.Image} alt='Newsletter'
+                         src={room}/>
+                </div>
+                <div className={classes.Content}>
+                    <div className={classes.Title}>
+                        Book a visit
+                    </div>
+                    <div className={classes.Text}>
+                        Schedule a 20–30 minute tour to meet our teachers, explore learning spaces, and discuss your
+                        child’s needs. We offer morning and afternoon slots.
+                    </div>
+
                 </div>
             </section>
 

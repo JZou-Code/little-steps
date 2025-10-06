@@ -3,22 +3,6 @@
     font-size: 1.2rem;
 }
 
-.HeaderContainer {
-    margin-bottom: 2rem;
-}
-
-.Header {
-    text-align: center;
-    font-size: 2rem;
-    font-weight: bold;
-}
-
-.Description {
-    margin: 1rem auto;
-    padding: 0 5rem;
-    font-size: 1.5rem;
-}
-
 .ContentBlock {
     display: flex;
     justify-content: space-between;
@@ -30,6 +14,10 @@
     width: 50%;
     border-radius: 1rem;
     overflow: hidden;
+}
+
+.Image{
+
 }
 
 .Content {

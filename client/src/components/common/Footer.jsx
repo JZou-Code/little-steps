@@ -18,7 +18,7 @@ const Footer = () => {
                         care, and joyful exploration.
                     </div>
                 </section>
-                <section className={classes.ContentContainer}>
+                <section className={classes.ContactContainer}>
                     <div className={classes.ContentTitle}>
                         Contact
                     </div>
@@ -33,7 +33,7 @@ const Footer = () => {
                         </div>
                         <div className={classes.Line}>
                             <div className={classes.LineTitle}>Address:</div>
-                            <div className={classes.LineContent}>123 Sample Street, Hamilton</div>
+                            <div className={classes.LineContent}>123 Sample Street</div>
                         </div>
                         <div className={classes.Line}>
                             <div className={classes.LineTitle}>Open:</div>
@@ -41,7 +41,7 @@ const Footer = () => {
                         </div>
                     </div>
                 </section>
-                <section className={classes.ContentContainer}>
+                <section className={classes.LinkContainer}>
                     <div className={classes.ContentTitle}>
                         Quick links
                     </div>
@@ -70,13 +70,12 @@ const Footer = () => {
                         </ul>
                     </div>
                 </section>
-                <section className={classes.ContentContainer}>
+                <section className={classes.CareerContainer}>
                     <div className={classes.ContentTitle}>
-                        Careers & volunteering
+                        Careers
                     </div>
                     <div className={classes.Content}>
-                        Send email to us your CV: <br/>
-                        career@example.nz
+                        Email us: career@example.nz
                     </div>
                 </section>
             </div>
