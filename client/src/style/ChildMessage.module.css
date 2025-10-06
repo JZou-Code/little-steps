@@ -9,11 +9,12 @@
 }
 
 .ListContainer {
-    padding: 1rem;
+    padding: 2rem 1rem;
     border: 2px solid #FFA726;
     border-radius: 1rem;
     position: relative;
     margin-top: 2rem;
+    background-color: #fffdf3;
 }
 
 .ListContainer table {

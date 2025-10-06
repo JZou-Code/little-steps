@@ -1,3 +1,10 @@
+/**
+ * Newsletter routes configuration for handling newsletter-related API endpoints
+ * Defines CRUD operations for newsletters with file upload support
+ * Uses multer for handling multiple image uploads
+ * All routes require authentication middleware
+ */
+
 const express = require('express');
 const router = express.Router();
 const newsletterController = require('../controllers/newsletterController')

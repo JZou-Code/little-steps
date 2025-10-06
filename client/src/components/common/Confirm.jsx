@@ -3,6 +3,16 @@ import classes from '../../style/Confirm.module.css'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faXmark} from "@fortawesome/free-solid-svg-icons";
 
+/**
+ * Confirm component that displays confirmation dialog
+ * Shows delete confirmation with confirm and cancel buttons
+ * Used for user deletion confirmation
+ * 
+ * @param {Object} props - Component props
+ * @param {Function} props.onConfirm - Confirm button click handler
+ * @param {Function} props.onCancel - Cancel button click handler
+ * @returns {JSX.Element} The confirmation dialog component
+ */
 const Confirm = (props) => {
     return (
         <div className={`${classes.Container} popup`}>

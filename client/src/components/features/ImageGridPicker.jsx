@@ -3,6 +3,19 @@ import classes from '../../style/ImageGridPicker.module.css'
 import Button from "../common/Button.jsx";
 import ErrorNotification from "../common/notifications/ErrorNotification.jsx";
 
+/**
+ * ImageGridPicker component that handles image selection and management
+ * Provides drag-and-drop reordering, file validation, and size limits
+ * Supports multiple image selection with preview and deletion
+ * 
+ * @param {Object} props - Component props
+ * @param {number} props.maxCount - Maximum number of images allowed
+ * @param {number} props.maxMB - Maximum file size in MB
+ * @param {number} props.maxW - Maximum image width
+ * @param {number} props.maxH - Maximum image height
+ * @param {Function} props.onChange - Callback function when images change
+ * @returns {JSX.Element} The image grid picker component
+ */
 export default function ImageGridPicker({
                                             maxCount = 9,
                                             maxMB = 1, // Max size
@@ -146,6 +159,11 @@ export default function ImageGridPicker({
     );
 }
 
+/**
+ * Reads file as data URL for image preview
+ * @param {File} file - File to read
+ * @returns {Promise<string>} Data URL string
+ */
 function readAsDataURL(file) {
     return new Promise((resolve, reject) => {
         const fileReader = new FileReader();

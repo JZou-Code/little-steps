@@ -1,5 +1,16 @@
+/**
+ * Message controller that handles message-related HTTP requests
+ * Provides operations for creating and retrieving messages
+ * All functions require authentication middleware
+ */
+
 const messageService = require('../services/messageService');
 
+/**
+ * Creates a new message
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ */
 const createMessage = async (req, res) => {
     const data = req.body;
     const result = await messageService.createMessage(data)

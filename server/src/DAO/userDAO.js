@@ -1,5 +1,15 @@
 const prisma = require('../prisma/client');
 
+/**
+ * User Data Access Object (DAO) that handles database operations
+ * Manages CRUD operations for user entities using Prisma ORM
+ */
+
+/**
+ * Creates a new user in the database
+ * @param {Object} data - User data to create
+ * @returns {Promise<Object>} Created user data or error response
+ */
 async function createUser(data) {
     try {
         const resData = await prisma.user.create({data});
@@ -25,6 +35,12 @@ async function createUser(data) {
     }
 }
 
+/**
+ * Updates an existing user in the database
+ * @param {string} id - User ID
+ * @param {Object} data - Data to update
+ * @returns {Promise<Object>} Updated user data
+ */
 async function updateUser(id, data) {
     return prisma.user.update(
         {
@@ -34,6 +50,11 @@ async function updateUser(id, data) {
     );
 }
 
+/**
+ * Finds a user by ID
+ * @param {string} id - User ID
+ * @returns {Promise<Object>} User data or null
+ */
 async function findUser(id) {
     return prisma.user.findUnique({where: {id}});
 }

@@ -1,3 +1,9 @@
+/**
+ * Comment routes configuration for handling comment-related API endpoints
+ * Defines CRUD operations for comments
+ * All routes require authentication middleware
+ */
+
 const express = require('express');
 const router = express.Router();
 const commentController = require('../controllers/commentController')

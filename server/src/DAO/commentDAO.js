@@ -1,5 +1,16 @@
+/**
+ * Comment Data Access Object (DAO) that handles comment-related database operations
+ * Provides CRUD operations for comment entities using Prisma ORM
+ * Includes author relationship handling and pagination support
+ */
+
 const prisma = require('../prisma/client');
 
+/**
+ * Creates a new comment record in the database
+ * @param {Object} data - Comment data to create
+ * @returns {Promise<Object>} Result object with code, message, and data
+ */
 async function createComment(data) {
 
     console.log(data)
@@ -27,6 +38,11 @@ async function findManyComments(data) {
     return prisma.comment.findMany({where: data});
 }
 
+/**
+ * Finds comments with pagination and author information
+ * @param {Object} data - Query parameters including skip, take, orderBy, id (newsletterId)
+ * @returns {Promise<Object>} Result object with pagination info and comment data including author
+ */
 async function findManyCommentsByOffset(data) {
     try {
         const res = await prisma.comment.findMany({

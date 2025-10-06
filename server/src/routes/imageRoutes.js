@@ -1,3 +1,9 @@
+/**
+ * Image routes configuration for handling image-related API endpoints
+ * Defines CRUD operations for article images
+ * All routes require authentication middleware
+ */
+
 const express = require('express');
 const router = express.Router();
 const imageController = require('../controllers/imageController')

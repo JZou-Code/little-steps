@@ -9,6 +9,14 @@ import AuthContext from "../context/AuthContext.jsx";
 import OtherNotification from "../components/common/notifications/OtherNotification.jsx";
 import ErrorNotification from "../components/common/notifications/ErrorNotification.jsx";
 
+/**
+ * CreateNewsletterPage component that handles newsletter creation
+ * Provides rich text editor for content creation and image upload functionality
+ * Handles form validation, file upload, and newsletter submission
+ * Shows processing states and error handling
+ * 
+ * @returns {JSX.Element} The create newsletter page component
+ */
 const CreateNewsletterPage = () => {
     const [title, setTitle] = useState('');
     const [content, setContent] = useState('');

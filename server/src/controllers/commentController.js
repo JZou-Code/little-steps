@@ -1,5 +1,16 @@
+/**
+ * Comment controller that handles comment-related HTTP requests
+ * Provides CRUD operations for comments
+ * All functions require authentication middleware
+ */
+
 const commentService = require('../services/commentService');
 
+/**
+ * Creates a new comment
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ */
 const createComment = async (req, res) => {
     const data = req.body;
     const result = await commentService.createComment(data)

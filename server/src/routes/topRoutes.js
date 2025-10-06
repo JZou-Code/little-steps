@@ -1,3 +1,9 @@
+/**
+ * Top-level router that combines all API routes
+ * Applies authentication middleware to protected routes
+ * Organizes routes by feature (user, child, message, newsletter, comment)
+ */
+
 const express = require('express');
 const router = express.Router();
 const {authenticate} = require('../middleware/userMiddleware')

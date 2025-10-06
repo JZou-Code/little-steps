@@ -4,6 +4,13 @@ import cover1 from '../../assets/animation-images/cover-1.png'
 import cover2 from '../../assets/animation-images/cover-2.png'
 import cover3 from '../../assets/animation-images/cover-3.png'
 
+/**
+ * LoginAnim component that displays animated images for login page
+ * Shows sliding animation with multiple cover images
+ * Provides visual enhancement for authentication pages
+ * 
+ * @returns {JSX.Element} The login animation component
+ */
 const LoginAnim = () => {
     return (
         <div className={classes.Container}>

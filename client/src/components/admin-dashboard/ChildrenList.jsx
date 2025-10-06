@@ -7,6 +7,17 @@ import Message from "../common/Message.jsx";
 import ModifyChildren from "./ModifyChildren.jsx";
 import {deleteChildById} from "../../api/manageChildren.js";
 
+/**
+ * ChildrenList component that displays and manages child records
+ * Shows paginated list of children with modify and delete operations
+ * Handles child editing, deletion, and parent binding functionality
+ * Includes date formatting and success/error notifications
+ * 
+ * @param {Object} props - Component props
+ * @param {Function} props.setChild - Function to set selected child data
+ * @param {Function} props.bindChild - Function to trigger child binding
+ * @returns {JSX.Element} The children list component
+ */
 const AdminDashboardPage = (props) => {
     const [pageIndex, setPageIndex] = useState(0);
     const [itemNum, setItemNum] = useState(10);

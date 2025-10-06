@@ -10,6 +10,15 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faAngleLeft, faAngleRight, faCommentDots} from "@fortawesome/free-solid-svg-icons";
 import {faReply} from "@fortawesome/free-solid-svg-icons/faReply";
 
+/**
+ * Comment component that handles comment display and creation
+ * Shows list of comments with pagination and reply functionality
+ * Handles comment creation, loading states, and error handling
+ * 
+ * @param {Object} props - Component props
+ * @param {string} props.newsletterId - Newsletter ID for comments
+ * @returns {JSX.Element} The comment component
+ */
 const Comment = (props) => {
     const [isReply, setIsReply] = useState(false);
     const [isReplyTo, setIsReplyTo] = useState(false);

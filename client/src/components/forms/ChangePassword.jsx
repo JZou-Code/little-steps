@@ -8,6 +8,16 @@ import OtherNotification from "../common/notifications/OtherNotification.jsx";
 import ErrorNotification from "../common/notifications/ErrorNotification.jsx";
 import SuccessfulNotification from "../common/notifications/SuccessfulNotification.jsx";
 
+/**
+ * ChangePassword component that handles password change functionality
+ * Wraps ChangePasswordForm with processing states and notifications
+ * Handles API calls, error handling, and success feedback
+ * Shows loading, error, and success states during password change
+ * 
+ * @param {Object} props - Component props
+ * @param {Function} props.onCancel - Cancel button click handler
+ * @returns {JSX.Element} The change password component
+ */
 const ChangePassword = (props) => {
     const [isProcessing, setIsProcessing] = useState(false);
     const [isError, setIsError] = useState(false);

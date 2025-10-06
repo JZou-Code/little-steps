@@ -7,6 +7,14 @@ import Confirm from "../common/Confirm.jsx";
 import {deleteUserById} from "../../api/manageUsers.js";
 import Message from "../common/Message.jsx";
 
+/**
+ * UsersList component that displays and manages user accounts
+ * Shows paginated list of users with modify and delete operations
+ * Handles user editing, deletion, and success/error notifications
+ * Includes search functionality and modal dialogs for operations
+ *
+ * @returns {JSX.Element} The users list component
+ */
 const AdminDashboardPage = () => {
     const [pageIndex, setPageIndex] = useState(0);
     const [itemNum, setItemNum] = useState(10);
@@ -204,8 +212,7 @@ const AdminDashboardPage = () => {
                 </Backdrop>
             }
         </>
-    )
-        ;
+    );
 };
 
 export default AdminDashboardPage;

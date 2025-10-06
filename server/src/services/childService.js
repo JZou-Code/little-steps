@@ -1,5 +1,16 @@
+/**
+ * Child service that handles child-related business logic
+ * Provides CRUD operations for child entities
+ * Acts as a bridge between controllers and data access layer
+ */
+
 const childDao = require('../DAO/childDAO');
 
+/**
+ * Creates a new child record
+ * @param {Object} data - Child data to create
+ * @returns {Promise} Result from child DAO
+ */
 const createChild = async (data) => {
     return childDao.createChild(data)
 }

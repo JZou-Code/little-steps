@@ -1,6 +1,18 @@
+/**
+ * Newsletter service that handles newsletter-related business logic
+ * Provides CRUD operations for newsletters with image handling
+ * Acts as a bridge between controllers and data access layer
+ */
+
 const newsletterDao = require('../DAO/newsletterDAO');
 const {createImage} = require("./imageService");
 
+/**
+ * Creates a new newsletter with associated images
+ * @param {Object} data - Newsletter data to create
+ * @param {Array} files - Array of image files to upload
+ * @returns {Promise} Result from newsletter creation and image upload
+ */
 const createNewsletter = async (data, files) => {
     const res = await newsletterDao.createNewsletter(data);
     const errorObj = {

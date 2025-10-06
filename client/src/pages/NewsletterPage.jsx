@@ -8,6 +8,14 @@ import OtherNotification from "../components/common/notifications/OtherNotificat
 import ErrorNotification from "../components/common/notifications/ErrorNotification.jsx";
 import {roles} from "../utils/roles.js";
 
+/**
+ * NewsletterPage component that displays newsletter articles with pagination
+ * Shows list of newsletters with role-based create button
+ * Handles loading states, error handling, and navigation
+ * Includes pagination controls for browsing articles
+ * 
+ * @returns {JSX.Element} The newsletter page component
+ */
 const NewsletterPage = () => {
     const [pageIndex, setPageIndex] = useState(0);
     const [itemNum, setItemNum] = useState(10);

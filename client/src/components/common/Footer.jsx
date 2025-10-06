@@ -3,6 +3,13 @@ import classes from '../../style/Footer.module.css'
 import logo from "../../assets/logo/logo.png";
 import {useNavigate} from "react-router-dom";
 
+/**
+ * Footer component that displays site information and quick links
+ * Contains contact information, company description, and navigation links
+ * Provides footer navigation for main pages and career information
+ * 
+ * @returns {JSX.Element} The footer component with site information
+ */
 const Footer = () => {
     const navigate = useNavigate();
 

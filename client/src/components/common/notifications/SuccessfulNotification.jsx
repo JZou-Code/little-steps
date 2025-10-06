@@ -4,6 +4,18 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCircleCheck, faXmark} from "@fortawesome/free-solid-svg-icons";
 import Backdrop from "../../../UI/Backdrop/Backdrop.jsx";
 
+/**
+ * SuccessfulNotification component that displays success messages in a modal overlay
+ * Shows success icon (check circle), title, message, and action button
+ * Uses backdrop for modal display with FontAwesome icons
+ * Provides positive feedback for completed operations with user confirmation
+ * 
+ * @param {Object} props - Component props
+ * @param {string} props.message - Success message to display to user
+ * @param {string} props.buttonName - Text for the action/close button
+ * @param {Function} props.onClick - Button click handler to close notification
+ * @returns {JSX.Element} The success notification modal component
+ */
 const SuccessfulNotification = (props) => {
     return (
         <Backdrop>

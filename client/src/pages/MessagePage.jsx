@@ -6,6 +6,14 @@ import AuthContext from "../context/AuthContext.jsx";
 import {fetchUsers} from "../api/adminOperation.js";
 import {deleteUserById} from "../api/manageUsers.js";
 
+/**
+ * MessagePage component that handles messaging functionality
+ * Allows users to send messages to child's parent and view message history
+ * Includes pagination for message list and real-time message display
+ * Shows sender/receiver message distinction with timestamps
+ * 
+ * @returns {JSX.Element} The message page component with messaging interface
+ */
 const MessagePage = () => {
     const [content, setContent] = useState('');
     const {state} = useLocation();
@@ -83,11 +91,12 @@ const MessagePage = () => {
     }
 
     return (
-        <div className={classes.Container}>
-            <div className={classes.Title}>
-                Messages to {state?.name}'s Parent
-            </div>
-            <form onSubmit={handleSubmit} className={classes.FormContainer}>
+        <div className={classes.Outer}>
+            <div className={classes.Container}>
+                <div className={classes.Title}>
+                    Messages to {state?.name}'s Parent
+                </div>
+                <form onSubmit={handleSubmit} className={classes.FormContainer}>
                 <textarea
                     placeholder={'Message content...'}
                     value={content}
@@ -95,47 +104,48 @@ const MessagePage = () => {
                         setContent(e.target.value)
                     }}
                     className={classes.TextArea}></textarea>
-                <button className={classes.Button}>Send</button>
-            </form>
-            <div className={classes.MessageContainer}>
-                {
-                    messages && messages.map((item) => {
-                        const flag = item.senderId === authCtx.user.id
-                        const tempTime = new Date(item.createdAt);
-                        const time = tempTime.toLocaleTimeString('en-NZ', {
-                            hour12: false,
-                            hour: '2-digit', minute: '2-digit', second: '2-digit',
-                        });
-                        const date = tempTime.toLocaleDateString('en-NZ', {
-                            year: 'numeric', month: '2-digit', day: '2-digit',
-                        });
+                    <button className={classes.Button}>Send</button>
+                </form>
+                <div className={classes.MessageContainer}>
+                    {
+                        messages && messages.map((item) => {
+                            const flag = item.senderId === authCtx.user.id
+                            const tempTime = new Date(item.createdAt);
+                            const time = tempTime.toLocaleTimeString('en-NZ', {
+                                hour12: false,
+                                hour: '2-digit', minute: '2-digit', second: '2-digit',
+                            });
+                            const date = tempTime.toLocaleDateString('en-NZ', {
+                                year: 'numeric', month: '2-digit', day: '2-digit',
+                            });
 
-                        return (
-                            <>
-                                <div className={flag ? classes.RightMessage : classes.LeftMessage}>
-                                    <div>
-                                        {item.content}
+                            return (
+                                <>
+                                    <div className={flag ? classes.RightMessage : classes.LeftMessage}>
+                                        <div>
+                                            {item.content}
+                                        </div>
+                                        <div className={classes.CreateTime}>
+                                            {time + ' ' + date}
+                                        </div>
                                     </div>
-                                    <div className={classes.CreateTime}>
-                                        {time + ' ' + date}
-                                    </div>
-                                </div>
-                            </>
+                                </>
 
-                        )
-                    })
-                }
-                <div className={classes.ListFunction}>
-                    <button
-                        onClick={handlePrev}
-                        className={disablePrev ? `${classes.Button} ${classes.Disabled}` : classes.Button}>
-                        Previous
-                    </button>
-                    <button
-                        onClick={handleNext}
-                        className={disableNext ? `${classes.Button} ${classes.Disabled}` : classes.Button}>
-                        Next
-                    </button>
+                            )
+                        })
+                    }
+                    <div className={classes.ListFunction}>
+                        <button
+                            onClick={handlePrev}
+                            className={disablePrev ? `${classes.Button} ${classes.Disabled}` : classes.Button}>
+                            Previous
+                        </button>
+                        <button
+                            onClick={handleNext}
+                            className={disableNext ? `${classes.Button} ${classes.Disabled}` : classes.Button}>
+                            Next
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

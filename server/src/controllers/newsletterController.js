@@ -1,5 +1,16 @@
+/**
+ * Newsletter controller that handles newsletter-related HTTP requests
+ * Provides CRUD operations for newsletters with file upload support
+ * All functions require authentication middleware
+ */
+
 const newsletterService = require('../services/newsletterService');
 
+/**
+ * Creates a new newsletter with images
+ * @param {Object} req - Express request object with files
+ * @param {Object} res - Express response object
+ */
 const createNewsletter = async (req, res) => {
     const files = req.files;
     const data = req.body;

@@ -1,10 +1,15 @@
+.Outer{
+    padding-top: 3rem;
+}
+
 .Container {
     width: 60%;
-    padding: 1rem;
+    padding: 2rem 1rem;
     border: 2px solid #FFA726;
     border-radius: 1rem;
-    margin: 2rem auto 0;
+    margin: 0 auto;
     font-size: 1.2rem;
+    background-color: #fffdf3;
 }
 
 .Title {

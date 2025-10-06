@@ -1,6 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import {requestCaptcha} from "../../api/signUp.js";
 
+/**
+ * Captcha component that displays and manages captcha verification
+ * Fetches captcha image from server and handles refresh functionality
+ * Shows loading state and error handling for captcha requests
+ * 
+ * @param {Object} props - Component props
+ * @param {Function} props.setCaptchaId - Function to set captcha ID
+ * @returns {JSX.Element} The captcha component with image and refresh functionality
+ */
 const Captcha = (props) => {
     const [captchaSrc, setCaptchaSrc] = useState('')
     const [captchaFail, setCaptchaFail] = useState(false)

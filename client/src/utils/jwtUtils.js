@@ -1,3 +1,10 @@
+/**
+ * Extracts expiration time from JWT token in milliseconds
+ * Decodes JWT payload and returns expiration timestamp
+ * 
+ * @param {string} token - JWT token to decode
+ * @returns {number|null} Expiration time in milliseconds or null if invalid
+ */
 export function getJwtExpMs(token) {
     try {
         if (!token) {

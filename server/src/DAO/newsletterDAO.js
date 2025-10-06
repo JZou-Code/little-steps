@@ -1,5 +1,16 @@
+/**
+ * Newsletter Data Access Object (DAO) that handles newsletter-related database operations
+ * Provides CRUD operations for newsletter entities using Prisma ORM
+ * Includes image relationship handling and pagination support
+ */
+
 const prisma = require('../prisma/client');
 
+/**
+ * Creates a new newsletter record in the database
+ * @param {Object} data - Newsletter data to create
+ * @returns {Promise<Object>} Result object with code, message, and data
+ */
 async function createNewsletter(data) {
     try {
         const resData = await prisma.newsletter.create({data});
@@ -35,6 +46,11 @@ async function findManyNewsletters(data) {
     return prisma.newsletter.findMany({where: data});
 }
 
+/**
+ * Finds newsletters with pagination and associated images
+ * @param {Object} data - Query parameters including skip, take, orderBy, where
+ * @returns {Promise<Object>} Result object with pagination info and newsletter data including images
+ */
 async function findManyNewslettersByOffset(data) {
     try {
         const res = await prisma.newsletter.findMany({

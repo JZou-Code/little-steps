@@ -10,6 +10,17 @@ import 'tinymce/plugins/image';
 import 'tinymce/plugins/preview';
 import 'tinymce/skins/ui/oxide/skin.min.css';
 
+/**
+ * TinyMCE rich text editor component
+ * Provides WYSIWYG editing with security features and custom styling
+ * Includes plugins for code, links, lists, images, and preview
+ * Implements XSS protection and safe content handling
+ * 
+ * @param {Object} props - Component props
+ * @param {string} props.content - Editor content value
+ * @param {Function} props.onChange - Content change handler
+ * @returns {JSX.Element} The TinyMCE editor component
+ */
 export default function TinyMCE({content, onChange}) {
     return (
         <Editor

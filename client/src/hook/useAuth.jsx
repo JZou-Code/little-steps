@@ -7,10 +7,27 @@ import {roles} from "../utils/roles.js";
 import {requestLogout, requestRefresh} from "../api/manageUsers.js";
 // import axiosApi from "../api/axiosApi.js";
 
+/**
+ * Custom hook for authentication operations
+ * Provides login, logout, and token refresh functionality
+ * Manages authentication state and localStorage persistence
+ * 
+ * @returns {Object} Authentication methods and state
+ * @returns {Function} returns.login - Login function
+ * @returns {Function} returns.logout - Logout function  
+ * @returns {Function} returns.refreshToken - Token refresh function
+ */
 const useAuth = () => {
     const authCtx = useContext(AuthContext);
     const pageCtx = useContext(PageStateContext);
 
+    /**
+     * Handles user login authentication
+     * @param {string} emailParam - User email
+     * @param {string} password - User password
+     * @param {Function} setErrorMsg - Error message setter function
+     * @returns {Promise<boolean>} True if login successful, false otherwise
+     */
     const login = async (emailParam, password, setErrorMsg) => {
         try {
             const res = await axios.post(
@@ -42,6 +59,11 @@ const useAuth = () => {
         }
     }
 
+    /**
+     * Handles user logout
+     * @param {string} id - User ID
+     * @returns {Promise<boolean>} True if logout successful, false otherwise
+     */
     const logout = async (id) => {
         try {
             const res = await requestLogout(id);
@@ -72,6 +94,10 @@ const useAuth = () => {
         }
     }
 
+    /**
+     * Refreshes authentication token
+     * @returns {Promise<string|false>} New access token or false if refresh failed
+     */
     const refreshToken = async () => {
         try {
             const res = await requestRefresh();

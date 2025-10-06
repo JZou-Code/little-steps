@@ -1,5 +1,16 @@
+/**
+ * Child Data Access Object (DAO) that handles child-related database operations
+ * Provides CRUD operations for child entities using Prisma ORM
+ * Includes parent relationship handling and pagination support
+ */
+
 const prisma = require('../prisma/client');
 
+/**
+ * Creates a new child record in the database
+ * @param {Object} data - Child data to create
+ * @returns {Promise<Object>} Result object with code, message, and data
+ */
 async function createChild(data) {
 
     console.log(data)
@@ -19,6 +30,12 @@ async function createChild(data) {
     }
 }
 
+/**
+ * Updates an existing child record in the database
+ * @param {string} id - Child ID to update
+ * @param {Object} data - Updated child data
+ * @returns {Promise<Object>} Updated child record
+ */
 async function updateChild(id, data) {
     console.log(id)
     console.log(data)
@@ -30,6 +47,11 @@ async function updateChild(id, data) {
     );
 }
 
+/**
+ * Finds a single child by ID
+ * @param {string} id - Child ID to find
+ * @returns {Promise<Object>} Child record or null
+ */
 async function findChild(id) {
     return prisma.child.findUnique({where: {id}});
 }
@@ -38,6 +60,11 @@ async function findManyChildren(data) {
     return prisma.child.findMany({where: data});
 }
 
+/**
+ * Finds children with pagination and parent information
+ * @param {Object} data - Query parameters including skip, take, orderBy, where
+ * @returns {Promise<Object>} Result object with pagination info and child data
+ */
 async function findManyChildrenByOffset(data) {
     try {
         const res = await prisma.child.findMany({

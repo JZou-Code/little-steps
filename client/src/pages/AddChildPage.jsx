@@ -4,6 +4,14 @@ import {useLocation, useNavigate} from "react-router-dom";
 import LoginAnim from "../components/features/LoginAnim.jsx";
 import {addNewChild} from "../api/manageChildren.js";
 
+/**
+ * AddChildPage component that handles child registration
+ * Provides form for entering child information including name, date of birth, and gender
+ * Handles form submission and navigation to admin dashboard
+ * Shows login animation for visual appeal
+ * 
+ * @returns {JSX.Element} The add child page component
+ */
 const AddChildPage = () => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');

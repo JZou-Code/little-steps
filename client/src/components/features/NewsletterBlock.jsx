@@ -5,12 +5,33 @@ import Comment from "./Comment.jsx";
 import {convertTime} from "../../utils/convertTime.js";
 import ImageWrapper from "./ImageWrapper.jsx";
 
+/**
+ * NewsletterBlock component that displays individual newsletter articles
+ * Shows article title, images, content, and comments
+ * Handles image display with responsive grid layout and modal viewing
+ * Sanitizes HTML content for security
+ * 
+ * @param {Object} props - Component props
+ * @param {Object} props.data - Newsletter article data
+ * @param {string} props.data.title - Article title
+ * @param {string} props.data.content - Article HTML content
+ * @param {Array} props.data.ArticleImage - Array of article images
+ * @param {string} props.data.updatedAt - Last update timestamp
+ * @param {string} props.data.id - Newsletter ID
+ * @returns {JSX.Element} The newsletter block component
+ */
 const NewsletterBlock = ({data}) => {
     const [time, setTime] = useState(data.updatedAt);
     const [container, setContainer] = useState('');
     const [open, setOpen] = useState(false);
     const [src, setSrc] = useState('')
 
+    /**
+     * Renders sanitized HTML content safely
+     * @param {Object} props - Component props
+     * @param {string} props.html - HTML content to render
+     * @returns {JSX.Element} Sanitized HTML content
+     */
     const RichHtml = ({html}) => {
         const safe = DOMPurify.sanitize(html);
         return (

@@ -5,6 +5,19 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faXmark} from "@fortawesome/free-solid-svg-icons";
 import {updateUserById} from "../../api/manageUsers.js";
 
+/**
+ * ModifyUsers component that handles user information editing
+ * Provides form for updating user details including name and role
+ * Handles form submission and success/error notifications
+ * Supports role selection between PARENT and TEACHER
+ * 
+ * @param {Object} props - Component props
+ * @param {Object} props.data - User data to modify
+ * @param {Function} props.onCancel - Cancel button click handler
+ * @param {Function} props.setupMsg - Function to show success/error messages
+ * @param {Function} props.loadUsers - Function to reload users list
+ * @returns {JSX.Element} The modify users component
+ */
 const ModifyUsers = ({data, onCancel, setupMsg, loadUsers}) => {
     const [firstName, setFirstName] = useState(data?.firstName || '');
     const [lastName, setLastName] = useState(data?.lastName || '');

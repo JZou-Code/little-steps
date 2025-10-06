@@ -7,6 +7,14 @@ import {useLocation, useNavigate} from "react-router-dom";
 import authContext from "../../context/AuthContext.jsx";
 import useAuth from "../../hook/useAuth.jsx";
 
+/**
+ * LoginForm component that handles user authentication
+ * Provides email and password input fields with validation
+ * Handles login submission and navigation after successful authentication
+ * Shows error messages and provides links to forgot password and signup
+ * 
+ * @returns {JSX.Element} The login form component
+ */
 const LoginForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');

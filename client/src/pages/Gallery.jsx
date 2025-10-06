@@ -5,6 +5,13 @@ import gallery2 from '../assets/gallery-page/gallery-2.jpg'
 import gallery3 from '../assets/gallery-page/gallery-3.jpg'
 import gallery4 from '../assets/gallery-page/gallery-4.jpg'
 
+/**
+ * Gallery component that displays activity showcases
+ * Shows different learning activities with images and descriptions
+ * Includes drawing, storytelling, alphabet learning, and handcraft sections
+ * 
+ * @returns {JSX.Element} The gallery page component with activity showcases
+ */
 const Gallery = () => {
     return (
         <div className={classes.Container}>

@@ -4,6 +4,14 @@ import {searchChildren} from "../api/adminOperation.js";
 import AuthContext from "../context/AuthContext.jsx";
 import {useNavigate} from "react-router-dom";
 
+/**
+ * ChildMessage component that displays children list for messaging
+ * Shows paginated list of children with search functionality
+ * Handles role-based filtering and navigation to message interface
+ * Includes date formatting and parent information display
+ *
+ * @returns {JSX.Element} The child message page component
+ */
 const ChildMessage = () => {
     const [pageIndex, setPageIndex] = useState(0);
     const [itemNum, setItemNum] = useState(10);
@@ -139,7 +147,6 @@ const ChildMessage = () => {
                     </button>
                 </div>
             </div>
-
         </div>
     );
 };

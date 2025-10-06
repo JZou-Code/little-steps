@@ -11,6 +11,15 @@ import Captcha from "../common/Captcha.jsx";
 import {useNavigate} from "react-router-dom";
 import {requestSignUp} from "../../api/signUp.js";
 
+/**
+ * SignUpForm component that handles new user registration
+ * Collects user information including email, password, and names
+ * Validates input fields according to predefined rules
+ * Handles signup submission and navigation to login page
+ * Provides validation error messages and login link
+ * 
+ * @returns {JSX.Element} The signup form component
+ */
 const SignUpForm = () => {
     // Input values, all string
     const [email, setEmail] = useState('');

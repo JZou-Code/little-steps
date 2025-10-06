@@ -3,11 +3,27 @@ const saltTool = require('../utils/SaltTool');
 const jwt = require('jsonwebtoken');
 const {JWT_ACCESS_SECRET, JWT_REFRESH_SECRET, ACCESS_EXPIRES_IN, REFRESH_EXPIRES_IN} = require('../auth/config');
 
+/**
+ * User service that handles business logic for user operations
+ * Manages user authentication, password hashing, and JWT token generation
+ */
+
+/**
+ * Creates a new user with hashed password
+ * @param {Object} data - User data including password
+ * @returns {Promise<Object>} Created user data
+ */
 const createUser = async (data) => {
     data.password = await saltTool.hash(data.password);
     return userDao.createUser(data)
 }
 
+/**
+ * Authenticates user login and generates JWT tokens
+ * @param {string} email - User email
+ * @param {string} password - User password
+ * @returns {Promise<Object>} Access token, refresh token, and user data
+ */
 const login = async (email, password) => {
     const storedData = await userDao.findUserByEmail(email);
     if (!storedData) {
@@ -43,6 +59,11 @@ const login = async (email, password) => {
     }
 }
 
+/**
+ * Refreshes access token using refresh token
+ * @param {string} refreshToken - Refresh token
+ * @returns {Object} New access token or error response
+ */
 const refresh = (refreshToken) => {
     try {
         const decoded = jwt.verify(refreshToken, JWT_REFRESH_SECRET);

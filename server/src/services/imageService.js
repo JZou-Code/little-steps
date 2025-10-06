@@ -1,16 +1,35 @@
+/**
+ * Image service that handles image-related business logic and S3 upload
+ * Provides CRUD operations for article images with AWS S3 integration
+ * Acts as a bridge between controllers and data access layer
+ */
+
 const imageDao = require('../DAO/imageDAO');
 const {PutObjectCommand} = require('@aws-sdk/client-s3');
 const path = require('path');
 const crypto = require('crypto');
 const {s3} = require('../utils/s3Tool');
 
-
 const BUCKET = process.env.S3_BUCKET;
 
+/**
+ * Sanitizes filename for safe S3 key generation
+ * @param {string} name - Original filename
+ * @returns {string} Sanitized filename
+ */
 function safeKeySegment(name) {
     return name.replace(/\s+/g, '_');
 }
 
+/**
+ * Uploads file buffer to AWS S3 with generated key
+ * @param {Object} params - Upload parameters
+ * @param {Buffer} params.buffer - File buffer data
+ * @param {string} params.contentType - MIME type of the file
+ * @param {number} params.index - File index for ordering
+ * @param {string} params.originalname - Original filename
+ * @returns {Promise<Object>} Object with S3 key and public URL
+ */
 async function uploadToS3({buffer, contentType, index, originalname}) {
     const ext = path.extname(originalname || '') || '';
     const hash = crypto.randomBytes(8).toString('hex');
@@ -32,6 +51,13 @@ async function uploadToS3({buffer, contentType, index, originalname}) {
     return {key, url};
 }
 
+/**
+ * Creates a new image record with S3 upload
+ * @param {Object} file - File object from multer
+ * @param {number} index - Image position index
+ * @param {string} id - Newsletter ID to associate with
+ * @returns {Promise<Object>} Result from image creation
+ */
 const createImage = async (file, index, id) => {
     // console.log(file)
     // return imageDao.createImage(file, index, id)

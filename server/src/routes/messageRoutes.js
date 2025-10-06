@@ -1,3 +1,9 @@
+/**
+ * Message routes configuration for handling message-related API endpoints
+ * Defines operations for creating and retrieving messages
+ * All routes require authentication middleware
+ */
+
 const express = require('express');
 const router = express.Router();
 const messageController = require('../controllers/messageController')

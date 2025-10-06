@@ -1,6 +1,14 @@
 import {useEffect, useRef} from 'react';
 import {getJwtExpMs} from "../utils/jwtUtils.js";
 
+/**
+ * Custom hook for scheduling automatic token refresh
+ * Calculates refresh timing based on token expiration
+ * Schedules refresh 1 minute before token expires
+ * 
+ * @param {string} accessToken - Current access token
+ * @param {Function} refresh - Function to call for token refresh
+ */
 export default function useRefreshScheduler(accessToken, refresh) {
     const timerRef = useRef(null);
 

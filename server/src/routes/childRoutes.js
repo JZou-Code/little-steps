@@ -1,3 +1,9 @@
+/**
+ * Child routes configuration for handling child-related API endpoints
+ * Defines CRUD operations for child entities
+ * All routes require authentication middleware
+ */
+
 const express = require('express');
 const router = express.Router();
 const childController = require('../controllers/childController')

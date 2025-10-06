@@ -1,3 +1,9 @@
+/**
+ * Vite configuration for React application
+ * Configures development server with proxy for API calls
+ * Sets up CloudFront proxy for API requests
+ */
+
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 

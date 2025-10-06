@@ -4,6 +4,16 @@ import {faSpinner} from "@fortawesome/free-solid-svg-icons";
 import classes from '../../../style/OtherNotification.module.css'
 import Backdrop from "../../../UI/Backdrop/Backdrop.jsx";
 
+/**
+ * OtherNotification component that displays loading or informational messages in a modal
+ * Shows spinning loader icon and message text without close button
+ * Used for loading states, processing indicators, and general notifications
+ * Automatically displays without user interaction required
+ * 
+ * @param {Object} props - Component props
+ * @param {string} props.message - Loading or informational message to display
+ * @returns {JSX.Element} The loading/notification modal component
+ */
 const OtherNotification = (props) => {
     return (
         <Backdrop>

@@ -5,6 +5,14 @@ import PageStateContext from "../context/PageStateContext.jsx";
 import {pageState} from "./pageState.js";
 import {roles} from "./roles.js";
 
+/**
+ * AdminRoute component that protects routes requiring admin privileges
+ * Redirects unauthenticated users to login page
+ * Redirects non-admin users to account page
+ * Preserves intended destination for post-login redirect
+ * 
+ * @returns {JSX.Element} Either admin content or appropriate redirect
+ */
 export default function AdminRoute() {
     const {isLogin, user:{role}} = useContext(AuthContext);
     const {dispatch} = useContext(PageStateContext)

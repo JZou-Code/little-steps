@@ -1,6 +1,15 @@
 const jwt = require('jsonwebtoken');
 const { JWT_ACCESS_SECRET } = process.env;
 
+/**
+ * Authentication middleware that verifies JWT tokens
+ * Checks for Bearer token in Authorization header
+ * Validates token and adds user information to request object
+ * 
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @param {Function} next - Express next function
+ */
 const authenticate = (req, res, next) => {
     const hdr = req.headers.authorization || '';
 

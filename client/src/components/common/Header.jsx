@@ -6,7 +6,13 @@ import HeaderAccount from "./HeaderAccount.jsx";
 import HeaderLogin from "./HeaderLogin.jsx";
 import logo from '../../assets/logo/logo.png'
 
-
+/**
+ * Header component that displays the main navigation and logo
+ * Shows different header content based on user authentication status
+ * Contains navigation links to main pages and logo with home navigation
+ * 
+ * @returns {JSX.Element} The header component with navigation
+ */
 const Header = () => {
     const ctx = useContext(AuthContext);
     const navigate = useNavigate();

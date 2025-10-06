@@ -1,3 +1,9 @@
+/**
+ * Main Express application server
+ * Configures middleware, routes, and error handling for the backend API
+ * Sets up session management, CORS, and static file serving
+ */
+
 const express = require("express");
 const cookieParser = require('cookie-parser');
 const cors = require("cors");
@@ -26,18 +32,6 @@ app.use(session({
 
 const topRouter = require('./src/routes/topRoutes')
 app.use('/api', topRouter)
-
-// const userRouter = require('./src/routes/userRoutes');
-// const childRouter = require('./src/routes/childRoutes');
-// const messageRouter = require('./src/routes/messageRoutes');
-// const newsletterRouter = require('./src/routes/newsletterRoutes');
-// const commentRouter = require('./src/routes/commentRoutes');
-//
-// app.use('/user', userRouter);
-// app.use('/child', childRouter);
-// app.use('/message', messageRouter);
-// app.use('/newsletter', newsletterRouter);
-// app.use('/comment', commentRouter);
 
 app.use((req, res, next) => {
     const err = new Error('Not Found');

@@ -8,6 +8,14 @@ import newsletterImage from '../assets/account-page/newsletter.jpg'
 import Backdrop from "../UI/Backdrop/Backdrop.jsx";
 import ChangePassword from "../components/forms/ChangePassword.jsx";
 
+/**
+ * AccountPage component that displays user account dashboard
+ * Shows different content sections based on user role
+ * Includes newsletter access, child messaging, password change, and admin dashboard
+ * Handles role-based redirects and permission checks
+ * 
+ * @returns {JSX.Element} The account page component with user-specific content
+ */
 const AccountPage = () => {
     const navigate = useNavigate();
     const authCtx = useContext(AuthContext);

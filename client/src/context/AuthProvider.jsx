@@ -5,6 +5,9 @@ import useRefreshScheduler from "../hook/useRefreshScheduler.jsx";
 import useAuth from "../hook/useAuth.jsx";
 import {setupAuthInterceptors} from "../utils/setupAxios.js";
 
+/**
+ * Default authentication state for unauthenticated users
+ */
 const defaultAuth = {
     isLogin: false,
     user: {
@@ -15,6 +18,12 @@ const defaultAuth = {
     token: ''
 };
 
+/**
+ * Initialize authentication state from localStorage
+ * Retrieves stored authentication data or returns default state
+ * 
+ * @returns {Object} Initial authentication state
+ */
 const init = () => {
     try {
         const stored = localStorage.getItem('auth');
@@ -40,6 +49,16 @@ const init = () => {
     }
 };
 
+/**
+ * AuthProvider component that manages authentication state
+ * Provides authentication context to child components
+ * Handles token refresh, login/logout operations, and persistence
+ * Sets up authentication interceptors for API requests
+ * 
+ * @param {Object} props - Component props
+ * @param {React.ReactNode} props.children - Child components
+ * @returns {JSX.Element} The authentication provider component
+ */
 export default function AuthProvider({children}) {
     const [auth, setAuth] = useState(init);
     const {refreshToken} = useAuth();

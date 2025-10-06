@@ -4,6 +4,20 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faXmark} from "@fortawesome/free-solid-svg-icons";
 import {updateChildById} from "../../api/manageChildren.js";
 
+/**
+ * ModifyChildren component that handles child information editing
+ * Provides form for updating child details including name, date of birth, and gender
+ * Handles form submission, success/error notifications, and child binding
+ * Supports date formatting and gender selection
+ * 
+ * @param {Object} props - Component props
+ * @param {Object} props.data - Child data to modify
+ * @param {Function} props.onCancel - Cancel button click handler
+ * @param {Function} props.bindChild - Function to trigger child binding
+ * @param {Function} props.setupMsg - Function to show success/error messages
+ * @param {Function} props.loadChildren - Function to reload children list
+ * @returns {JSX.Element} The modify children component
+ */
 const ModifyUsers = ({data, onCancel, bindChild, setupMsg, loadChildren}) => {
     const [firstName, setFirstName] = useState(data?.firstName || '');
     const [lastName, setLastName] = useState(data?.lastName || '');

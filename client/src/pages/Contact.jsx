@@ -4,6 +4,13 @@ import draw from '../assets/contactpage/draw.jpg'
 import message from '../assets/contactpage/message.jpg'
 import room from '../assets/contactpage/room.jpg'
 
+/**
+ * Contact component that displays contact information and services
+ * Shows contact details, visit booking information, and career opportunities
+ * Provides comprehensive information for potential families and job seekers
+ *
+ * @returns {JSX.Element} The contact page component with contact information
+ */
 const Contact = () => {
     return (
         <div className={classes.Container}>
@@ -47,7 +54,7 @@ const Contact = () => {
                                     <strong>Open hours:</strong>
                                 </div>
                                 <div>
-                                    Mon–Fri 7:30am–5:30pm (closed public holidays)
+                                    Mon–Fri 7:30am–5:30pm (closed on public holidays)
                                 </div>
                             </li>
                         </ul>
@@ -66,7 +73,7 @@ const Contact = () => {
                     </div>
                     <div className={classes.Text}>
                         Schedule a 20–30 minute tour to meet our teachers, explore learning spaces, and discuss your
-                        child’s needs. We offer morning and afternoon slots.
+                        child's needs. We offer morning and afternoon slots.
                     </div>
 
                 </div>

@@ -5,6 +5,13 @@ import PageStateProvider from "./context/PageStateProvider.jsx";
 import AuthProvider from "./context/AuthProvider.jsx";
 import Footer from "./components/common/Footer.jsx";
 
+/**
+ * Main App component that serves as the root of the application
+ * Wraps the entire app with authentication and page state providers
+ * Contains the main layout structure with header, body content, and footer
+ * 
+ * @returns {JSX.Element} The main application component
+ */
 function App() {
     return (
         <>

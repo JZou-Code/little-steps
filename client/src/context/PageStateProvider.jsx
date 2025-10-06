@@ -2,7 +2,20 @@ import React, {useReducer} from 'react';
 import {pageState} from "../utils/pageState.js";
 import PageStateContext from "./PageStateContext.jsx";
 
+/**
+ * PageStateProvider component that manages page state transitions
+ * Uses useReducer to handle state changes for different UI modes
+ * Provides page state context to child components
+ * 
+ * @param {Object} props - Component props
+ * @param {React.ReactNode} props.children - Child components
+ * @returns {JSX.Element} The page state provider component
+ */
 export default function PageStateProvider({children}) {
+    /**
+     * Reducer function for managing page state transitions
+     * Handles different page states including login, signup, loading, etc.
+     */
     const [popupStatus, dispatchPopupStatus] = useReducer(
         (prevState, action) => {
             switch (action.type){

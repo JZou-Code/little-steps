@@ -8,7 +8,14 @@ import reason2 from '../assets/homepage/reason-2.jpg'
 import reason3 from '../assets/homepage/reason-3.jpg'
 import ErrorNotification from "../components/common/notifications/ErrorNotification.jsx";
 
-
+/**
+ * HomePage component that displays the main landing page content
+ * Shows company overview, reasons to choose the service, and about section
+ * Handles permission error notifications from navigation state
+ * Contains images and descriptive content about Little Steps childcare
+ * 
+ * @returns {JSX.Element} The home page component with main content sections
+ */
 const HomePage = () => {
     const [noPermission, setNoPermission] = useState(false);
 

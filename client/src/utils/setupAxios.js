@@ -1,14 +1,30 @@
 import axiosApi from "../api/axiosApi.js";
 import {requestLogout, requestRefresh} from "../api/manageUsers.js";
 
+/**
+ * Flag to prevent multiple interceptor installations
+ */
 let installed = false;
 
+/**
+ * Sets up authentication interceptors for axios API calls
+ * Handles automatic token refresh on 401 errors
+ * Manages logout on authentication failures
+ * 
+ * @param {Object} params - Configuration parameters
+ * @param {Function} params.logout - Logout function to call on auth failure
+ */
 export function setupAuthInterceptors({logout}) {
     if (installed) {
         return
     }
     installed = true;
 
+    /**
+     * Retries a failed request with a refreshed token
+     * @param {Object} originalRequest - The original axios request configuration
+     * @returns {Promise} Retry result or logout on failure
+     */
     const retryWithToken = async (originalRequest) => {
         try {
             const newAT = await requestRefresh();

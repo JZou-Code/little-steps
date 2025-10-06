@@ -1,5 +1,10 @@
 import axios from 'axios';
 
+/**
+ * Configured axios instance for API requests
+ * Sets up base URL, credentials, and authorization headers
+ * Automatically adds authentication token from localStorage
+ */
 const axiosApi = axios.create({
     baseURL: '/api',
     withCredentials: true,

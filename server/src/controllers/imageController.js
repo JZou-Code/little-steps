@@ -1,5 +1,16 @@
+/**
+ * Image controller that handles image-related HTTP requests
+ * Provides CRUD operations for article images
+ * All functions require authentication middleware
+ */
+
 const imageService = require('../services/imageService');
 
+/**
+ * Creates a new image record
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ */
 const createImage = async (req, res) => {
     const data = req.body;
     const result = await imageService.createImage(data)

@@ -1,3 +1,9 @@
+/**
+ * User routes configuration for handling user-related API endpoints
+ * Defines public routes (create, login, logout, refresh) and protected routes
+ * Applies authentication middleware to protected routes
+ */
+
 const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController')

@@ -2,6 +2,15 @@ import React, {useState} from 'react';
 import classes from "../../style/ChangePssword.module.css";
 import {isValidPassword} from "../../utils/regex.js";
 
+/**
+ * ChangePasswordForm component that handles password change functionality
+ * Validates current password and new password according to security rules
+ * Provides form inputs for current password, new password, and confirmation
+ * 
+ * @param {Object} props - Component props
+ * @param {Function} props.onSubmit - Submit handler function for password change
+ * @returns {JSX.Element} The change password form component
+ */
 const ChangePasswordForm = (props) => {
     const [currentPwd, setCurrentPwd] = useState('');
     const [newPwd, setNewPwd] = useState('');

@@ -4,6 +4,13 @@ import {pageState} from "../../utils/pageState.js";
 import {useNavigate} from "react-router-dom";
 import pageStateContext from "../../context/PageStateContext.jsx";
 
+/**
+ * HeaderLogin component that displays login/signup buttons
+ * Shows login and signup buttons for unauthenticated users
+ * Handles navigation to authentication pages
+ * 
+ * @returns {JSX.Element} The header login component with auth buttons
+ */
 const HeaderLogin = () => {
     const ctx = useContext(pageStateContext);
     const navigate = useNavigate();

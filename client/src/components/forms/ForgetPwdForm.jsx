@@ -6,6 +6,13 @@ import PageStateContext from "../../context/PageStateContext.jsx";
 import ErrorNotification from "../common/notifications/ErrorNotification.jsx";
 import {isValidEmail, isValidPassword} from "../../utils/regex.js";
 
+/**
+ * ForgetPwdForm component that handles password reset functionality
+ * Collects email, validation code, and new password for password recovery
+ * Validates input fields and shows error notifications
+ * 
+ * @returns {JSX.Element} The forgot password form component
+ */
 const ForgetPwdForm = () => {
     const [email, setEmail] = useState('')
     const [validationCode, setValidationCode] = useState('')

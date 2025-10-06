@@ -1,5 +1,19 @@
+/**
+ * Image Data Access Object (DAO) that handles article image database operations
+ * Provides CRUD operations for article images using Prisma ORM
+ * Includes newsletter relationship handling and pagination support
+ */
+
 const prisma = require('../prisma/client');
 
+/**
+ * Creates a new article image record in the database
+ * @param {string} key - Storage key for the image
+ * @param {string} mimeType - MIME type of the image
+ * @param {number} index - Position index of the image
+ * @param {string} id - Newsletter ID to associate the image with
+ * @returns {Promise<Object>} Result object with code, message, and data
+ */
 async function createImage(key, mimeType, index, id) {
     try {
         const resData =

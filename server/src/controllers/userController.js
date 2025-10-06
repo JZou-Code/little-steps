@@ -1,5 +1,15 @@
 const userService = require('../services/userService');
 
+/**
+ * User controller that handles HTTP requests for user operations
+ * Manages user creation, authentication, profile updates, and account management
+ */
+
+/**
+ * Creates a new user account
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ */
 const createUser = async (req, res) => {
     const data = req.body;
     const result = await userService.createUser(data)
@@ -7,6 +17,13 @@ const createUser = async (req, res) => {
     res.send(result)
 }
 
+/**
+ * Handles user login authentication
+ * Sets refresh token cookie and returns access token
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ * @param {Function} next - Express next function
+ */
 const login = async (req, res, next) => {
     try {
         const {email, password} = req.body;
@@ -31,6 +48,12 @@ const login = async (req, res, next) => {
     }
 }
 
+/**
+ * Handles user logout
+ * Clears refresh token cookie and destroys session
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ */
 const logout = async (req, res) => {
     res.clearCookie('refreshToken', {
         httpOnly: true,
@@ -47,6 +70,11 @@ const logout = async (req, res) => {
     });
 }
 
+/**
+ * Refreshes access token using refresh token
+ * @param {Object} req - Express request object
+ * @param {Object} res - Express response object
+ */
 const refresh = (req, res) => {
     try {
         const rt = req.cookies.refreshToken;

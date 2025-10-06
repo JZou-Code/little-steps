@@ -16,6 +16,14 @@ import ChildMessage from "./pages/ChildMessage.jsx";
 import MessagePage from "./pages/MessagePage.jsx";
 import CreateNewsletterPage from "./pages/CreateNewsletterPage.jsx";
 
+/**
+ * Routes controller component that defines all application routes
+ * Handles public routes, private routes, and admin-only routes
+ * Uses nested routing for account and newsletter sections
+ * Wraps all routes with error boundary for error handling
+ * 
+ * @returns {JSX.Element} The routes configuration component
+ */
 const RoutesController = () => {
     return (
         <div>

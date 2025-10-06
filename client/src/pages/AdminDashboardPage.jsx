@@ -6,6 +6,14 @@ import {forms} from "../utils/forms.js";
 import BindChildToParent from "../components/admin-dashboard/BindChildToParent.jsx";
 import {useNavigate} from "react-router-dom";
 
+/**
+ * AdminDashboardPage component that provides admin management interface
+ * Shows different management sections for users, children, and binding operations
+ * Includes navigation buttons to switch between different admin functions
+ * Handles form state management for different admin operations
+ * 
+ * @returns {JSX.Element} The admin dashboard page component
+ */
 const AdminDashboardPage = () => {
     const [formState, setFormState] = useState(forms.USERS)
     const [child, setChild] = useState(null)

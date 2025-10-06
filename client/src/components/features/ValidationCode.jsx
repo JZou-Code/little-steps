@@ -2,6 +2,17 @@ import React, {useState} from 'react';
 import classes from "../../style/Forms.module.css";
 import {requestValidationCode} from "../../api/signUp.js";
 
+/**
+ * ValidationCode component that handles email validation code functionality
+ * Provides input field for validation code and send/resend button
+ * Implements countdown timer for resend functionality
+ * 
+ * @param {Object} props - Component props
+ * @param {string} props.email - Email address for sending validation code
+ * @param {string} props.code - Validation code value
+ * @param {Function} props.setCode - Function to update validation code
+ * @returns {JSX.Element} The validation code component
+ */
 const ValidationCode = (props) => {
     const [buttonContent, setButtonContent] = useState('Send')
     const [disabled, setDisabled] = useState(false)

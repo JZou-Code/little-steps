@@ -3,6 +3,17 @@ import classes from '../../style/AdminDashboardPage.module.css'
 import {searchUsers} from "../../api/adminOperation.js";
 import {updateChildById} from "../../api/manageChildren.js";
 
+/**
+ * BindChildToParent component that handles child-parent relationship binding
+ * Provides search functionality for finding parent users
+ * Allows binding child to selected parent with pagination support
+ * Shows current binding status and handles relationship updates
+ * 
+ * @param {Object} props - Component props
+ * @param {Object} props.child - Child data to bind
+ * @param {Function} props.reset - Function to reset component state
+ * @returns {JSX.Element} The bind child to parent component
+ */
 const BindChildToParent = ({child, reset}) => {
     const [pageIndex, setPageIndex] = useState(0);
     const [itemNum, setItemNum] = useState(10);
