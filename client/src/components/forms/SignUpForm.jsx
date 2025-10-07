@@ -1,13 +1,9 @@
-import React, {useContext, useReducer, useState} from 'react';
+import React, {useContext, useState} from 'react';
 import classes from "../../style/Forms.module.css";
-// import Captcha from "./Captcha.jsx";
-// import {requestSignUp, requestValidationCode} from "../api/signUp.js";
-import {isValidEmail, isValidPassword, isValidUsername} from "../../utils/regex.js";
+import {isValidEmail, isValidPassword} from "../../utils/regex.js";
 import {pageState} from "../../utils/pageState.js";
-// import ValidationCode from "./ValidationCode.jsx";
 import PageStateContext from "../../context/PageStateContext.jsx";
 import ValidationCode from "../features/ValidationCode.jsx";
-import Captcha from "../common/Captcha.jsx";
 import {useNavigate} from "react-router-dom";
 import {requestSignUp} from "../../api/signUp.js";
 
@@ -17,7 +13,7 @@ import {requestSignUp} from "../../api/signUp.js";
  * Validates input fields according to predefined rules
  * Handles signup submission and navigation to login page
  * Provides validation error messages and login link
- * 
+ *
  * @returns {JSX.Element} The signup form component
  */
 const SignUpForm = () => {
@@ -27,8 +23,8 @@ const SignUpForm = () => {
     const [lastName,setLastName] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [validationCode, setValidationCode] = useState('')
     // const [captchaId, setCaptchaId] = useState('')
-    // const [validationCode, setValidationCode] = useState('')
     // const [captcha, setCaptcha] = useState('');
 
     const [errorMsg, setErrorMsg] = useState('')
@@ -96,7 +92,7 @@ const SignUpForm = () => {
                         placeholder={'Email'}
                     />
                 </div>
-                {/*<ValidationCode code={validationCode} setCode={setValidationCode} email={email}></ValidationCode>*/}
+                <ValidationCode code={validationCode} setCode={setValidationCode} email={email}></ValidationCode>
                 <div className={classes.InputContainer}>
                     <input
                         className={classes.Input}

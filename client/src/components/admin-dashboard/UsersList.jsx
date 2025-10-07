@@ -6,6 +6,8 @@ import ModifyUsers from "./ModifyUsers.jsx";
 import Confirm from "../common/Confirm.jsx";
 import {deleteUserById} from "../../api/manageUsers.js";
 import Message from "../common/Message.jsx";
+import SuccessfulNotification from "../common/notifications/SuccessfulNotification.jsx";
+import ErrorNotification from "../common/notifications/ErrorNotification.jsx";
 
 /**
  * UsersList component that displays and manages user accounts
@@ -201,15 +203,11 @@ const AdminDashboardPage = () => {
 
             {
                 isSuccessful &&
-                <Backdrop>
-                    <Message onCancel={cancelMessage} message={successfulMsg} flag={true}/>
-                </Backdrop>
+                    <SuccessfulNotification onClick={cancelMessage} message={successfulMsg}/>
             }
             {
                 isFailed &&
-                <Backdrop>
-                    <Message onCancel={cancelMessage} message={failedMsg} flag={false}/>
-                </Backdrop>
+                    <ErrorNotification onClick={cancelMessage} message={failedMsg}/>
             }
         </>
     );
