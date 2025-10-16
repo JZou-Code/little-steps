@@ -14,7 +14,7 @@ import ErrorNotification from "../components/common/notifications/ErrorNotificat
  * Provides rich text editor for content creation and image upload functionality
  * Handles form validation, file upload, and newsletter submission
  * Shows processing states and error handling
- * 
+ *
  * @returns {JSX.Element} The create newsletter page component
  */
 const CreateNewsletterPage = () => {
@@ -75,39 +75,41 @@ const CreateNewsletterPage = () => {
     }
 
     return (
-        <div className={classes.Container}>
-            <div className={classes.TitleContainer}>
-                <input
-                    value={title}
-                    onChange={(e) => {
-                        setTitle(e.target.value)
-                    }}
-                    placeholder={'Title...'}
-                    className={classes.TitleInput}/>
+        <div className={classes.Outer}>
+            <div className={classes.Container}>
+                <div className={classes.TitleContainer}>
+                    <input
+                        value={title}
+                        onChange={(e) => {
+                            setTitle(e.target.value)
+                        }}
+                        placeholder={'Title...'}
+                        className={classes.TitleInput}/>
+                </div>
+                <div className={classes.ImageContainer}>
+                    <ImageGridPicker onChange={setImages}/>
+                </div>
+                <div className={classes.BodyContainer}>
+                    <TinyMCE content={content} onChange={handleChange}/>
+                </div>
+                <div className={classes.ButtonContainer}>
+                    <Button handleClick={handleSubmit} name={'Submit'}/>
+                    <Button handleClick={handleCancel} name={'Cancel'}/>
+                </div>
+                {
+                    processing && <OtherNotification message={'Processing...'}/>
+                }
+                {
+                    isEmpty && <ErrorNotification message={'Title and Content required'} onClick={() => {
+                        setIsEmpty(false)
+                    }}/>
+                }
+                {
+                    isError && <ErrorNotification message={'Something went wrong'} onClick={() => {
+                        setIsError(false)
+                    }}/>
+                }
             </div>
-            <div className={classes.ImageContainer}>
-                <ImageGridPicker onChange={setImages}/>
-            </div>
-            <div className={classes.BodyContainer}>
-                <TinyMCE content={content} onChange={handleChange}/>
-            </div>
-            <div className={classes.ButtonContainer}>
-                <Button handleClick={handleSubmit} name={'Submit'}/>
-                <Button handleClick={handleCancel} name={'Cancel'}/>
-            </div>
-            {
-                processing && <OtherNotification message={'Processing...'}/>
-            }
-            {
-                isEmpty && <ErrorNotification message={'Title and Content required'} onClick={() => {
-                    setIsEmpty(false)
-                }}/>
-            }
-            {
-                isError && <ErrorNotification message={'Something went wrong'} onClick={() => {
-                    setIsError(false)
-                }}/>
-            }
         </div>
     );
 };

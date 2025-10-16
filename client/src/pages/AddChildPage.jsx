@@ -9,7 +9,7 @@ import {addNewChild} from "../api/manageChildren.js";
  * Provides form for entering child information including name, date of birth, and gender
  * Handles form submission and navigation to admin dashboard
  * Shows login animation for visual appeal
- * 
+ *
  * @returns {JSX.Element} The add child page component
  */
 const AddChildPage = () => {
@@ -44,7 +44,7 @@ const AddChildPage = () => {
             </div>
             <form className={classes.FormContainer} onSubmit={submitHandler}>
                 <div className={classes.Title}>
-                    Bind Child
+                    New Child
                 </div>
                 <div className={classes.InputContainer}>
                     <input
