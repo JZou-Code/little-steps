@@ -4,7 +4,7 @@
  * Sets up CloudFront proxy for API requests
  */
 
-import { defineConfig } from 'vite'
+import {defineConfig, loadEnv} from 'vite'
 import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
